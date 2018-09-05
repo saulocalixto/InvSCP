@@ -10,6 +10,10 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 ### Atalhos para casos de uso
 - [CadPat](#cadpat---cadastrar-um-patrimônio)
 - [UpdPat](#updpat---atualizar-um-patrimônio)
+- [DelPat](#delpat---deletar-um-patrimônio)
+- [CadUsr](#cadusr---cadastrar-um-usuário)
+- [UpdUsr](#updusr---atualizar-um-usuário)
+- [DelUsr](#delusr---remover-um-usuário)
 - [MovPatEx](#movpatex---movimentação-de-bem-patrimonial-externo)
 - [MovPatIn](#movpatin---movimentação-de-bem-patrimonial-interno)
 - [AceiMov](#aceimov---aceite-de-entrada-de-bem-movimentado)
@@ -20,7 +24,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 
 **Descrição resumida:** O sistema deve provê a funcionalidade de cadastrar um novo bem patrimonial que chegou à instituição, podendo informar no ato todas as informações pertinentes a esse novo bem.
 
-**Autor:** Chefe e Substituto de chefe da Seção
+**Autor:** Chefe e Substituto de chefe de departamento
 
 **Pré-condição:**
 1. O usuário deve ter autorização para realizar o cadastro.
@@ -28,9 +32,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 **Pós-condição:**
 1. Um novo patrimônio foi adicionado à base do sistema, podendo agora ser visualizado, editado, movimentado ou ter sua baixa decretada.
 
-**Sequencia típica**
+**Sequência típica**
 1. O usuário autorizado entra na funcionalidade de cadastro de patrimônio;
-2. O sistema devolver a ficha de cadastro;
+2. O sistema devolve a ficha de cadastro;
 3. O usuário digita todas as informações solicitadas pelo sistema, inclusive o local onde o patrimônio será guardado;
 4. O usuário salva as informações;
 5. O sistema apresenta a ficha do bem que acabou de ser cadastrado.
@@ -42,21 +46,13 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|O local indicado para salvar o patrimônio não existe.|O sistema lançará uma exceção informando que o local de lotação não existe no sistema.|2|
 |3|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-**Diagrama de classe:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
-
-**Diagrama de Sequência:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
-
 ## *UpdPat* - Atualizar um patrimônio
 
 **Descrição resumida:** O sistema deve provê a funcionalidade de atualização de um bem patrimonial previamente cadastrado observando as restrições:
 * O número do patrimônio não pode ser atualizado;
 * O grupo de material do patrimônio não pode ser atualizado;
 
-**Autor:** Chefe e Substituto de chefe da Seção
+**Autor:** Chefe e Substituto de chefe de departamento
 
 **Pré-condição:**
 1. O patrimônio deve estar previamente cadastrado;
@@ -65,7 +61,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 **Pós-condição:**
 1. Um patrimônio previamente cadastrado tem seus dados atualizados.
 
-**Sequencia típica**
+**Sequência típica**
 1. O usuário autorizado localiza um patrimônio;
 2. O sistema devolve a ficha do bem procurado;
 3. O usuário entra na funcionalidade de atualização;
@@ -82,13 +78,122 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário tenta atualizar algum dado indevido.|O sistema lança exceção informando que o dado não pode ser atualizado.|4|
 |6|Usuário desiste da operação.|O sistema volta para a ficha do bem sem ter os dados atualizados.|2|
 
-**Diagrama de classe:**
+## *DelPat* - Deletar um patrimônio
 
-*Colar aqui o diagrama que representa esse caso de uso*
+**Descrição resumida:** O sistema deve provê a funcionalidade de excluir um patrimônio da base de dados do sistema de forma permanente, desde que seja seguida determinadas regras:
+* O patrimônio que se deseja excluir deve ter sido cadastrado há menos de um mês;
+* Não pode ter havido a emissão do inventários contendo o bem;
+* Ele não pode ter sido movimentado.
 
-**Diagrama de Sequência:**
+**Autor:** Chefe e Substituto de chefe de departamento
 
-*Colar aqui o diagrama que representa esse caso de uso*
+**Pré-condição:**
+1. O patrimônio deve estar previamente cadastrado;
+2. O item a ser removido deve ter sido cadastrado há menos de um mês;
+3. O item não pode ter constado no inventário emitido;
+4. O item não pode ter sido movimentado.
+
+**Pós-condição:**
+1. O bem removido da base do sistema.
+
+**Sequência típica**
+1. O usuário autorizado localiza um patrimônio;
+2. O sistema devolve a ficha do bem procurado;
+3. O usuário aciona a funcionalidade de Remoção do patrimônio;
+4. O sistema emite um alerta com as consequências do ato;
+5. Usuário confirma o ato;
+6. Sistema retorna para tela inicial;
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
+|5|Usuário não confirma a ação de remoção do bem.|O sistema volta para a ficha de exibição do bem.|2|
+
+## *CadUsr* - Cadastrar um usuário
+
+**Descrição resumida:** O sistema deve provê a funcionalidade do chefe de departamento cadastrar um novo usuário que esteja ligado à seu departamento. No ato do cadastro do usuário o chefe deve informar todos os dados obrigatórios exigidos, além do nível de permissão que determinado usuário terá.
+
+**Autor:** Chefe e Substituto de chefe de departamento
+
+**Pré-condição:**
+1. Usuário que será cadastrado deverá ser vinculado ao mesmo departamento do chefe que o está cadastrando.
+
+**Pós-condição:**
+1. Um novo usuário é adicionado à base.
+
+**Sequência típica**
+1. O usuário autorizado entra na funcionalidade de cadastro de usuário;
+2. O sistema devolve a ficha de cadastro de usuário;
+3. O usuário digita todas as informações solicitadas pelo sistema, inclusive o nível de permissão que o novo usuário terá no sistema;
+4. O usuário salva as informações;
+5. O sistema apresenta a ficha do usuário recém cadastrado.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|4|O departamento do novo usuário diverge do departamento do usuário que está fazendo o cadastro.|O sistema lança exceção avisando que o usuário não tem permissão de cadastrar usuários em departamentos diferente do que ele está vinculado.|2|
+|4|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
+
+## *UpdUsr* - Atualizar um usuário
+
+**Descrição resumida:** O chefe de departamento pode atualizar os dados dos usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
+
+**Autor:** Chefe e Substituto de chefe de departamento
+
+**Pré-condição:**
+1. O usuário a ser atualizado deve estar vinculado ao departamento do chefe que deseja atualizar o dado;
+
+**Pós-condição:**
+1. O usuário tem seus dados atualizados no sistema.
+
+**Sequência típica**
+1. O usuário autorizado localiza um usuário;
+2. O sistema devolve a ficha do usuário;
+3. O usuário entra na funcionalidade de atualização;
+4. O sistema abre a tela de edição dos dados do usuário;
+5. Usuário atualiza os dados;
+6. Usuário confirma a operação;
+7. Sistema apresenta a ficha do item com os dados atualizados;
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|O usuário não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
+|3|Usuário não tem permissão para atualização.|O sistema lança exceção informando que o usuário só pode atualizar outros usuários vinculados ao seu departamento.|2|
+|5|Usuário tenta atualizar algum dado indevido.|O sistema lança exceção informando que o dado não pode ser atualizado.|4|
+|6|Usuário desiste da operação.|O sistema volta para a ficha do bem sem ter os dados atualizados.|2|
+
+## *DelUsr* - Remover um usuário
+
+**Descrição resumida:** O chefe de departamento pode remover os usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
+
+**Autor:** Chefe e Substituto de chefe de departamento
+
+**Pré-condição:**
+1. O usuário a ser atualizado deve estar vinculado ao departamento do chefe que deseja atualizar o dado;
+
+**Pós-condição:**
+1. O usuário é removido do sistema.
+
+**Sequência típica**
+1. O usuário autorizado localiza um usuário;
+2. O sistema devolve a ficha do usuário;
+3. O usuário entra na funcionalidade de apagar;
+4. O sistema lança um alerta informando sobre as consequências do ato;
+5. Usuário confirma;
+6. Sistema retorna para tela inicial.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|O usuário não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
+|3|Usuário não tem permissão para remover o outro usuário.|O sistema lança exceção informando que o usuário só pode atualizar outros usuários vinculados ao seu departamento.|2|
+|5|Usuário não confirma a operação.|O sistema retorna para a ficha do usuário.|3|
 
 ## *MovPatEx* - Movimentação de bem patrimonial Externo
 
@@ -104,7 +209,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 1. O item movimentado fica com o status de *Aceite de saída* caso a movimentação não tenha sido feita pelo chefe de departamento;
 2. Caso o item tenha sido movimentado pelo chefe do departamento o item fica com o status de *Aceite de entrada no destino*.
 
-**Sequencia típica**
+**Sequência típica**
 1. O usuário localiza o bem no sistema;
 2. O sistema apresenta a ficha do bem;
 3. Usuário aciona a funcionalidade de movimentação;
@@ -122,14 +227,6 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário deixa de informar uma das informações obrigatórias.|O sistema lança uma mensagem informando que o dado obrigatório não foi informado.|4|
 |6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-**Diagrama de classe:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
-
-**Diagrama de Sequência:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
-
 ## *MovPatIn* - Movimentação de bem patrimonial Interno
 
 **Descrição resumida:** Movimentações entre salas do mesmo departamento não precisam do aceite do chefe do departamento, sendo marcadas imediatamente como *Finalizadas*.
@@ -145,8 +242,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 1. O item movimentado fica com o status de *Finalizado* imediatamente;
 2. O local onde o item está guardado é atualizado no sistema.
 
-
-**Sequencia típica**
+**Sequência típica**
 1. O usuário localiza o bem no sistema;
 2. O sistema apresenta a ficha do bem;
 3. Usuário aciona a funcionalidade de movimentação;
@@ -165,14 +261,6 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário informa uma localização fora do departamento no qual o bem está lotado.|O sistema cadastra a movimentação mas com o status de *Aceite de Saída*.|7|
 |6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-**Diagrama de classe:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
-
-**Diagrama de Sequência:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
-
 ## *AceiMov* - Aceite de entrada de bem movimentado
 
 **Descrição resumida:** O chefe do departamento para onde o bem foi movimentado deve autorizar o recebimento do bem. Só quando essa ação for feita é que o local de lotação do bem é atualizado e o status da movimentação fica como *Finalizada*.
@@ -186,7 +274,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 1. O item movimentado fica com o status de *Finalizada*;
 2. O local onde o item é lotado é atualizado no sistema.
 
-**Sequencia típica**
+**Sequência típica**
 1. O chefe de departamento entra na funcionalidade de *Aceite de entrada*;
 2. O sistema listará todas as movimentações que se destinam ao seu departamento e estão aguardando o aval para concluir a operação;
 3. O usuário abre a movimentação que deseja avaliar;
@@ -198,14 +286,6 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
 |1|Não ter nenhuma movimentação para dar aceite.|O sistema não irá listar nada.|1|
-
-**Diagrama de classe:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
-
-**Diagrama de Sequência:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
 
 ## *CanMov* - Cancelamento de movimentação
 
@@ -220,7 +300,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 1. O bem não tem seu local atualizado;
 2. A movimentação fica com o status de *Cancelada*.
 
-**Sequencia típica**
+**Sequência típica**
 1. O chefe de departamento entra na funcionalidade de *Aceite de entrada* ou *Aceite de Saída*;
 2. O sistema listará todas as movimentações que se destinam ao seu departamento e estão aguardando o aval para concluir a operação;
 3. O usuário abre a movimentação que deseja avaliar;
@@ -261,7 +341,7 @@ Um bem pode ser baixado pelos seguintes motivos:
 1. No registro do bem constará a informação da baixa do bem, informando data, autor e motivo;
 2. Bem fica impossibilitado de fazer parte do inventário.
 
-**Sequencia típica**
+**Sequência típica**
 1. O usuário localiza o bem no sistema;
 2. O sistema apresenta a ficha de registro do bem;
 3. Usuário aciona a funcionalidade de baixa;
@@ -278,11 +358,3 @@ Um bem pode ser baixado pelos seguintes motivos:
 |3|O usuário não tem permissão para movimentar o bem.|O sistema informa ao usuário que ele não tem permissão para realizar a ação.|2|
 |4|Usuário deixa de informar uma das informações obrigatórias.|O sistema lança uma mensagem informando que o dado obrigatório não foi informado.|4|
 |5|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|1|
-
-**Diagrama de classe:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
-
-**Diagrama de Sequência:**
-
-*Colar aqui o diagrama que representa esse caso de uso*
