@@ -7,27 +7,33 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 * [Diagrama](#diagrama-de-caso-de-uso)
 * [Chefe ou substituto de chefe de departamento](#chefe-de-departamento)
 	* Patrimônio
-		- [CadPat](#cadpat---cadastrar-um-patrimônio)
-		- [UpdPat](#updpat---atualizar-um-patrimônio)
-		- [DelPat](#delpat---deletar-um-patrimônio)
+		- [CadPat](#cadpat)
+		- [UpdPat](#updpat)
+		- [DelPat](#delpat)
+		- [VisHis](#vishis)
 	* Usuário 
-		- [CadUsr](#cadusr---cadastrar-um-usuário)
-		- [UpdUsr](#updusr---atualizar-um-usuário)
-		- [DelUsr](#delusr---remover-um-usuário)
+		- [CadUsr](#cadusr)
+		- [UpdUsr](#updusr)
+		- [DelUsr](#delusr)
 	* Localização
-		- [CadLoc](#cadloc---cadastrar-uma-localização)
-		- [UpdLoc](#updloc---atualizar-uma-localização)
-		- [DelLoc](#delloc---deletar-uma-localização)
+		- [CadLoc](#cadloc)
+		- [UpdLoc](#updloc)
+		- [DelLoc](#delloc)
 	* Departamento
-		- [VincSal](#vincsal---vincular-salas)
-		- [DesvSal](#desvsal---desvincular-salas)
+		- [VincSal](#vincsal)
+		- [DesvSal](#desvsal)
 	* Movimentação
-		- [MovPatEx](#movpatex---movimentação-de-bem-patrimonial-externo)
-		- [MovPatIn](#movpatin---movimentação-de-bem-patrimonial-interno)
-		- [AceiMov](#aceimov---aceite-de-entrada-de-bem-movimentado)
-		- [CanMov](#canmov---cancelamento-de-movimentação)
-* [Chefe ou substituto de chefe de departamento de patrimônio](#chefe-de-departamento-de-patrimônio)
-	- [BaixPat](#baixpat---dar-baixa-em-um-patrimônio)
+		- [MovPatEx](#movpatex)
+		- [MovPatIn](#movpatin)
+		- [AceiMov](#aceimov)
+		- [CanMov](#canmov)
+		- [Emgutransp](#emgutransp)
+	* Serviços
+		- [Emrelpat](#emrelpat)
+		- [RegOs](#regos)
+		- [FechOs](#fechos)
+* [Chefe de departamento de bem patrimonial](#chefe-de-departamento-de-bem-patrimonial)
+	- [BaixPat](#baixpat)
 
 ### Diagrama de Caso de Uso
 
@@ -35,7 +41,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 
 ## Chefe de departamento
 
-### *CadPat* - Cadastrar um patrimônio
+### *CadPat*
+
+**Título:** Cadastrar um patrimônio
 
 **Descrição resumida:** O sistema deve provê a funcionalidade de cadastrar um novo bem patrimonial que chegou à instituição, podendo informar no ato todas as informações pertinentes a esse novo bem, inclusive localização e departamento ao qual está vinculado.
 
@@ -61,7 +69,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|O local indicado para salvar o patrimônio não existe.|O sistema lançará uma exceção informando que o local de lotação não existe no sistema.|2|
 |3|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-### *UpdPat* - Atualizar um patrimônio
+### *UpdPat* - Atualizar um bem
+
+**Título:** Atualizar um patrimônio
 
 **Descrição resumida:** O sistema deve provê a funcionalidade de atualização de um bem patrimonial previamente cadastrado observando as restrições:
 * O número do patrimônio não pode ser atualizado;
@@ -93,7 +103,42 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário tenta atualizar algum dado indevido.|O sistema lança exceção informando que o dado não pode ser atualizado.|4|
 |6|Usuário desiste da operação.|O sistema volta para a ficha do bem sem ter os dados atualizados.|2|
 
-### *DelPat* - Deletar um patrimônio
+### *VisHis*
+
+**Título:** Visualizar histórico de patrimônio
+
+**Descrição resumida:** O sistema deve guardar o histórico de qualquer movimentação feita para um bem patrimonial e o usuário deve poder visualizar esse histórico. Deve conter no histórico:
+* Movimentações feitas ao longo de tempo;
+* Depreciação ao longo do tempo;
+* Os geradas;
+* Baixa do bem.
+
+**Autor:** Chefe e Substituto de chefe de departamento
+
+**Pré-condição:**
+1. O bem deve ter mais de um histórico, ou seja ter tido alguma ocorrência de movimentação, Os ou baixa.
+
+**Pós-condição:**
+1. A visualização do histórico do bem.
+
+**Sequência típica**
+1. O usuário autorizado localiza um patrimônio;
+2. O sistema devolve a ficha do bem procurado;
+3. O usuário aciona o histórico do bem;
+4. O sistema lista todas as datas de histórico do referido bem;
+5. Usuário escolhe a data desejada;
+6. Sistema informa se houve movimentação, Os ou baixa naquela data;
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
+|3|O bem não tem histórico.|O sistema não lista nada.|2|
+
+### *DelPat*
+
+**Título:** Remover um patrimônio
 
 **Descrição resumida:** O sistema deve provê a funcionalidade de excluir um patrimônio da base de dados do sistema de forma permanente, desde que seja seguida determinadas regras:
 * O patrimônio que se deseja excluir deve ter sido cadastrado há menos de um mês;
@@ -126,7 +171,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
 |5|Usuário não confirma a ação de remoção do bem.|O sistema volta para a ficha de exibição do bem.|2|
 
-### *CadUsr* - Cadastrar um usuário
+### *CadUsr*
+
+**Título:** Cadastrar um usuário
 
 **Descrição resumida:** O sistema deve provê a funcionalidade do chefe de departamento cadastrar um novo usuário que esteja ligado à seu departamento. No ato do cadastro do usuário o chefe deve informar todos os dados obrigatórios exigidos, além do nível de permissão que determinado usuário terá.
 
@@ -152,7 +199,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|O departamento do novo usuário diverge do departamento do usuário que está fazendo o cadastro.|O sistema lança exceção avisando que o usuário não tem permissão de cadastrar usuários em departamentos diferente do que ele está vinculado.|2|
 |4|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-### *UpdUsr* - Atualizar um usuário
+### *UpdUsr*
+
+**Título:** Atualizar um usuário
 
 **Descrição resumida:** O chefe de departamento pode atualizar os dados dos usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
 
@@ -182,7 +231,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário tenta atualizar algum dado indevido.|O sistema lança exceção informando que o dado não pode ser atualizado.|4|
 |6|Usuário desiste da operação.|O sistema volta para a ficha do bem sem ter os dados atualizados.|2|
 
-### *DelUsr* - Remover um usuário
+### *DelUsr*
+
+**Título:** Remover um usuário
 
 **Descrição resumida:** O chefe de departamento pode remover os usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
 
@@ -210,7 +261,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |3|Usuário não tem permissão para remover o outro usuário.|O sistema lança exceção informando que o usuário só pode atualizar outros usuários vinculados ao seu departamento.|2|
 |5|Usuário não confirma a operação.|O sistema retorna para a ficha do usuário.|3|
 
-### *CadLoc* - Cadastrar uma Localização
+### *CadLoc*
+
+**Título:** Cadastrar um local
 
 **Descrição resumida:** O usuário deve poder realizar cadastros de locais onde os bens ficarão guardados. Geralmente um bem é guardado em uma sala que é vinculada à um departamento, prédio e endereço. Por tanto ao cadastrar uma localização o usuário deve inserir:
 * Sala;
@@ -239,7 +292,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|O departamento da nova localização diverge do departamento do usuário que está fazendo o cadastro.|O sistema lança exceção avisando que o usuário não tem permissão de cadastrar localização em departamentos diferente do que ele está vinculado.|2|
 |4|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-### *UpdLoc* - Atualizar uma Localização
+### *UpdLoc*
+
+**Título:** Atualizar um local
 
 **Descrição resumida:** O usuário deve poder realizar a atualização de localizações que sejam vinculadas ao departamento do qual é chefe. Ele deve observar que ao atualizar uma localização todos os bens que forem vinculados a ela também serão atualizados.
 
@@ -270,7 +325,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |6|Usuário deixa alguma informação obrigatória sem preencher.|O sistema lança exceção de dado obrigatório não preenchido.|5|
 |7|Usuário desiste da operação.|O sistema volta para a ficha da localização.|3|
 
-### *DelLoc* - Deletar uma Localização
+### *DelLoc*
+
+**Título:** Remover um local
 
 **Descrição resumida:** O usuário deve poder apagar uma localização previamente cadastrada. Contudo é se houver algum patrimônio ou departamento previamente vinculado a essa localização então a exclusão não será permitida.
 
@@ -300,7 +357,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|Existe patrimônio ou departamento vinculado à localização.|O sistema informa que não pode ser feita a exclusão por haver patrimônio vinculado à ela.|3|
 |6|Usuário não confirma a operação.|O sistema volta para a ficha da localização.|3|
 
-### *VincSal* - Vincular salas
+### *VincSal*
+
+**Título:** Vincular salas
 
 **Descrição resumida:** O chefe de departamento deve ter a possibilidade de vincular uma sala previamente cadastrada ao departamento de que ele é chefe. Ele só poderá fazer isso se essa sala já não estiver vinculada a um outro departamento.
 
@@ -329,7 +388,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|Localização já está vinculada a um departamento.|O sistema avisa o usuário que não poderá vincular a sala a um outro departamento.|3|
 |6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|3|
 
-### *DesvSal* - Desvincular salas
+### *DesvSal*
+
+**Título:** Desvincular salas
 
 **Descrição resumida:** O chefe de departamento deve ter a possibilidade de desvincular uma sala previamente cadastrada ao departamento de que ele é chefe. Ele só poderá fazer isso se não houver patrimônio vinculado à sala ou ao departamento.
 
@@ -359,7 +420,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|Localização não está vinculada ao departamento do usuário.|O sistema avisa o usuário que não poderá desvincular a localização.|3|
 |6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|3|
 
-### *MovPatEx* - Movimentação de bem patrimonial Externo
+### *MovPatEx*
+
+**Título:** Movimentação de bem patrimonial externo
 
 **Descrição resumida:** A movimentação de bens entre departamento diferentes deve ser registrada no sistema. Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de *Aceite de saída*, o que significa que ela está aguardando autorização de origem. Caso seja o próprio chefe do departamento que tenha cadastrado a movimentação, então o *Aceite de Saída* será automático.
 
@@ -391,7 +454,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário deixa de informar uma das informações obrigatórias.|O sistema lança uma mensagem informando que o dado obrigatório não foi informado.|4|
 |6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-### *MovPatIn* - Movimentação de bem patrimonial Interno
+### *MovPatIn*
+
+**Título:** Movimentação de bem patrimonial interno
 
 **Descrição resumida:** Movimentações entre salas do mesmo departamento não precisam do aceite do chefe do departamento, sendo marcadas imediatamente como *Finalizadas*.
 
@@ -425,7 +490,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário informa uma localização fora do departamento no qual o bem está lotado.|O sistema cadastra a movimentação mas com o status de *Aceite de Saída*.|7|
 |6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-### *AceiMov* - Aceite de entrada de bem movimentado
+### *AceiMov*
+
+**Título:** Aceite de entrada de bem movimentado
 
 **Descrição resumida:** O chefe do departamento para onde o bem foi movimentado deve autorizar o recebimento do bem. Só quando essa ação for feita é que o local de lotação do bem é atualizado e o status da movimentação fica como *Finalizada*.
 
@@ -451,7 +518,9 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |-------|----------|-----------------------|---------|
 |1|Não ter nenhuma movimentação para dar aceite.|O sistema não irá listar nada.|1|
 
-### *CanMov* - Cancelamento de movimentação
+### *CanMov*
+
+**Título:** Cancelamento de movimentação
 
 **Descrição resumida:** A movimentação pode ser recusada pelo chefe de departamento. Tanto movimentação de entrada, como movimentação de saída. Nesses casos a movimentação fica com o status de *Cancelada*.
 
@@ -477,17 +546,134 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |-------|----------|-----------------------|---------|
 |1|Não ter nenhuma movimentação para dar aceite.|O sistema não irá listar nada.|1|
 
-**Diagrama de classe:**
+### *EmGuTransp*
 
-*Colar aqui o diagrama que representa esse caso de uso*
+**Título:** Emissão de guia para autorização de transporte
 
-**Diagrama de Sequência:**
+**Descrição resumida:** Quando uma movimentação é feita entre municípios diferentes o chefe de departamento deve emitir um guia para autorização de transporte do bem. Nesse guia deve conter:
+* Cidade de origem;
+* Cidade de destino;
+* Informações do bem movimentado.
 
-*Colar aqui o diagrama que representa esse caso de uso*
+**Autor:** Chefe de departamento
 
-## Chefe de departamento de patrimônio
+**Pré-condição:**
+1. Deve haver uma movimentação cujo destino seja em cidade diferente da origem.
 
-### *BaixPat* - Dar baixa em um patrimônio
+**Pós-condição:**
+1. É emitido a guia de autorização.
+
+**Sequência típica**
+1. O chefe de departamento entra na funcionalidade de *Emissão de guia de transporte*;
+2. O sistema apresenta a tela com uma lista de movimentações geradas;
+3. Usuário deve informar qual a movimentação que originará a guia;
+4. Será apresentada a guia com as informações da movimentação;
+5. Usuário confirma as informações;
+6. Sistema apresenta a guia pronta para ser impressa.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|Não ter nenhuma movimentação emissão da guia.|O sistema não irá listar nada.|2|
+|3|Usuário informa uma movimentação que não tem origem e destino em cidades diferentes.|O sistema informará que a movimentação não exige guia de movimentação.|2|
+
+### *EmRelPat*
+
+**Título:** Emissão de relatório de bens patrimoniais
+
+**Descrição resumida:** O sistema deve prover a funcionalidade de emissão de relatórios dos bens patrimoniais vinculados a um determinado departamento. O relatório deve conter as seguintes regras:
+* Bens devem ser agrupados por sala;
+* Bens devem ser ordenados por grupo de material e número de tombamento;
+
+**Autor:** Chefe de departamento
+
+**Pré-condição:**
+1. Deve haver bens vinculados ao departamento.
+
+**Pós-condição:**
+1. É emitido relatório com os bens patrimoniais do departamento.
+
+**Sequência típica**
+1. O chefe de departamento entra na funcionalidade de *Emissão de relatório patrimonial*;
+2. O sistema apresenta a tela o relatório de todos os bens vinculados ao departamento do qual o usuário é chefe;
+3. Usuário imprime o relatório.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|Não há nenhum bem vinculado ao departamento.|O sistema informa que não há insumos para o relatório.|1|
+
+### *RegOs*
+
+**Título:** Registro de ordem de serviço
+
+**Descrição resumida:** O sistema deve prover a funcionalidade de registro de ordem de serviço quando um bem patrimonial precisa ser consertado. O status do da ordem de serviço fica *Em conserto*.
+
+**Autor:** Chefe de departamento
+
+**Pré-condição:**
+1. O bem patrimonial precisa estar cadastrado.
+
+**Pós-condição:**
+1. Ordem de serviço é registrada no sistema;
+2. A ordem de serviço fica com o status de *Em conserto*.
+
+**Sequência típica**
+1. Sistema apresenta tela inicial;
+2. O usuário entra na funcionalidade registrar Os;
+3. O sistema apresenta formulário com para preenchimento de Os.
+4. Usuário informa todas as informações pertinentes, inclusive qual bem que estará indo para conserto;
+5. Usuário confirma operação;
+6. Sistema informa ao usuário que Os foi registrada com sucesso;
+7. A Os fica com o status de *Em conserto*.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|4|Usuário deixa de preencher algum dado obrigatório.|O sistema apresenta exceção informando que dado obrigatório não foi informado.|3|
+|5|Usuário desiste da operação.|O sistema volta para a tela inicial.|1|
+
+### *FechOs*
+
+**Título:** Fechar ordem de serviço
+
+**Descrição resumida:** Quando um bem patrimonial sai para conserto é aberto uma Os. Quando esse bem retorna o sistema deve prover a funcionalidade de fechar a Os aberta informando a data de retorno do bem e o valor do serviço. Nesse estado a Os fica com status de *Concluída*.
+
+**Autor:** Chefe de departamento
+
+**Pré-condição:**
+1. A Os precisa estar com o status de *Em conserto*.
+
+**Pós-condição:**
+1. Ordem de serviço fica com o status de *Concluída*.
+
+**Sequência típica**
+1. Sistema apresenta tela inicial;
+2. O usuário localiza a Os que deseja finalizar;
+3. O sistema apresenta a ficha da Os cadastrada;
+4. Usuário entra na funcionalidade de fechar Os;
+5. Sistema apresenta formulário para fechamento da Os com data de retorno do bem e valor total do serviço;
+6. Usuário preenche os dados;
+7. Usuário confirma a operação;
+8. Sistema apresenta ficha de cadastro da Os com o status de *Concluída*.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|Os não está cadastrada.|O sistema informa que Os não foi encontrada.|1|
+|4|Os não está com o status de *Em conserto*.|Sistema informa que Os não encontra-se aberta.|3|
+|6|Usuário deixa de informar algum dado.|O sistema informa que dado obrigatório não foi preenchido.|5|
+|7|Usuário desiste da operação.|O sistema volta para a tela inicial.|3|
+
+## Chefe de departamento de bem patrimonial
+
+### *BaixPat*
+
+**Título:** Dar baixa em um patrimônio
 
 **Descrição resumida:** Quando o bem patrimonial torna-se desnecessário para a instituição é necessário dar baixa ao mesmo.
 Um bem pode ser baixado pelos seguintes motivos:
