@@ -38,7 +38,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 
 ### Diagrama de Caso de Uso
 
-![Diagrama de caso de uso](https://github.com/saulocalixto/InvSCP/blob/dev/Design%20Funcional/Casos%20de%20Uso/Diagrama%20de%20Casos%20de%20Uso(preview).png?raw=true)
+![Diagrama de caso de uso](https://github.com/saulocalixto/InvSCP/blob/dev/Design%20Funcional/Casos%20de%20Uso/diagramaCasosDeUso.png?raw=true)
 
 ## Chefe de departamento
 
