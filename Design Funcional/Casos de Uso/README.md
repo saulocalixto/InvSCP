@@ -33,6 +33,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 		- [RegOs](#regos)
 		- [FechOs](#fechos)
 * [Chefe de departamento de bem patrimonial](#chefe-de-departamento-de-bem-patrimonial)
+	- [EmInv](#eminv)
 	- [BaixPat](#baixpat)
 
 ### Diagrama de Caso de Uso
@@ -45,7 +46,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 
 **Título:** Cadastrar um patrimônio
 
-**Descrição resumida:** O sistema deve provê a funcionalidade de cadastrar um novo bem patrimonial que chegou à instituição, podendo informar no ato todas as informações pertinentes a esse novo bem, inclusive localização e departamento ao qual está vinculado.
+**Descrição resumida:** O sistema deve provê a funcionalidade de cadastrar um novo bem patrimonial que chegou à instituição, podendo informar no ato todas as informações pertinentes a esse novo bem, inclusive localização e departamento ao qual está vinculado. Quando a localização de um bem não é informada, ele é guardado automaticamente na sala de depósito do departamento de patrimônio.
 
 **Autor:** Chefe e Substituto de chefe de departamento
 
@@ -56,18 +57,20 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 1. Um novo patrimônio foi adicionado à base do sistema, podendo agora ser visualizado, editado, movimentado ou ter sua baixa decretada.
 
 **Sequência típica**
-1. O usuário autorizado entra na funcionalidade de cadastro de patrimônio;
-2. O sistema devolve a ficha de cadastro;
-3. O usuário digita todas as informações solicitadas pelo sistema, inclusive o local onde o patrimônio será guardado;
-4. O usuário salva as informações;
-5. O sistema apresenta a ficha do bem que acabou de ser cadastrado.
+1. Sistema apresenta a tela inicial;
+2. O usuário autorizado entra na funcionalidade de cadastro de patrimônio;
+3. O sistema devolve a ficha de cadastro;
+4. O usuário digita todas as informações solicitadas pelo sistema, inclusive o local onde o patrimônio será guardado;
+5. O usuário salva as informações;
+6. O sistema apresenta a ficha do bem que acabou de ser cadastrado.
 
 **Exceções da Sequência Típica**
 
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
-|4|O local indicado para salvar o patrimônio não existe.|O sistema lançará uma exceção informando que o local de lotação não existe no sistema.|2|
-|3|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
+|4|O local indicado para salvar o patrimônio não existe.|O sistema lançará uma exceção informando que o local de lotação não existe no sistema.|3|
+|4|O usuário não informa o local onde o bem será guardado.|O sistema avisa que o bem será guardado na sala de depósito do departamento de patrimônio.|5|
+|5|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|1|
 
 ### *UpdPat* - Atualizar um bem
 
@@ -670,6 +673,31 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |7|Usuário desiste da operação.|O sistema volta para a tela inicial.|3|
 
 ## Chefe de departamento de bem patrimonial
+
+### *EmInv*
+
+**Título:** Emitir inventário
+
+**Descrição resumida:** O chefe do departamento de patrimônio precisa emitir o inventário que é na verdade a relação de bens da instituição. No inventário o sistema deverá permitir que o usuário acompanhe a evolução de bem no momento de publicar o balanço patrimonial, além de acompanhamento de depreciação para poder fazer projeções de compras no futuro.
+
+**Autor:** Chefe do departamento de patrimônio
+
+**Pré-condição:**
+1. Deve haver bens cadastrado no sistema.
+
+**Pós-condição:**
+1. Um documento contendo as informações de todos os bens da instituição;
+
+**Sequência típica**
+1. Sistema apresenta tela inicial;
+2. Usuário entra da funcionalidade de emissão de inventário;
+3. Sistema apresenta documento contendo todas as informações de bens patrimoniais cadastrados no sistema;
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|Não há bens patrimoniais cadastrados no sistema.|Sistema informa que não há bens para constar no inventário.|1|
 
 ### *BaixPat*
 
