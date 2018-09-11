@@ -14,7 +14,7 @@ Em particular, o software é utilizado para assinar digitalmente as movimentaç�
 * Saulo Calixto
 * Elias Batista Ferreira
 
-### Features
+### Principais Recursos
 
 * Permissões para diferentes tipos de usuários
 * Cadastro de patrimônio
@@ -24,7 +24,7 @@ Em particular, o software é utilizado para assinar digitalmente as movimentaç�
 * Registro de ordem de serviço
 * Baixa de bem patrimonial
 
-### Informes Bugs e Sugestões
+### Considerações Finais
 
 O InvSCP é um projeto **Open Source**. Qualquer um pode ajudar a melhorá-lo.
 Reporte bugs ou faça sugestões utilizando o [Issues/Fórum do Projeto](https://github.com/saulocalixto/InvSCP/issues)
