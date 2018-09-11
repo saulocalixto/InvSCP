@@ -1,24 +1,36 @@
-# Casos de Uso - InvSCP
+<center>UNIVERSIDADE FEDERAL DE GOIÁS</center>
+<center>INSTITUTO DE INFORMÁTICA</center>
+<center>Engenharia de Software</center>
+<br>
+<center>Gustavo Batista</center>
+ <center>Lucas Sampaio</center>
+  <center>Murillo Nunes</center>
+  <center>Marcos Rafael</center>
+   <center>Saulo Calixto</center>
 
-O presente documento tem como objetivo documentar os casos de uso do sistema InvSCP, salientando os autores de cada ação e de suas necessidades atendidas pelos casos de uso.
+# Design Funcional
+O presente documento traz uma visão geral do funcionando do sistema, apresentando casos de uso com seus respectivos autores além do diagrama de classes apresentando a estrutura inicial de classes.
+
+# Sumário
+
+- [Casos de uso](#casos-de-uso)
+- [Diagrama de classes](#diagrama-de-classes)
+
+# Diagrama de classes
+
+![Teste](../Modelo%20de%20Classe/InvSCP.png?raw=true)
+
+# Casos de Uso
+
+Nessa sessão trataremos sobre os casos de uso que são significativos para o usuário, separando os autores e quais suas necessidades no sistema. É apresentado um diagrama de fácil compreensão para o usuário, além do detalhamento de cada caso de uso.
 
 ### Sumário
 
 * [Diagrama](#diagrama-de-caso-de-uso)
 * [Chefe ou substituto de chefe de departamento](#chefe-de-departamento)
-	* Patrimônio
-		- [CadPat](#cadpat)
-		- [UpdPat](#updpat)
-		- [DelPat](#delpat)
-		- [VisHis](#vishis)
-	* Usuário 
-		- [CadUsr](#cadusr)
-		- [UpdUsr](#updusr)
-		- [DelUsr](#delusr)
-	* Localização
-		- [CadLoc](#cadloc)
-		- [UpdLoc](#updloc)
-		- [DelLoc](#delloc)
+	- [ManPat](#manpat)
+	- [ManUsr](#manusr)
+	* [ManLoc](#manloc)
 	* Departamento
 		- [ManDep](#mandep)
 		- [VincSal](#vincsal)
@@ -44,11 +56,13 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 
 ### Diagrama de Caso de Uso
 
-![Diagrama de casos de uso](https://github.com/saulocalixto/InvSCP/blob/dev/Design%20Funcional/Casos%20de%20Uso/diagramaCasosDeUso.png?raw=true)
+![Diagrama de casos de uso](./diagramaCasosDeUso.png?raw=true)
 
 ## Chefe de departamento
 
-### *CadPat*
+### ManPat
+**Título:** Manter patrimônio 
+#### Fluxo principal
 
 **Título:** Cadastrar um patrimônio
 
@@ -62,7 +76,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 **Pós-condição:**
 1. Um novo patrimônio foi adicionado à base do sistema, podendo agora ser visualizado, editado, movimentado ou ter sua baixa decretada.
 
-**Sequência típica**
+**Sequência típica:** cadastrar
 1. Sistema apresenta a tela inicial;
 2. O usuário autorizado entra na funcionalidade de cadastro de patrimônio;
 3. O sistema devolve a ficha de cadastro;
@@ -78,7 +92,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|O usuário não informa o local onde o bem será guardado.|O sistema avisa que o bem será guardado na sala de depósito do departamento de patrimônio.|5|
 |5|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|1|
 
-### *UpdPat* - Atualizar um bem
+#### Fluxo alternativo I
 
 **Título:** Atualizar um patrimônio
 
@@ -112,40 +126,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário tenta atualizar algum dado indevido.|O sistema lança exceção informando que o dado não pode ser atualizado.|4|
 |6|Usuário desiste da operação.|O sistema volta para a ficha do bem sem ter os dados atualizados.|2|
 
-### *VisHis*
-
-**Título:** Visualizar histórico de patrimônio
-
-**Descrição resumida:** O sistema deve guardar o histórico de qualquer movimentação feita para um bem patrimonial e o usuário deve poder visualizar esse histórico. Deve conter no histórico:
-* Movimentações feitas ao longo de tempo;
-* Depreciação ao longo do tempo;
-* Os geradas;
-* Baixa do bem.
-
-**Autor:** Chefe e Substituto de chefe de departamento
-
-**Pré-condição:**
-1. O bem deve ter mais de um histórico, ou seja ter tido alguma ocorrência de movimentação, Os ou baixa.
-
-**Pós-condição:**
-1. A visualização do histórico do bem.
-
-**Sequência típica**
-1. O usuário autorizado localiza um patrimônio;
-2. O sistema devolve a ficha do bem procurado;
-3. O usuário aciona o histórico do bem;
-4. O sistema lista todas as datas de histórico do referido bem;
-5. Usuário escolhe a data desejada;
-6. Sistema informa se houve movimentação, Os ou baixa naquela data;
-
-**Exceções da Sequência Típica**
-
-| Passo | Condição | Tratamento da Exceção | Retorno |
-|-------|----------|-----------------------|---------|
-|2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
-|3|O bem não tem histórico.|O sistema não lista nada.|2|
-
-### *DelPat*
+#### Fluxo alternativo II
 
 **Título:** Remover um patrimônio
 
@@ -180,7 +161,42 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
 |5|Usuário não confirma a ação de remoção do bem.|O sistema volta para a ficha de exibição do bem.|2|
 
-### *CadUsr*
+### *VisHis*
+
+**Título:** Visualizar histórico de patrimônio
+
+**Descrição resumida:** O sistema deve guardar o histórico de qualquer movimentação feita para um bem patrimonial e o usuário deve poder visualizar esse histórico. Deve conter no histórico:
+* Movimentações feitas ao longo de tempo;
+* Depreciação ao longo do tempo;
+* Os geradas;
+* Baixa do bem.
+
+**Autor:** Chefe e Substituto de chefe de departamento
+
+**Pré-condição:**
+1. O bem deve ter mais de um histórico, ou seja ter tido alguma ocorrência de movimentação, Os ou baixa.
+
+**Pós-condição:**
+1. A visualização do histórico do bem.
+
+**Sequência típica**
+1. O usuário autorizado localiza um patrimônio;
+2. O sistema devolve a ficha do bem procurado;
+3. O usuário aciona o histórico do bem;
+4. O sistema lista todas as datas de histórico do referido bem;
+5. Usuário escolhe a data desejada;
+6. Sistema informa se houve movimentação, Os ou baixa naquela data;
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
+|3|O bem não tem histórico.|O sistema não lista nada.|2|
+
+### ManUsr
+**Título:** Manter usuário 
+#### *Fluxo principal*
 
 **Título:** Cadastrar um usuário
 
@@ -208,7 +224,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|O departamento do novo usuário diverge do departamento do usuário que está fazendo o cadastro.|O sistema lança exceção avisando que o usuário não tem permissão de cadastrar usuários em departamentos diferente do que ele está vinculado.|2|
 |4|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-### *UpdUsr*
+#### *Fluxo alternativo I*
 
 **Título:** Atualizar um usuário
 
@@ -240,7 +256,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |5|Usuário tenta atualizar algum dado indevido.|O sistema lança exceção informando que o dado não pode ser atualizado.|4|
 |6|Usuário desiste da operação.|O sistema volta para a ficha do bem sem ter os dados atualizados.|2|
 
-### *DelUsr*
+#### *Fluxo alternativo II*
 
 **Título:** Remover um usuário
 
@@ -270,7 +286,11 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |3|Usuário não tem permissão para remover o outro usuário.|O sistema lança exceção informando que o usuário só pode atualizar outros usuários vinculados ao seu departamento.|2|
 |5|Usuário não confirma a operação.|O sistema retorna para a ficha do usuário.|3|
 
-### *CadLoc*
+### ManLoc
+
+**Título:** Manter localização 
+
+#### *Fluxo principal*
 
 **Título:** Cadastrar um local
 
@@ -301,7 +321,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|O departamento da nova localização diverge do departamento do usuário que está fazendo o cadastro.|O sistema lança exceção avisando que o usuário não tem permissão de cadastrar localização em departamentos diferente do que ele está vinculado.|2|
 |4|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
-### *UpdLoc*
+#### *Fluxo alternativo I*
 
 **Título:** Atualizar um local
 
@@ -334,7 +354,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |6|Usuário deixa alguma informação obrigatória sem preencher.|O sistema lança exceção de dado obrigatório não preenchido.|5|
 |7|Usuário desiste da operação.|O sistema volta para a ficha da localização.|3|
 
-### *DelLoc*
+#### *Fluxo alternativo II*
 
 **Título:** Remover um local
 
@@ -932,6 +952,5 @@ Retorna para a sequência típica
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
 |2|Nenhum bem condiz aos critérios de busca utilizados|O sistema lançará uma exceção informando que não há bens cadastrados com estes critérios ou o usuário informou algo errado|1|
-
 
 
