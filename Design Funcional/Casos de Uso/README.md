@@ -934,3 +934,4 @@ Retorna para a sequência típica
 |2|Nenhum bem condiz aos critérios de busca utilizados|O sistema lançará uma exceção informando que não há bens cadastrados com estes critérios ou o usuário informou algo errado|1|
 
 
+
