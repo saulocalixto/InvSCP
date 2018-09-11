@@ -20,6 +20,7 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 		- [UpdLoc](#updloc)
 		- [DelLoc](#delloc)
 	* Departamento
+		- [ManDep](#mandep)
 		- [VincSal](#vincsal)
 		- [DesvSal](#desvsal)
 	* Movimentação
@@ -35,6 +36,11 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 * [Chefe de departamento de bem patrimonial](#chefe-de-departamento-de-bem-patrimonial)
 	- [EmInv](#eminv)
 	- [BaixPat](#baixpat)
+* [Usuário](#usuario)
+	- [RegMov](#regmov)
+* [Público](#publico)
+	- [BusBemPat](#busbempat)
+	- [ConDadBemPat](#condadbempat)
 
 ### Diagrama de Caso de Uso
 
@@ -360,6 +366,92 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 |4|Existe patrimônio ou departamento vinculado à localização.|O sistema informa que não pode ser feita a exclusão por haver patrimônio vinculado à ela.|3|
 |6|Usuário não confirma a operação.|O sistema volta para a ficha da localização.|3|
 
+### ManDep
+
+**Título:** Manter departamento.
+
+**Descrição resumida:** O sistema deve criar, atualizar, pesquisar e deletar departamentos.
+
+**Autor:** Chefe do patrimônio, administrador de seção.
+
+**Pré-condição:**
+1. <não se aplica>
+
+**Pós-condição:**
+1. Um novo departamento é cadastrado
+
+**Sequência típica:** Cadastro de departamento
+1. O usuário autorizado entra na funcionalidade de cadastro de departamento;
+2. O sistema devolve a ficha de cadastro de departamento;
+3. O usuário digita todas as informações solicitadas pelo sistema;
+4. O usuário salva as informações;
+5. O sistema apresenta a ficha do departamento recém cadastrado;
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|4|O departamento já existe|O sistema lançará uma exceção informando que o departamento já está cadastrado|1|
+|4|Usuário não preenche todas as informações necessárias|O sistema exibe uma mensagem avisando que uma informação não foi preenchida|2|
+|3|Usuário desiste da operação|O sistema cancela o cadastro do departamento|3|
+
+**Sequência alternativa:** pesquisar departamento
+1. O usuário  acessa a funcionalidade de busca de departamentos;
+2. O sistema retorna o formulário para busca.
+3. O usuário informa ou não critérios de busca.
+4. O sistema faz uma busca com os critérios informados.
+5. O sistema retorna o conjunto de departamentos condizentes.
+
+**Exceções da Sequência alternativa:** pesquisar departamento
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|4|Nenhum departamento condiz com os critérios de busca utilizados|O sistema lançará uma exceção informando que não há departamentos cadastrados com estes critérios ou o usuário informou algo errado|1|
+
+**Sequência alternativa:** atualizar departamento
+1. O usuário  acessa a funcionalidade de busca de departamentos;
+2. O sistema retorna o formulário para busca.
+3. O usuário informa ou não critérios de busca.
+4. O sistema faz uma busca com os critérios informados.
+5. O sistema retorna o conjunto de departamentos condizentes.
+6. O usuário seleciona o departamento que deseja editar as informações
+7. O sistema retorna a ficha para a edição de informações
+8. O usuário modifica as informações que deseja.
+9. O usuário salva as alterações.
+10. O sistema retorna a ficha do departamento atualizado.
+
+**Exceções da Sequência alternativa:** atualizar departamento
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|4|Nenhum departamento condiz com os critérios de busca utilizados|O sistema lançará uma exceção informando que não há departamentos cadastrados com estes critérios ou o usuário informou algo errado|1|
+|8|O usuário desiste da operação|O sistema cancela o cadastro da baixa|2|
+
+**Sequência alternativa:** deletar departamento
+
+Regras:
+
+O departamento ia ser removido deve ter sido cadastrado há menos de um mês;
+
+Não podem haver salas ligadas ao departamento.
+
+Fluxo:
+1. O usuário  acessa a funcionalidade de busca de departamentos;
+2. O sistema retorna o formulário para busca;
+3. O usuário informa ou não critérios de busca;
+4. O sistema faz uma busca com os critérios informados;
+5. O sistema retorna o conjunto de departamentos condizentes;
+6. O usuário seleciona o departamento que deseja deletar;
+7. O departamento é deletado;
+
+**Exceções da Sequência alternativa:** deletar departamento
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|4|Nenhum departamento condiz com os critérios de busca utilizados|O sistema lançará uma exceção informando que não há departamentos cadastrados com estes critérios ou o usuário informou algo errado|1|
+|6|O departamento foi cadastrado a mais de 1 mês|O sistema cancela a operação e informa que o departamento foi cadastrado a mais de 1 mês|2|
+|6|O departamento tem sala vinculadas|O sistema cancela a operação e informa que o departamento possui salas vinculadas|3|
+
 ### *VincSal*
 
 **Título:** Vincular salas
@@ -427,17 +519,16 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 
 **Título:** Movimentação de bem patrimonial externo
 
-**Descrição resumida:** A movimentação de bens entre departamento diferentes deve ser registrada no sistema. Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de *Aceite de saída*, o que significa que ela está aguardando autorização de origem. Caso seja o próprio chefe do departamento que tenha cadastrado a movimentação, então o *Aceite de Saída* será automático.
+**Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando autorização de origem. Como esta movimentação está sendo feita pelo Administrador de seção, a movimentação vai para o estado Aceite de entrada automaticamente, pois é ele mesmo seria responsável por dar o Aceite de saída.
 
-**Autor:** Chefe da seção, funcionário da seção
+**Autor:** Administrador de seção.
 
 **Pré-condição:**
 1. O usuário deve ter autorização para movimentar o bem;
 2. O bem não pode estar com o status de baixa.
 
 **Pós-condição:**
-1. O item movimentado fica com o status de *Aceite de saída* caso a movimentação não tenha sido feita pelo chefe de departamento;
-2. Caso o item tenha sido movimentado pelo chefe do departamento o item fica com o status de *Aceite de entrada no destino*.
+1. A movimentação em estado de Aceite de entrada no destino.
 
 **Sequência típica**
 1. O usuário localiza o bem no sistema;
@@ -446,16 +537,17 @@ O presente documento tem como objetivo documentar os casos de uso do sistema Inv
 4. Sistema apresenta tela de registro de movimentação;
 5. Usuário preenche informações relativas à movimentação;
 6. Usuário salva movimentação;
-7. Sistema apresenta ficha de bem com informação pertinente à movimentação recém cadastrada.
+7. O sistema cria a movimentação e registra o aceite de saída automaticamente.
+8. O sistema apresenta para o usuário a ficha de bem com informação pertinente à movimentação recém cadastrada.
 
 **Exceções da Sequência Típica**
 
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
-|2|Bem pesquisado não foi localizado|O sistema informará que o bem não foi encontrado.|1|
-|3|O usuário não tem permissão para movimentar o bem.|O sistema informa ao usuário que ele não tem permissão para realizar a ação.|2|
-|5|Usuário deixa de informar uma das informações obrigatórias.|O sistema lança uma mensagem informando que o dado obrigatório não foi informado.|4|
-|6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
+|2|Bem pesquisado não foi localizado|O sistema informará que o bem não foi encontrado|1|
+|5|Usuário deixa de informar uma das informações obrigatórias|O sistema lança uma mensagem informando que o dado obrigatório não foi informado|4|
+|6|Usuário desiste da operação|O sistema cancela a criação da movimentação|2|
+
 
 ### *MovPatIn*
 
@@ -738,3 +830,107 @@ Um bem pode ser baixado pelos seguintes motivos:
 |3|O usuário não tem permissão para movimentar o bem.|O sistema informa ao usuário que ele não tem permissão para realizar a ação.|2|
 |4|Usuário deixa de informar uma das informações obrigatórias.|O sistema lança uma mensagem informando que o dado obrigatório não foi informado.|4|
 |5|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|1|
+
+## Usuário
+
+### RegMov 
+
+**Título:** Registrar uma movimentação
+
+**Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando autorização de origem.
+
+**Autor:** Usuario (funcionários de seção).
+
+**Pré-condição:**
+1. O usuário deve ter autorização para movimentar o bem;
+2. O bem não pode estar com o status de baixa.
+
+**Pós-condição:**
+1. A movimentação com o estado de Aceite de saída;
+
+**Sequência típica**
+1. O usuário localiza o bem no sistema;
+2. O sistema apresenta a ficha do bem;
+3. Usuário aciona a funcionalidade de movimentação;
+4. Sistema apresenta tela de registro de movimentação;
+5. Usuário preenche informações relativas à movimentação;
+6. Usuário salva movimentação;
+7. Sistema apresenta ficha de bem com informação pertinente à movimentação recém cadastrada;
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|1|Bem pesquisado não foi localizado|O sistema informará que o bem não foi encontrado|1|
+|3|O usuário não tem permissão para movimentar o bem|O sistema informa ao usuário que ele não tem permissão para realizar a ação|2|
+|5|Usuário deixa de informar uma das informações obrigatórias|O sistema lança uma mensagem informando que o dado obrigatório não foi informado|3|
+|5|Usuário desiste da operação|O sistema cancela o registro da movimentação|4|
+
+## Público
+
+### *BusBemPat*
+
+**Título:** Buscar bem patrimonial.
+
+**Descrição resumida:** O sistema deve permitir que qualquer pessoa faça uma busca sobre os bens patrimoniais da organização, usando número de tombamento, denominação ou marca como critério de busca(filtro) e retornar um conjunto de bens que condizem com a busca.
+
+**Autor:** Qualquer pessoa interessada (não é necessário login)
+
+**Pré-condição:**
+
+1. <não se aplica>.
+
+**Pós-condição:**
+1. Um conjunto de bens patrimoniais resultantes da busca ordenados por denominação e data de aquisição.
+
+**Sequência típica:**
+1. A pessoa interessada informa um conjunto de critérios de busca (número de tombamento, denominação ou marca).
+2. O sistema faz a busca utilizando os filtros informados.
+3. O sistema retorna à pessoa o conjunto (ordenado) de bens patrimoniais que foram identificados.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|Nenhum bem condiz aos critérios de busca utilizados|O sistema lançará uma exceção informando que não há bens cadastrados com estes critérios ou o usuário informou algo errado|1|
+
+**Sequência alternativa: Conjunto de todos os bens**
+
+A pessoa não informa nenhum critério de busca.
+O sistema emite uma mensagem de confirmação avisando que nenhum critério foi definido então será retornado TODOS os bens patrimoniais.
+A pessoa aceita.
+O sistema retorna todos os bens.
+Sequência alternativa: Pessoa esqueceu de informar os critérios.
+A pessoa não informa nenhum critério de busca.
+O sistema emite uma mensagem de confirmação avisando que nenhum critério foi definido então será retornado TODOS os bens patrimoniais.
+A pessoa recusa.
+Retorna para a sequência típica
+
+### ConDadBemPat
+
+**Título:** Consultar dados de um bem patrimonial.
+
+**Descrição resumida:** O sistema deve que qualquer pessoa interessada veja os dados completos de um bem patrimonial.
+
+**Autor:** Qualquer pessoa interessada (não é necessário login)
+
+**Pré-condição:**
+1. <não se aplica>.
+
+**Pós-condição:**
+1. Os dados completos (o número do tombamento, denominação, data de aquisição, número da nota fiscal, grupo de material, vida útil, especificação, garantia, marca, valor de compra, situação e localização) de um bem patrimonial.
+
+**Sequência típica**
+1. A pessoa interessada informa um conjunto de critérios de busca (número de tombamento, denominação ou marca).
+2. O sistema faz a busca utilizando os filtros informados.
+3. O sistema retorna à pessoa o conjunto (ordenado) de bens patrimoniais que foram identificados.
+4. A pessoa seleciona o bem que tem interesse em saber os dados.
+5. O sistema retorna os dados completos daquele bem que foi selecionado.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|Nenhum bem condiz aos critérios de busca utilizados|O sistema lançará uma exceção informando que não há bens cadastrados com estes critérios ou o usuário informou algo errado|1|
+
+
