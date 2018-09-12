@@ -22,7 +22,7 @@ O presente documento traz uma visão geral do funcionando do sistema, apresentan
 
 # Casos de Uso
 
-Nessa sessão trataremos sobre os casos de uso que são significativos para o usuário, separando os autores e quais suas necessidades no sistema. É apresentado um diagrama de fácil compreensão para o usuário, além do detalhamento de cada caso de uso.
+Nessa sessão trataremos sobre os casos de uso que são significativos para os usuários, separando os autores e quais suas necessidades no sistema. É apresentado um diagrama de fácil compreensão para os usuários, além do detalhamento de cada caso de uso.
 
 ### Sumário
 
@@ -43,8 +43,8 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para o us
 		- [Emgutransp](#emgutransp)
 	* Serviços
 		- [Emrelpat](#emrelpat)
-		- [RegOs](#regos)
-		- [FechOs](#fechos)
+		- [RegOS](#regos)
+		- [FechOS](#fechos)
 * [Chefe de departamento de bem patrimonial](#chefe-de-departamento-de-bem-patrimonial)
 	- [EmInv](#eminv)
 	- [BaixPat](#baixpat)
@@ -68,7 +68,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para o us
 
 **Descrição resumida:** O sistema deve provê a funcionalidade de cadastrar um novo bem patrimonial que chegou à instituição, podendo informar no ato todas as informações pertinentes a esse novo bem, inclusive localização e departamento ao qual está vinculado. Quando a localização de um bem não é informada, ele é guardado automaticamente na sala de depósito do departamento de patrimônio.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. O usuário deve ter autorização para realizar o cadastro.
@@ -100,7 +100,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para o us
 * O número do patrimônio não pode ser atualizado;
 * O grupo de material do patrimônio não pode ser atualizado;
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. O patrimônio deve estar previamente cadastrado;
@@ -135,7 +135,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para o us
 * Não pode ter havido a emissão do inventários contendo o bem;
 * Ele não pode ter sido movimentado.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. O patrimônio deve estar previamente cadastrado;
@@ -167,7 +167,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para o us
 
 **Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um patrimonio.
 
-**Autor:** Chefe e Substituto de chefe de departamento.
+**Autor:** Administrador de departamento.
 
 **Pré-condição:**
 
@@ -196,7 +196,7 @@ Não se aplica
 * Os geradas;
 * Baixa do bem.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. O bem deve ter mais de um histórico, ou seja ter tido alguma ocorrência de movimentação, Os ou baixa.
@@ -227,7 +227,7 @@ Não se aplica
 
 **Descrição resumida:** O sistema deve provê a funcionalidade do chefe de departamento cadastrar um novo usuário que esteja ligado à seu departamento. No ato do cadastro do usuário o chefe deve informar todos os dados obrigatórios exigidos, além do nível de permissão que determinado usuário terá.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. Usuário que será cadastrado deverá ser vinculado ao mesmo departamento do chefe que o está cadastrando.
@@ -255,7 +255,7 @@ Não se aplica
 
 **Descrição resumida:** O chefe de departamento pode atualizar os dados dos usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. O usuário a ser atualizado deve estar vinculado ao departamento do chefe que deseja atualizar o dado;
@@ -287,7 +287,7 @@ Não se aplica
 
 **Descrição resumida:** O chefe de departamento pode remover os usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. O usuário a ser atualizado deve estar vinculado ao departamento do chefe que deseja atualizar o dado;
@@ -317,7 +317,7 @@ Não se aplica
 
 **Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um usuário.
 
-**Autor:** Chefe e Substituto de chefe de departamento.
+**Autor:** Administrador de departamento.
 
 **Pré-condição:**
 
@@ -344,12 +344,12 @@ Não se aplica
 
 **Título:** Cadastrar um local
 
-**Descrição resumida:** O usuário deve poder realizar cadastros de locais onde os bens ficarão guardados. Geralmente um bem é guardado em uma sala que é vinculada à um departamento, prédio e endereço. Por tanto ao cadastrar uma localização o usuário deve inserir:
+**Descrição resumida:** O usuário deve poder realizar cadastros de locais onde os bens ficarão guardados. Geralmente um bem é guardado em uma sala que é vinculada à um departamento, prédio e endereço. Portanto ao cadastrar uma localização o usuário deve inserir:
 * Sala;
 * Prédio;
 * Endereço.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. Usuário deve ter permissão para o ato.
@@ -377,7 +377,7 @@ Não se aplica
 
 **Descrição resumida:** O usuário deve poder realizar a atualização de localizações que sejam vinculadas ao departamento do qual é chefe. Ele deve observar que ao atualizar uma localização todos os bens que forem vinculados a ela também serão atualizados.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. Usuário deve ter permissão para o ato;
@@ -410,7 +410,7 @@ Não se aplica
 
 **Descrição resumida:** O usuário deve poder apagar uma localização previamente cadastrada. Contudo é se houver algum patrimônio ou departamento previamente vinculado a essa localização então a exclusão não será permitida.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. Usuário deve ser chefe do departamento do qual a localização está vinculada;
@@ -442,7 +442,7 @@ Não se aplica
 
 **Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de uma localização.
 
-**Autor:** Chefe e Substituto de chefe de departamento.
+**Autor:** Administrador de departamento.
 
 **Pré-condição:**
 
@@ -470,7 +470,7 @@ Não se aplica
 **Título:** Cadastrar um departamento
 **Descrição resumida:** O sistema possui a funcionalidade de cadastrar um departamento
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -499,7 +499,7 @@ Não se aplica
 
 **Descrição resumida:** O usuário pode realizar a operação de atualizar as informações sobre um departamento
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -530,7 +530,7 @@ Não se aplica.
 
 **Descrição resumida:** O usuário pode apagar um departamento previamente cadastrada.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 2. O departamento a ser removido não pode ter salas vinculadas.
@@ -560,7 +560,7 @@ Não se aplica.
 
 **Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um departamento.
 
-**Autor:** Chefe e Substituto de chefe de departamento.
+**Autor:** Administrador de departamento.
 
 **Pré-condição:**
 
@@ -585,7 +585,7 @@ Não se aplica
 
 **Descrição resumida:** O chefe de departamento deve ter a possibilidade de vincular uma sala previamente cadastrada ao departamento de que ele é chefe. Ele só poderá fazer isso se essa sala já não estiver vinculada a um outro departamento.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. Sala não pode esta  vinculada a outro departamento.
@@ -616,7 +616,7 @@ Não se aplica
 
 **Descrição resumida:** O chefe de departamento deve ter a possibilidade de desvincular uma sala previamente cadastrada ao departamento de que ele é chefe. Ele só poderá fazer isso se não houver patrimônio vinculado à sala ou ao departamento.
 
-**Autor:** Chefe e Substituto de chefe de departamento
+**Autor:** Administrador de departamento
 
 **Pré-condição:**
 1. Sala não pode ter patrimônio vinculado a ela;
@@ -827,7 +827,7 @@ Não se aplica
 |-------|----------|-----------------------|---------|
 |2|Não há nenhum bem vinculado ao departamento.|O sistema informa que não há insumos para o relatório.|1|
 
-### *RegOs*
+### *RegOS*
 
 **Título:** Registro de ordem de serviço
 
@@ -844,11 +844,11 @@ Não se aplica
 
 **Sequência típica**
 1. Sistema apresenta tela inicial;
-2. O usuário entra na funcionalidade registrar Os;
-3. O sistema apresenta formulário com para preenchimento de Os.
+2. O usuário entra na funcionalidade registrar OS;
+3. O sistema apresenta formulário com para preenchimento de OS.
 4. Usuário informa todas as informações pertinentes, inclusive qual bem que estará indo para conserto;
 5. Usuário confirma operação;
-6. Sistema informa ao usuário que Os foi registrada com sucesso;
+6. Sistema informa ao usuário que OS foi registrada com sucesso;
 7. A Os fica com o status de *Em conserto*.
 
 **Exceções da Sequência Típica**
@@ -858,11 +858,11 @@ Não se aplica
 |4|Usuário deixa de preencher algum dado obrigatório.|O sistema apresenta exceção informando que dado obrigatório não foi informado.|3|
 |5|Usuário desiste da operação.|O sistema volta para a tela inicial.|1|
 
-### *FechOs*
+### *FechOS*
 
 **Título:** Fechar ordem de serviço
 
-**Descrição resumida:** Quando um bem patrimonial sai para conserto é aberto uma Os. Quando esse bem retorna o sistema deve prover a funcionalidade de fechar a Os aberta informando a data de retorno do bem e o valor do serviço. Nesse estado a Os fica com status de *Concluída*.
+**Descrição resumida:** Quando um bem patrimonial sai para conserto é aberto uma Os. Quando esse bem retorna o sistema deve prover a funcionalidade de fechar a OS aberta informando a data de retorno do bem e o valor do serviço. Nesse estado a OS fica com status de *Concluída*.
 
 **Autor:** Chefe de departamento
 
@@ -874,13 +874,13 @@ Não se aplica
 
 **Sequência típica**
 1. Sistema apresenta tela inicial;
-2. O usuário localiza a Os que deseja finalizar;
-3. O sistema apresenta a ficha da Os cadastrada;
-4. Usuário entra na funcionalidade de fechar Os;
-5. Sistema apresenta formulário para fechamento da Os com data de retorno do bem e valor total do serviço;
+2. O usuário localiza a OS que deseja finalizar;
+3. O sistema apresenta a ficha da OS cadastrada;
+4. Usuário entra na funcionalidade de fechar OS;
+5. Sistema apresenta formulário para fechamento da OS com data de retorno do bem e valor total do serviço;
 6. Usuário preenche os dados;
 7. Usuário confirma a operação;
-8. Sistema apresenta ficha de cadastro da Os com o status de *Concluída*.
+8. Sistema apresenta ficha de cadastro da OS com o status de *Concluída*.
 
 **Exceções da Sequência Típica**
 
