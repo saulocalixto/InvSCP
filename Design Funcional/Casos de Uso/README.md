@@ -71,7 +71,8 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 **Autor:** Administrador de departamento
 
 **Pré-condição:**
-1. O usuário deve ter autorização para realizar o cadastro.
+
+Não se aplica.
 
 **Pós-condição:**
 1. Um novo patrimônio foi adicionado à base do sistema, podendo agora ser visualizado, editado, movimentado ou ter sua baixa decretada.
@@ -90,7 +91,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 |-------|----------|-----------------------|---------|
 |4|O local indicado para salvar o patrimônio não existe.|O sistema lançará uma exceção informando que o local de lotação não existe no sistema.|3|
 |4|O usuário não informa o local onde o bem será guardado.|O sistema avisa que o bem será guardado na sala de depósito do departamento de patrimônio.|5|
-|5|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|1|
+|4|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
 #### Fluxo alternativo I
 
@@ -103,8 +104,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 **Autor:** Administrador de departamento
 
 **Pré-condição:**
-1. O patrimônio deve estar previamente cadastrado;
-2. O item atualizado não pode estar dentro do grupo de restrições;
+1. O item atualizado não pode estar dentro do grupo de restrições;
 
 **Pós-condição:**
 1. Um patrimônio previamente cadastrado tem seus dados atualizados.
@@ -124,7 +124,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 |-------|----------|-----------------------|---------|
 |2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
 |5|Usuário tenta atualizar algum dado indevido.|O sistema lança exceção informando que o dado não pode ser atualizado.|4|
-|6|Usuário desiste da operação.|O sistema volta para a ficha do bem sem ter os dados atualizados.|2|
+|4|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
 
 #### Fluxo alternativo II
 
@@ -138,10 +138,9 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 **Autor:** Administrador de departamento
 
 **Pré-condição:**
-1. O patrimônio deve estar previamente cadastrado;
-2. O item a ser removido deve ter sido cadastrado há menos de um mês;
-3. O item não pode ter constado no inventário emitido;
-4. O item não pode ter sido movimentado.
+1. O item a ser removido deve ter sido cadastrado há menos de um mês;
+2. O item não pode ter constado no inventário emitido;
+3. O item não pode ter sido movimentado.
 
 **Pós-condição:**
 1. O bem removido da base do sistema.
@@ -199,7 +198,8 @@ Não se aplica
 **Autor:** Administrador de departamento
 
 **Pré-condição:**
-1. O bem deve ter mais de um histórico, ou seja ter tido alguma ocorrência de movimentação, Os ou baixa.
+
+Não se aplica
 
 **Pós-condição:**
 1. A visualização do histórico do bem.
@@ -216,7 +216,6 @@ Não se aplica
 
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
-|2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
 |3|O bem não tem histórico.|O sistema não lista nada.|2|
 
 ### ManUsr
@@ -352,7 +351,8 @@ Não se aplica
 **Autor:** Administrador de departamento
 
 **Pré-condição:**
-1. Usuário deve ter permissão para o ato.
+
+Não se aplica.
 
 **Pós-condição:**
 1. Uma nova localização é adicionado à base.
@@ -380,8 +380,8 @@ Não se aplica
 **Autor:** Administrador de departamento
 
 **Pré-condição:**
-1. Usuário deve ter permissão para o ato;
-2. A localização deve esta cadastrada;
+
+Não se aplica.
 
 **Pós-condição:**
 1. A localização tem seus dados atualizados.
@@ -446,7 +446,7 @@ Não se aplica
 
 **Pré-condição:**
 
-Não se aplica
+Não se aplica.
 
 **Pós-condição:**
 1. Informações sobre uma localização.
@@ -459,7 +459,7 @@ Não se aplica
 
 **Exceções da Sequência alternativa:** recuperar localização
 
-Não se aplica
+Não se aplica.
 
 ### ManDep
 
@@ -474,7 +474,7 @@ Não se aplica
 
 **Pré-condição:**
 
-Não se aplica
+Não se aplica.
 
 **Pós-condição:**
 1. Um novo departamento é adicionado à base.
@@ -564,7 +564,7 @@ Não se aplica.
 
 **Pré-condição:**
 
-Não se aplica
+Não se aplica.
 
 **Pós-condição:**
 1. Informações sobre um departamento.
@@ -651,8 +651,7 @@ Não se aplica
 **Autor:** Administrador de seção.
 
 **Pré-condição:**
-1. O usuário deve ter autorização para movimentar o bem;
-2. O bem não pode estar com o status de baixa.
+1. O bem não pode estar com o status de baixa.
 
 **Pós-condição:**
 1. A movimentação em estado de Aceite de entrada no destino.
@@ -685,9 +684,8 @@ Não se aplica
 **Autor:** Chefe da seção, funcionário da seção
 
 **Pré-condição:**
-1. O usuário deve ter autorização para movimentar o bem;
-2. O bem não pode estar com o status de baixa;
-3. A movimentação deve ser entre salas do mesmo departamento.
+1. O bem não pode estar com o status de baixa;
+2. A movimentação deve ser entre salas do mesmo departamento.
 
 **Pós-condição:**
 1. O item movimentado fica com o status de *Finalizado* imediatamente;
@@ -811,7 +809,8 @@ Não se aplica
 **Autor:** Chefe de departamento
 
 **Pré-condição:**
-1. Deve haver bens vinculados ao departamento.
+
+Não se aplica.
 
 **Pós-condição:**
 1. É emitido relatório com os bens patrimoniais do departamento.
@@ -836,7 +835,8 @@ Não se aplica
 **Autor:** Chefe de departamento
 
 **Pré-condição:**
-1. O bem patrimonial precisa estar cadastrado.
+
+Não se aplica.
 
 **Pós-condição:**
 1. Ordem de serviço é registrada no sistema;
@@ -902,7 +902,8 @@ Não se aplica
 **Autor:** Chefe do departamento de patrimônio
 
 **Pré-condição:**
-1. Deve haver bens cadastrado no sistema.
+
+Não se aplica.
 
 **Pós-condição:**
 1. Um documento contendo as informações de todos os bens da instituição;
@@ -934,7 +935,8 @@ Um bem pode ser baixado pelos seguintes motivos:
 **Autor:** Chefe do departamento de patrimônio
 
 **Pré-condição:**
-1. O usuário deve ter autorização para realizar a baixa do bem.
+
+Não se aplica.
 
 **Pós-condição:**
 1. No registro do bem constará a informação da baixa do bem, informando data, autor e motivo;
@@ -969,8 +971,7 @@ Um bem pode ser baixado pelos seguintes motivos:
 **Autor:** Usuario (funcionários de seção).
 
 **Pré-condição:**
-1. O usuário deve ter autorização para movimentar o bem;
-2. O bem não pode estar com o status de baixa.
+1. O bem não pode estar com o status de baixa.
 
 **Pós-condição:**
 1. A movimentação com o estado de Aceite de saída;
@@ -1005,7 +1006,7 @@ Um bem pode ser baixado pelos seguintes motivos:
 
 **Pré-condição:**
 
-1. <não se aplica>.
+Não se aplica.
 
 **Pós-condição:**
 1. Um conjunto de bens patrimoniais resultantes da busca ordenados por denominação e data de aquisição.
@@ -1042,7 +1043,8 @@ Retorna para a sequência típica
 **Autor:** Qualquer pessoa interessada (não é necessário login)
 
 **Pré-condição:**
-1. <não se aplica>.
+
+Não se aplica.
 
 **Pós-condição:**
 1. Os dados completos (o número do tombamento, denominação, data de aquisição, número da nota fiscal, grupo de material, vida útil, especificação, garantia, marca, valor de compra, situação e localização) de um bem patrimonial.
