@@ -161,6 +161,31 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para o us
 |2|O bem procurado não está cadastrado no sistema.|O sistema lançará uma exceção informando que o bem não está cadastrado.|1|
 |5|Usuário não confirma a ação de remoção do bem.|O sistema volta para a ficha de exibição do bem.|2|
 
+#### Fluxo alternativo III*
+
+**Título:** Recuperar um patrimônio
+
+**Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um patrimonio.
+
+**Autor:** Chefe e Substituto de chefe de departamento.
+
+**Pré-condição:**
+
+Não se aplica
+
+**Pós-condição:**
+1. Informações sobre um patrimonio.
+
+**Sequência típica**
+1. O usuário  acessa a funcionalidade de recuperar patrimonio;
+2. O sistema retorna a lista de bens patrimoniais com opções de filtro;
+3. O usuário seleciona o patrimonio;
+4. O sistema retorna todas os detalhes do patrimonio;
+
+**Exceções da Sequência alternativa:** recuperar um matrimonio
+
+Não se aplica
+
 ### *VisHis*
 
 **Título:** Visualizar histórico de patrimônio
@@ -286,6 +311,31 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para o us
 |3|Usuário não tem permissão para remover o outro usuário.|O sistema lança exceção informando que o usuário só pode atualizar outros usuários vinculados ao seu departamento.|2|
 |5|Usuário não confirma a operação.|O sistema retorna para a ficha do usuário.|3|
 
+#### Fluxo alternativo III*
+
+**Título:** Recuperar um usuário
+
+**Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um usuário.
+
+**Autor:** Chefe e Substituto de chefe de departamento.
+
+**Pré-condição:**
+
+Não se aplica
+
+**Pós-condição:**
+1. Informações sobre um usuário.
+
+**Sequência típica**
+1. O usuário  acessa a funcionalidade de recuperar usuário;
+2. O sistema retorna a lista de usuários com opções de filtro;
+3. O interessado seleciona o usuário;
+4. O sistema retorna todas os detalhes do usuário;
+
+**Exceções da Sequência alternativa:** recuperar usuário
+
+Não se aplica
+
 ### ManLoc
 
 **Título:** Manter localização 
@@ -386,91 +436,148 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para o us
 |4|Existe patrimônio ou departamento vinculado à localização.|O sistema informa que não pode ser feita a exclusão por haver patrimônio vinculado à ela.|3|
 |6|Usuário não confirma a operação.|O sistema volta para a ficha da localização.|3|
 
+#### Fluxo alternativo III*
+
+**Título:** Recuperar uma localização
+
+**Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de uma localização.
+
+**Autor:** Chefe e Substituto de chefe de departamento.
+
+**Pré-condição:**
+
+Não se aplica
+
+**Pós-condição:**
+1. Informações sobre uma localização.
+
+**Sequência típica**
+1. O usuário  acessa a funcionalidade de recuperar localização;
+2. O sistema retorna a lista de localizações com opções de filtro;
+3. O interessado seleciona o localização;
+4. O sistema retorna todas os detalhes do localização;
+
+**Exceções da Sequência alternativa:** recuperar localização
+
+Não se aplica
+
 ### ManDep
 
 **Título:** Manter departamento.
 
-**Descrição resumida:** O sistema deve criar, atualizar, pesquisar e deletar departamentos.
+#### *Fluxo principal*
 
-**Autor:** Chefe do patrimônio, administrador de seção.
+**Título:** Cadastrar um departamento
+**Descrição resumida:** O sistema possui a funcionalidade de cadastrar um departamento
+
+**Autor:** Chefe e Substituto de chefe de departamento
 
 **Pré-condição:**
-1. <não se aplica>
+
+Não se aplica
 
 **Pós-condição:**
-1. Um novo departamento é cadastrado
+1. Um novo departamento é adicionado à base.
 
-**Sequência típica:** Cadastro de departamento
+**Sequência típica**
 1. O usuário autorizado entra na funcionalidade de cadastro de departamento;
 2. O sistema devolve a ficha de cadastro de departamento;
 3. O usuário digita todas as informações solicitadas pelo sistema;
 4. O usuário salva as informações;
-5. O sistema apresenta a ficha do departamento recém cadastrado;
+5. O sistema apresenta a ficha do departamento recém cadastrado.
 
 **Exceções da Sequência Típica**
 
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
-|4|O departamento já existe|O sistema lançará uma exceção informando que o departamento já está cadastrado|1|
-|4|Usuário não preenche todas as informações necessárias|O sistema exibe uma mensagem avisando que uma informação não foi preenchida|2|
-|3|Usuário desiste da operação|O sistema cancela o cadastro do departamento|3|
+|4|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|1|;
+|4|Departamento já existe.|O sistema retorna ao passo 3 alerta o usuario.|2|;
 
-**Sequência alternativa:** pesquisar departamento
-1. O usuário  acessa a funcionalidade de busca de departamentos;
-2. O sistema retorna o formulário para busca.
-3. O usuário informa ou não critérios de busca.
-4. O sistema faz uma busca com os critérios informados.
-5. O sistema retorna o conjunto de departamentos condizentes.
+#### *Fluxo alternativo I*
 
-**Exceções da Sequência alternativa:** pesquisar departamento
+**Título:** Atualizar um departamento
 
-| Passo | Condição | Tratamento da Exceção | Retorno |
-|-------|----------|-----------------------|---------|
-|4|Nenhum departamento condiz com os critérios de busca utilizados|O sistema lançará uma exceção informando que não há departamentos cadastrados com estes critérios ou o usuário informou algo errado|1|
+**Descrição resumida:** O usuário pode realizar a operação de atualizar as informações sobre um departamento
 
-**Sequência alternativa:** atualizar departamento
-1. O usuário  acessa a funcionalidade de busca de departamentos;
-2. O sistema retorna o formulário para busca.
-3. O usuário informa ou não critérios de busca.
-4. O sistema faz uma busca com os critérios informados.
-5. O sistema retorna o conjunto de departamentos condizentes.
-6. O usuário seleciona o departamento que deseja editar as informações
-7. O sistema retorna a ficha para a edição de informações
-8. O usuário modifica as informações que deseja.
-9. O usuário salva as alterações.
-10. O sistema retorna a ficha do departamento atualizado.
+**Autor:** Chefe e Substituto de chefe de departamento
 
-**Exceções da Sequência alternativa:** atualizar departamento
+**Pré-condição:**
 
-| Passo | Condição | Tratamento da Exceção | Retorno |
-|-------|----------|-----------------------|---------|
-|4|Nenhum departamento condiz com os critérios de busca utilizados|O sistema lançará uma exceção informando que não há departamentos cadastrados com estes critérios ou o usuário informou algo errado|1|
-|8|O usuário desiste da operação|O sistema cancela o cadastro da baixa|2|
+Não se aplica.
 
-**Sequência alternativa:** deletar departamento
+**Pós-condição:**
+1. O departamento selecionado tem seus dados atualizados.
 
-Regras:
+**Sequência típica**
+1. O sistema apresenta a tela inicial;
+2. O usuário pesquisa o departamento;
+3. O sistema devolve a ficha com as informações do departamento selecionado;
+4. O usuário entra na funcionalidade de edição de dados;
+5. O sistema apresenta o formulário de edição dos dados do departamento;
+6. O usuário preenche os dados;
+7. O usuário confirma a operação;
+8. Sistema devolve ficha do departamento com os dados atualizados.
 
-O departamento ia ser removido deve ter sido cadastrado há menos de um mês;
-
-Não podem haver salas ligadas ao departamento.
-
-Fluxo:
-1. O usuário  acessa a funcionalidade de busca de departamentos;
-2. O sistema retorna o formulário para busca;
-3. O usuário informa ou não critérios de busca;
-4. O sistema faz uma busca com os critérios informados;
-5. O sistema retorna o conjunto de departamentos condizentes;
-6. O usuário seleciona o departamento que deseja deletar;
-7. O departamento é deletado;
-
-**Exceções da Sequência alternativa:** deletar departamento
+**Exceções da Sequência Típica**
 
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
-|4|Nenhum departamento condiz com os critérios de busca utilizados|O sistema lançará uma exceção informando que não há departamentos cadastrados com estes critérios ou o usuário informou algo errado|1|
-|6|O departamento foi cadastrado a mais de 1 mês|O sistema cancela a operação e informa que o departamento foi cadastrado a mais de 1 mês|2|
-|6|O departamento tem sala vinculadas|O sistema cancela a operação e informa que o departamento possui salas vinculadas|3|
+
+
+#### *Fluxo alternativo II*
+
+**Título:** Remover um departamento
+
+**Descrição resumida:** O usuário pode apagar um departamento previamente cadastrada.
+
+**Autor:** Chefe e Substituto de chefe de departamento
+
+**Pré-condição:**
+2. O departamento a ser removido não pode ter salas vinculadas.
+
+**Pós-condição:**
+1. O departamento será excluída da base de dados do sistema.
+
+**Sequência típica**
+1. O sistema apresenta a tela inicial;
+2. O usuário pesquisa o departamento que deseja buscar;
+3. O sistema devolve a ficha com as informações do departamento;
+4. O usuário aciona a funcionalidade de exclusão;
+5. O sistema apresenta mensagem informando dos riscos do ato;
+6. O usuário confirma a operação;
+7. Sistema volta para tela inicial.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|4|O departamento possui salas vinculadas|O sistema alerta o usuário e não prossegue|1|
+|6|Usuário não confirma a operação.|O sistema volta para a ficha da localização.|2|
+
+#### Fluxo alternativo III*
+
+**Título:** Recuperar um patrimônio
+
+**Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um departamento.
+
+**Autor:** Chefe e Substituto de chefe de departamento.
+
+**Pré-condição:**
+
+Não se aplica
+
+**Pós-condição:**
+1. Informações sobre um departamento.
+
+**Sequência típica**
+1. O usuário  acessa a funcionalidade de recuperar departamento;
+2. O sistema retorna a lista de departamentos com opções de filtro;
+3. O usuário seleciona o departamento;
+4. O sistema retorna todas os detalhes do departamento;
+
+**Exceções da Sequência alternativa:** recuperar departamento
+
+Não se aplica
 
 ### *VincSal*
 
