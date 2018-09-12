@@ -1,25 +1,3 @@
-<center>UNIVERSIDADE FEDERAL DE GOIÁS</center>
-<center>INSTITUTO DE INFORMÁTICA</center>
-<center>Engenharia de Software</center>
-<br>
-<center>Gustavo Batista</center>
- <center>Lucas Sampaio</center>
-  <center>Murillo Nunes</center>
-  <center>Marcos Rafael</center>
-   <center>Saulo Calixto</center>
-
-# Design Funcional
-O presente documento traz uma visão geral do funcionando do sistema, apresentando casos de uso com seus respectivos autores além do diagrama de classes apresentando a estrutura inicial de classes.
-
-# Sumário
-
-- [Casos de uso](#casos-de-uso)
-- [Diagrama de classes](#diagrama-de-classes)
-
-# Diagrama de classes
-
-![Teste](../Modelo%20de%20Classe/InvSCP.png?raw=true)
-
 # Casos de Uso
 
 Nessa sessão trataremos sobre os casos de uso que são significativos para os usuários, separando os autores e quais suas necessidades no sistema. É apresentado um diagrama de fácil compreensão para os usuários, além do detalhamento de cada caso de uso.
