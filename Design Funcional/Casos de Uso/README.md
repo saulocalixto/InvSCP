@@ -946,7 +946,7 @@ Não se aplica.
 
 **Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando autorização de origem.
 
-**Autor:** Usuario (funcionários de seção).
+**Autor:** Funcionário.
 
 **Pré-condição:**
 1. O bem não pode estar com o status de baixa.
