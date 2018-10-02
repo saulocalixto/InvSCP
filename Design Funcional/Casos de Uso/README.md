@@ -1,6 +1,6 @@
 # Casos de Uso
 
-Nessa sessão trataremos sobre os casos de uso que são significativos para os usuários, separando os autores e quais suas necessidades no sistema. É apresentado um diagrama de fácil compreensão para os usuários, além do detalhamento de cada caso de uso.
+Nessa sessão trataremos sobre os casos de uso que são significativos para os usuários, separando os atores e quais suas necessidades no sistema. É apresentado um diagrama de fácil compreensão para os usuários, além do detalhamento de cada caso de uso.
 
 ### Sumário
 
@@ -46,7 +46,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 
 **Descrição resumida:** O sistema deve provê a funcionalidade de cadastrar um novo bem patrimonial que chegou à instituição, podendo informar no ato todas as informações pertinentes a esse novo bem, inclusive localização e departamento ao qual está vinculado. Quando a localização de um bem não é informada, ele é guardado automaticamente na sala de depósito do departamento de patrimônio.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -57,7 +57,7 @@ Não se aplica.
 
 **Sequência típica:** cadastrar
 1. Sistema apresenta a tela inicial;
-2. O usuário autorizado entra na funcionalidade de cadastro de patrimônio;
+2. O usuário atorizado entra na funcionalidade de cadastro de patrimônio;
 3. O sistema devolve a ficha de cadastro;
 4. O usuário digita todas as informações solicitadas pelo sistema, inclusive o local onde o patrimônio será guardado;
 5. O usuário salva as informações;
@@ -79,7 +79,7 @@ Não se aplica.
 * O número do patrimônio não pode ser atualizado;
 * O grupo de material do patrimônio não pode ser atualizado;
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. O item atualizado não pode estar dentro do grupo de restrições;
@@ -88,7 +88,7 @@ Não se aplica.
 1. Um patrimônio previamente cadastrado tem seus dados atualizados.
 
 **Sequência típica**
-1. O usuário autorizado localiza um patrimônio;
+1. O usuário atorizado localiza um patrimônio;
 2. O sistema devolve a ficha do bem procurado;
 3. O usuário entra na funcionalidade de atualização;
 4. O sistema abre a tela de edição do patrimônio;
@@ -113,7 +113,7 @@ Não se aplica.
 * Não pode ter havido a emissão do inventários contendo o bem;
 * Ele não pode ter sido movimentado.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. O item a ser removido deve ter sido cadastrado há menos de um mês;
@@ -124,7 +124,7 @@ Não se aplica.
 1. O bem removido da base do sistema.
 
 **Sequência típica**
-1. O usuário autorizado localiza um patrimônio;
+1. O usuário atorizado localiza um patrimônio;
 2. O sistema devolve a ficha do bem procurado;
 3. O usuário aciona a funcionalidade de Remoção do patrimônio;
 4. O sistema emite um alerta com as consequências do ato;
@@ -144,7 +144,7 @@ Não se aplica.
 
 **Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um patrimonio.
 
-**Autor:** Administrador de departamento.
+**ator:** Administrador de departamento.
 
 **Pré-condição:**
 
@@ -173,7 +173,7 @@ Não se aplica
 * Os geradas;
 * Baixa do bem.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -183,7 +183,7 @@ Não se aplica
 1. A visualização do histórico do bem.
 
 **Sequência típica**
-1. O usuário autorizado localiza um patrimônio;
+1. O usuário atorizado localiza um patrimônio;
 2. O sistema devolve a ficha do bem procurado;
 3. O usuário aciona o histórico do bem;
 4. O sistema lista todas as datas de histórico do referido bem;
@@ -197,14 +197,16 @@ Não se aplica
 |3|O bem não tem histórico.|O sistema não lista nada.|2|
 
 ### ManUsr
+
 **Título:** Manter usuário 
+
 #### *Fluxo principal*
 
 **Título:** Cadastrar um usuário
 
 **Descrição resumida:** O sistema deve provê a funcionalidade do chefe de departamento cadastrar um novo usuário que esteja ligado à seu departamento. No ato do cadastro do usuário o chefe deve informar todos os dados obrigatórios exigidos, além do nível de permissão que determinado usuário terá.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. Usuário que será cadastrado deverá ser vinculado ao mesmo departamento do chefe que o está cadastrando.
@@ -213,7 +215,7 @@ Não se aplica
 1. Um novo usuário é adicionado à base.
 
 **Sequência típica**
-1. O usuário autorizado entra na funcionalidade de cadastro de usuário;
+1. O usuário atorizado entra na funcionalidade de cadastro de usuário;
 2. O sistema devolve a ficha de cadastro de usuário;
 3. O usuário digita todas as informações solicitadas pelo sistema, inclusive o nível de permissão que o novo usuário terá no sistema;
 4. O usuário salva as informações;
@@ -232,7 +234,7 @@ Não se aplica
 
 **Descrição resumida:** O chefe de departamento pode atualizar os dados dos usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. O usuário a ser atualizado deve estar vinculado ao departamento do chefe que deseja atualizar o dado;
@@ -241,7 +243,7 @@ Não se aplica
 1. O usuário tem seus dados atualizados no sistema.
 
 **Sequência típica**
-1. O usuário autorizado localiza um usuário;
+1. O usuário atorizado localiza um usuário;
 2. O sistema devolve a ficha do usuário;
 3. O usuário entra na funcionalidade de atualização;
 4. O sistema abre a tela de edição dos dados do usuário;
@@ -264,7 +266,7 @@ Não se aplica
 
 **Descrição resumida:** O chefe de departamento pode remover os usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. O usuário a ser atualizado deve estar vinculado ao departamento do chefe que deseja atualizar o dado;
@@ -273,7 +275,7 @@ Não se aplica
 1. O usuário é removido do sistema.
 
 **Sequência típica**
-1. O usuário autorizado localiza um usuário;
+1. O usuário atorizado localiza um usuário;
 2. O sistema devolve a ficha do usuário;
 3. O usuário entra na funcionalidade de apagar;
 4. O sistema lança um alerta informando sobre as consequências do ato;
@@ -294,7 +296,7 @@ Não se aplica
 
 **Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um usuário.
 
-**Autor:** Administrador de departamento.
+**ator:** Administrador de departamento.
 
 **Pré-condição:**
 
@@ -326,7 +328,7 @@ Não se aplica
 * Prédio;
 * Endereço.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -336,7 +338,7 @@ Não se aplica.
 1. Uma nova localização é adicionado à base.
 
 **Sequência típica**
-1. O usuário autorizado entra na funcionalidade de cadastro de localização;
+1. O usuário atorizado entra na funcionalidade de cadastro de localização;
 2. O sistema devolve a ficha de cadastro da localização;
 3. O usuário digita todas as informações solicitadas pelo sistema;
 4. O usuário salva as informações;
@@ -355,7 +357,7 @@ Não se aplica.
 
 **Descrição resumida:** O usuário deve poder realizar a atualização de localizações que sejam vinculadas ao departamento do qual é chefe. Ele deve observar que ao atualizar uma localização todos os bens que forem vinculados a ela também serão atualizados.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -388,7 +390,7 @@ Não se aplica.
 
 **Descrição resumida:** O usuário deve poder apagar uma localização previamente cadastrada. Contudo é se houver algum patrimônio ou departamento previamente vinculado a essa localização então a exclusão não será permitida.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. Usuário deve ser chefe do departamento do qual a localização está vinculada;
@@ -420,7 +422,7 @@ Não se aplica.
 
 **Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de uma localização.
 
-**Autor:** Administrador de departamento.
+**ator:** Administrador de departamento.
 
 **Pré-condição:**
 
@@ -446,9 +448,10 @@ Não se aplica.
 #### *Fluxo principal*
 
 **Título:** Cadastrar um departamento
+
 **Descrição resumida:** O sistema possui a funcionalidade de cadastrar um departamento
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -458,7 +461,7 @@ Não se aplica.
 1. Um novo departamento é adicionado à base.
 
 **Sequência típica**
-1. O usuário autorizado entra na funcionalidade de cadastro de departamento;
+1. O usuário atorizado entra na funcionalidade de cadastro de departamento;
 2. O sistema devolve a ficha de cadastro de departamento;
 3. O usuário digita todas as informações solicitadas pelo sistema;
 4. O usuário salva as informações;
@@ -477,7 +480,7 @@ Não se aplica.
 
 **Descrição resumida:** O usuário pode realizar a operação de atualizar as informações sobre um departamento
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -508,7 +511,7 @@ Não se aplica.
 
 **Descrição resumida:** O usuário pode apagar um departamento previamente cadastrada.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 2. O departamento a ser removido não pode ter salas vinculadas.
@@ -538,7 +541,7 @@ Não se aplica.
 
 **Descrição resumida:** O sistema possui a funcionalidade de recuperar as informações de um departamento.
 
-**Autor:** Administrador de departamento.
+**ator:** Administrador de departamento.
 
 **Pré-condição:**
 
@@ -563,7 +566,7 @@ Não se aplica
 
 **Descrição resumida:** O chefe de departamento deve ter a possibilidade de vincular uma sala previamente cadastrada ao departamento de que ele é chefe. Ele só poderá fazer isso se essa sala já não estiver vinculada a um outro departamento.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. Sala não pode esta  vinculada a outro departamento.
@@ -594,7 +597,7 @@ Não se aplica
 
 **Descrição resumida:** O chefe de departamento deve ter a possibilidade de desvincular uma sala previamente cadastrada ao departamento de que ele é chefe. Ele só poderá fazer isso se não houver patrimônio vinculado à sala ou ao departamento.
 
-**Autor:** Administrador de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. Sala não pode ter patrimônio vinculado a ela;
@@ -624,9 +627,9 @@ Não se aplica
 
 **Título:** Movimentação de bem patrimonial externo
 
-**Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando autorização de origem. Como esta movimentação está sendo feita pelo Administrador de seção, a movimentação vai para o estado Aceite de entrada automaticamente, pois é ele mesmo seria responsável por dar o Aceite de saída.
+**Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando atorização de origem. Como esta movimentação está sendo feita pelo Administrador de seção, a movimentação vai para o estado Aceite de entrada automaticamente, pois é ele mesmo seria responsável por dar o Aceite de saída.
 
-**Autor:** Administrador de seção.
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. O bem não pode estar com o status de baixa.
@@ -659,7 +662,7 @@ Não se aplica
 
 **Descrição resumida:** Movimentações entre salas do mesmo departamento não precisam do aceite do chefe do departamento, sendo marcadas imediatamente como *Finalizadas*.
 
-**Autor:** Chefe da seção, funcionário da seção
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. O bem não pode estar com o status de baixa;
@@ -692,9 +695,9 @@ Não se aplica
 
 **Título:** Aceite de entrada de bem movimentado
 
-**Descrição resumida:** O chefe do departamento para onde o bem foi movimentado deve autorizar o recebimento do bem. Só quando essa ação for feita é que o local de lotação do bem é atualizado e o status da movimentação fica como *Finalizada*.
+**Descrição resumida:** O chefe do departamento para onde o bem foi movimentado deve atorizar o recebimento do bem. Só quando essa ação for feita é que o local de lotação do bem é atualizado e o status da movimentação fica como *Finalizada*.
 
-**Autor:** Chefe de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. O bem deve ter sido movimentado para um departamento diferente da origem.
@@ -722,7 +725,7 @@ Não se aplica
 
 **Descrição resumida:** A movimentação pode ser recusada pelo chefe de departamento. Tanto movimentação de entrada, como movimentação de saída. Nesses casos a movimentação fica com o status de *Cancelada*.
 
-**Autor:** Chefe da seção
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. Deve existir uma movimentação com status de *Aceite de saída* ou *Aceite de entrada* para o departamento do chefe logado no sistema
@@ -746,20 +749,20 @@ Não se aplica
 
 ### *EmGuTransp*
 
-**Título:** Emissão de guia para autorização de transporte
+**Título:** Emissão de guia para atorização de transporte
 
-**Descrição resumida:** Quando uma movimentação é feita entre municípios diferentes o chefe de departamento deve emitir um guia para autorização de transporte do bem. Nesse guia deve conter:
+**Descrição resumida:** Quando uma movimentação é feita entre municípios diferentes o chefe de departamento deve emitir um guia para atorização de transporte do bem. Nesse guia deve conter:
 * Cidade de origem;
 * Cidade de destino;
 * Informações do bem movimentado.
 
-**Autor:** Chefe de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. Deve haver uma movimentação cujo destino seja em cidade diferente da origem.
 
 **Pós-condição:**
-1. É emitido a guia de autorização.
+1. É emitido a guia de atorização.
 
 **Sequência típica**
 1. O chefe de departamento entra na funcionalidade de *Emissão de guia de transporte*;
@@ -784,7 +787,7 @@ Não se aplica
 * Bens devem ser agrupados por sala;
 * Bens devem ser ordenados por grupo de material e número de tombamento;
 
-**Autor:** Chefe de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -810,7 +813,7 @@ Não se aplica.
 
 **Descrição resumida:** O sistema deve prover a funcionalidade de registro de ordem de serviço quando um bem patrimonial precisa ser consertado. O status do da ordem de serviço fica *Em conserto*.
 
-**Autor:** Chefe de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 
@@ -842,7 +845,7 @@ Não se aplica.
 
 **Descrição resumida:** Quando um bem patrimonial sai para conserto é aberto uma Os. Quando esse bem retorna o sistema deve prover a funcionalidade de fechar a OS aberta informando a data de retorno do bem e o valor do serviço. Nesse estado a OS fica com status de *Concluída*.
 
-**Autor:** Chefe de departamento
+**ator:** Administrador de departamento
 
 **Pré-condição:**
 1. A Os precisa estar com o status de *Em conserto*.
@@ -877,7 +880,7 @@ Não se aplica.
 
 **Descrição resumida:** O chefe do departamento de patrimônio precisa emitir o inventário que é na verdade a relação de bens da instituição. No inventário o sistema deverá permitir que o usuário acompanhe a evolução de bem no momento de publicar o balanço patrimonial, além de acompanhamento de depreciação para poder fazer projeções de compras no futuro.
 
-**Autor:** Chefe do departamento de patrimônio
+**ator:** Chefe do patrimônio
 
 **Pré-condição:**
 
@@ -910,14 +913,14 @@ Um bem pode ser baixado pelos seguintes motivos:
 * Por venda direta o leilão;
 * Por furto/roubo.
 
-**Autor:** Chefe do departamento de patrimônio
+**ator:** Chefe do patrimônio
 
 **Pré-condição:**
 
 Não se aplica.
 
 **Pós-condição:**
-1. No registro do bem constará a informação da baixa do bem, informando data, autor e motivo;
+1. No registro do bem constará a informação da baixa do bem, informando data, ator e motivo;
 2. Bem fica impossibilitado de fazer parte do inventário.
 
 **Sequência típica**
@@ -944,9 +947,9 @@ Não se aplica.
 
 **Título:** Registrar uma movimentação
 
-**Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando autorização de origem.
+**Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando atorização de origem.
 
-**Autor:** Funcionário.
+**ator:** Funcionário.
 
 **Pré-condição:**
 1. O bem não pode estar com o status de baixa.
@@ -980,7 +983,7 @@ Não se aplica.
 
 **Descrição resumida:** O sistema deve permitir que qualquer pessoa faça uma busca sobre os bens patrimoniais da organização, usando número de tombamento, denominação ou marca como critério de busca(filtro) e retornar um conjunto de bens que condizem com a busca.
 
-**Autor:** Qualquer pessoa interessada (não é necessário login)
+**ator:** Qualquer pessoa interessada (não é necessário login)
 
 **Pré-condição:**
 
@@ -1018,7 +1021,7 @@ Retorna para a sequência típica
 
 **Descrição resumida:** O sistema deve que qualquer pessoa interessada veja os dados completos de um bem patrimonial.
 
-**Autor:** Qualquer pessoa interessada (não é necessário login)
+**ator:** Qualquer pessoa interessada (não é necessário login)
 
 **Pré-condição:**
 
@@ -1039,5 +1042,4 @@ Não se aplica.
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
 |2|Nenhum bem condiz aos critérios de busca utilizados|O sistema lançará uma exceção informando que não há bens cadastrados com estes critérios ou o usuário informou algo errado|1|
-
 
