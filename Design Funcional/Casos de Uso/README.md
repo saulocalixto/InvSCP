@@ -5,6 +5,9 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 ### Sumário
 
 * [Diagrama](#diagrama-de-caso-de-uso)
+* [Chefe do Patrimônio](#chefe-do-patrimônio)
+	- [EmInv](#eminv)
+	- [BaixPat](#baixpat)
 * [Administrador de Departamento](#administrador-de-departamento)
 	* Bens Patromoniais
 		- [ManPat](#manpat)
@@ -27,10 +30,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 		- [Emrelpat](#emrelpat)
 		- [RegOS](#regos)
 		- [FechOS](#fechos)
-* [Chefe do Patrimônio](#chefe-do-patrimônio)
-	- [EmInv](#eminv)
-	- [BaixPat](#baixpat)
-* [Usuário](#usuario)
+* [Funcionário](#funcionário)
 	- [RegMov](#regmov)
 * [Público](#publico)
 	- [BusBemPat](#busbempat)
@@ -39,6 +39,75 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 ### Diagrama de Caso de Uso
 
 ![Diagrama de casos de uso](./diagramaCasosDeUso.png?raw=true)
+
+## Chefe do Patrimônio
+
+### *EmInv*
+
+**Título:** Emitir inventário
+
+**Descrição resumida:** O chefe do patrimônio precisa emitir o inventário que é na verdade a relação de bens da instituição. No inventário o sistema deverá permitir que o usuário acompanhe a evolução de bem no momento de publicar o balanço patrimonial, além de acompanhamento de depreciação para poder fazer projeções de compras no futuro.
+
+**ator:** Chefe do patrimônio
+
+**Pré-condição:**
+
+Não se aplica.
+
+**Pós-condição:**
+1. Um documento contendo as informações de todos os bens da instituição;
+
+**Sequência típica**
+1. Sistema apresenta tela inicial;
+2. Usuário entra da funcionalidade de emissão de inventário;
+3. Sistema apresenta documento contendo todas as informações de bens patrimoniais cadastrados no sistema;
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|2|Não há bens patrimoniais cadastrados no sistema.|Sistema informa que não há bens para constar no inventário.|1|
+
+### *BaixPat*
+
+**Título:** Dar baixa em um patrimônio
+
+**Descrição resumida:** Quando o bem patrimonial torna-se desnecessário para a instituição é necessário dar baixa ao mesmo.
+Um bem pode ser baixado pelos seguintes motivos:
+* Por inservível;
+* Por quebra, desgaste ou avaria;
+* Por venda em exercícios anteriores;
+* Por extravio;
+* Por venda direta o leilão;
+* Por furto/roubo.
+
+**ator:** Chefe do patrimônio
+
+**Pré-condição:**
+
+Não se aplica.
+
+**Pós-condição:**
+1. No registro do bem constará a informação da baixa do bem, informando data, ator e motivo;
+2. Bem fica impossibilitado de fazer parte do inventário.
+
+**Sequência típica**
+1. O usuário localiza o bem no sistema;
+2. O sistema apresenta a ficha de registro do bem;
+3. Usuário aciona a funcionalidade de baixa;
+4. Sistema abre tela de cadastro de baixa;
+5. Usuário informa todos as informações exigidas pelo sistema;
+6. Usuário salva o cadastro de baixa;
+7. Sistema apresenta ficha do bem com o status de *Baixa*.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|1|O usuário não consegue localizar o bem com as informações de pesquisa.|O sistema informará que o bem não foi encontrado.|1|
+|3|O usuário não tem permissão para movimentar o bem.|O sistema informa ao usuário que ele não tem permissão para realizar a ação.|2|
+|4|Usuário deixa de informar uma das informações obrigatórias.|O sistema lança uma mensagem informando que o dado obrigatório não foi informado.|4|
+|5|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|1|
 
 ##  Administrador de Departamento
 
@@ -876,76 +945,7 @@ Não se aplica.
 |6|Usuário deixa de informar algum dado.|O sistema informa que dado obrigatório não foi preenchido.|5|
 |7|Usuário desiste da operação.|O sistema volta para a tela inicial.|3|
 
-## Chefe do Patrimônio
-
-### *EmInv*
-
-**Título:** Emitir inventário
-
-**Descrição resumida:** O chefe do patrimônio precisa emitir o inventário que é na verdade a relação de bens da instituição. No inventário o sistema deverá permitir que o usuário acompanhe a evolução de bem no momento de publicar o balanço patrimonial, além de acompanhamento de depreciação para poder fazer projeções de compras no futuro.
-
-**ator:** Chefe do patrimônio
-
-**Pré-condição:**
-
-Não se aplica.
-
-**Pós-condição:**
-1. Um documento contendo as informações de todos os bens da instituição;
-
-**Sequência típica**
-1. Sistema apresenta tela inicial;
-2. Usuário entra da funcionalidade de emissão de inventário;
-3. Sistema apresenta documento contendo todas as informações de bens patrimoniais cadastrados no sistema;
-
-**Exceções da Sequência Típica**
-
-| Passo | Condição | Tratamento da Exceção | Retorno |
-|-------|----------|-----------------------|---------|
-|2|Não há bens patrimoniais cadastrados no sistema.|Sistema informa que não há bens para constar no inventário.|1|
-
-### *BaixPat*
-
-**Título:** Dar baixa em um patrimônio
-
-**Descrição resumida:** Quando o bem patrimonial torna-se desnecessário para a instituição é necessário dar baixa ao mesmo.
-Um bem pode ser baixado pelos seguintes motivos:
-* Por inservível;
-* Por quebra, desgaste ou avaria;
-* Por venda em exercícios anteriores;
-* Por extravio;
-* Por venda direta o leilão;
-* Por furto/roubo.
-
-**ator:** Chefe do patrimônio
-
-**Pré-condição:**
-
-Não se aplica.
-
-**Pós-condição:**
-1. No registro do bem constará a informação da baixa do bem, informando data, ator e motivo;
-2. Bem fica impossibilitado de fazer parte do inventário.
-
-**Sequência típica**
-1. O usuário localiza o bem no sistema;
-2. O sistema apresenta a ficha de registro do bem;
-3. Usuário aciona a funcionalidade de baixa;
-4. Sistema abre tela de cadastro de baixa;
-5. Usuário informa todos as informações exigidas pelo sistema;
-6. Usuário salva o cadastro de baixa;
-7. Sistema apresenta ficha do bem com o status de *Baixa*.
-
-**Exceções da Sequência Típica**
-
-| Passo | Condição | Tratamento da Exceção | Retorno |
-|-------|----------|-----------------------|---------|
-|1|O usuário não consegue localizar o bem com as informações de pesquisa.|O sistema informará que o bem não foi encontrado.|1|
-|3|O usuário não tem permissão para movimentar o bem.|O sistema informa ao usuário que ele não tem permissão para realizar a ação.|2|
-|4|Usuário deixa de informar uma das informações obrigatórias.|O sistema lança uma mensagem informando que o dado obrigatório não foi informado.|4|
-|5|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|1|
-
-## Usuário
+## Funcionário
 
 ### RegMov 
 
