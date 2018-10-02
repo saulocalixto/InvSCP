@@ -5,6 +5,8 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 ### Sumário
 
 * [Diagrama](#diagrama-de-caso-de-uso)
+
+
 * [Chefe do Patrimônio](#chefe-do-patrimônio)
 	- [EmInv](#eminv)
 	- [BaixPat](#baixpat)
