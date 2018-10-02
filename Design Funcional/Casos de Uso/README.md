@@ -5,15 +5,19 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 ### Sumário
 
 * [Diagrama](#diagrama-de-caso-de-uso)
-* [Chefe ou substituto de chefe de departamento](#chefe-de-departamento)
-	- [ManPat](#manpat)
-	- [ManUsr](#manusr)
-	* [ManLoc](#manloc)
-	* Departamento
+* [Administrador de Departamento](#administrador-de-departamento)
+	* Bens Patromoniais
+		- [ManPat](#manpat)
+		- [VisHis](#VisHis)
+	* Usuários
+		- [ManUsr](#manusr)
+	* Localizações
+		- [ManLoc](#manloc)
+	* Departamentos
 		- [ManDep](#mandep)
 		- [VincSal](#vincsal)
 		- [DesvSal](#desvsal)
-	* Movimentação
+	* Movimentações
 		- [MovPatEx](#movpatex)
 		- [MovPatIn](#movpatin)
 		- [AceiMov](#aceimov)
@@ -23,7 +27,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 		- [Emrelpat](#emrelpat)
 		- [RegOS](#regos)
 		- [FechOS](#fechos)
-* [Chefe de departamento de bem patrimonial](#chefe-de-departamento-de-bem-patrimonial)
+* [Chefe do Patrimônio](#chefe-do-patrimônio)
 	- [EmInv](#eminv)
 	- [BaixPat](#baixpat)
 * [Usuário](#usuario)
@@ -36,7 +40,7 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 
 ![Diagrama de casos de uso](./diagramaCasosDeUso.png?raw=true)
 
-## Chefe de departamento
+##  Administrador de Departamento
 
 ### ManPat
 **Título:** Manter patrimônio 
@@ -204,12 +208,12 @@ Não se aplica
 
 **Título:** Cadastrar um usuário
 
-**Descrição resumida:** O sistema deve provê a funcionalidade do chefe de departamento cadastrar um novo usuário que esteja ligado à seu departamento. No ato do cadastro do usuário o chefe deve informar todos os dados obrigatórios exigidos, além do nível de permissão que determinado usuário terá.
+**Descrição resumida:** O sistema deve provê a funcionalidade do administrador de departamento cadastrar um novo usuário que esteja ligado à seu departamento. No ato do cadastro do usuário o administrador deve informar todos os dados obrigatórios exigidos, além do nível de permissão que determinado usuário terá.
 
 **ator:** Administrador de departamento
 
 **Pré-condição:**
-1. Usuário que será cadastrado deverá ser vinculado ao mesmo departamento do chefe que o está cadastrando.
+1. Usuário que será cadastrado deverá ser vinculado ao mesmo departamento do administrador que o está cadastrando.
 
 **Pós-condição:**
 1. Um novo usuário é adicionado à base.
@@ -232,12 +236,12 @@ Não se aplica
 
 **Título:** Atualizar um usuário
 
-**Descrição resumida:** O chefe de departamento pode atualizar os dados dos usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
+**Descrição resumida:** O administrador de departamento pode atualizar os dados dos usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
 
 **ator:** Administrador de departamento
 
 **Pré-condição:**
-1. O usuário a ser atualizado deve estar vinculado ao departamento do chefe que deseja atualizar o dado;
+1. O usuário a ser atualizado deve estar vinculado ao departamento do administrador que deseja atualizar o dado;
 
 **Pós-condição:**
 1. O usuário tem seus dados atualizados no sistema.
@@ -264,12 +268,12 @@ Não se aplica
 
 **Título:** Remover um usuário
 
-**Descrição resumida:** O chefe de departamento pode remover os usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
+**Descrição resumida:** O administrador de departamento pode remover os usuários vinculados ao seu departamento, portanto o sistema deve prover essa funcionalidade a ele.
 
 **ator:** Administrador de departamento
 
 **Pré-condição:**
-1. O usuário a ser atualizado deve estar vinculado ao departamento do chefe que deseja atualizar o dado;
+1. O usuário a ser atualizado deve estar vinculado ao departamento do administrador que deseja atualizar o dado;
 
 **Pós-condição:**
 1. O usuário é removido do sistema.
@@ -355,7 +359,7 @@ Não se aplica.
 
 **Título:** Atualizar um local
 
-**Descrição resumida:** O usuário deve poder realizar a atualização de localizações que sejam vinculadas ao departamento do qual é chefe. Ele deve observar que ao atualizar uma localização todos os bens que forem vinculados a ela também serão atualizados.
+**Descrição resumida:** O usuário deve poder realizar a atualização de localizações que sejam vinculadas ao departamento do qual é administrador. Ele deve observar que ao atualizar uma localização todos os bens que forem vinculados a ela também serão atualizados.
 
 **ator:** Administrador de departamento
 
@@ -393,7 +397,7 @@ Não se aplica.
 **ator:** Administrador de departamento
 
 **Pré-condição:**
-1. Usuário deve ser chefe do departamento do qual a localização está vinculada;
+1. Usuário deve ser administrador do departamento do qual a localização está vinculada;
 2. Não deve haver nenhum patrimônio ou departamento vinculado à localização.
 
 **Pós-condição:**
@@ -564,7 +568,7 @@ Não se aplica
 
 **Título:** Vincular salas
 
-**Descrição resumida:** O chefe de departamento deve ter a possibilidade de vincular uma sala previamente cadastrada ao departamento de que ele é chefe. Ele só poderá fazer isso se essa sala já não estiver vinculada a um outro departamento.
+**Descrição resumida:** O administrador de departamento deve ter a possibilidade de vincular uma sala previamente cadastrada ao departamento de que ele é administrador. Ele só poderá fazer isso se essa sala já não estiver vinculada a um outro departamento.
 
 **ator:** Administrador de departamento
 
@@ -595,7 +599,7 @@ Não se aplica
 
 **Título:** Desvincular salas
 
-**Descrição resumida:** O chefe de departamento deve ter a possibilidade de desvincular uma sala previamente cadastrada ao departamento de que ele é chefe. Ele só poderá fazer isso se não houver patrimônio vinculado à sala ou ao departamento.
+**Descrição resumida:** O administrador de departamento deve ter a possibilidade de desvincular uma sala previamente cadastrada ao departamento de que ele é administrador. Ele só poderá fazer isso se não houver patrimônio vinculado à sala ou ao departamento.
 
 **ator:** Administrador de departamento
 
@@ -660,7 +664,7 @@ Não se aplica
 
 **Título:** Movimentação de bem patrimonial interno
 
-**Descrição resumida:** Movimentações entre salas do mesmo departamento não precisam do aceite do chefe do departamento, sendo marcadas imediatamente como *Finalizadas*.
+**Descrição resumida:** Movimentações entre salas do mesmo departamento não precisam do aceite do administrador do departamento, sendo marcadas imediatamente como *Finalizadas*.
 
 **ator:** Administrador de departamento
 
@@ -695,7 +699,7 @@ Não se aplica
 
 **Título:** Aceite de entrada de bem movimentado
 
-**Descrição resumida:** O chefe do departamento para onde o bem foi movimentado deve atorizar o recebimento do bem. Só quando essa ação for feita é que o local de lotação do bem é atualizado e o status da movimentação fica como *Finalizada*.
+**Descrição resumida:** O administrador do departamento para onde o bem foi movimentado deve atorizar o recebimento do bem. Só quando essa ação for feita é que o local de lotação do bem é atualizado e o status da movimentação fica como *Finalizada*.
 
 **ator:** Administrador de departamento
 
@@ -707,7 +711,7 @@ Não se aplica
 2. O local onde o item é lotado é atualizado no sistema.
 
 **Sequência típica**
-1. O chefe de departamento entra na funcionalidade de *Aceite de entrada*;
+1. O administrador de departamento entra na funcionalidade de *Aceite de entrada*;
 2. O sistema listará todas as movimentações que se destinam ao seu departamento e estão aguardando o aval para concluir a operação;
 3. O usuário abre a movimentação que deseja avaliar;
 4. O sistema apresenta os dados do bem movimentado;
@@ -723,19 +727,19 @@ Não se aplica
 
 **Título:** Cancelamento de movimentação
 
-**Descrição resumida:** A movimentação pode ser recusada pelo chefe de departamento. Tanto movimentação de entrada, como movimentação de saída. Nesses casos a movimentação fica com o status de *Cancelada*.
+**Descrição resumida:** A movimentação pode ser recusada pelo administrador de departamento. Tanto movimentação de entrada, como movimentação de saída. Nesses casos a movimentação fica com o status de *Cancelada*.
 
 **ator:** Administrador de departamento
 
 **Pré-condição:**
-1. Deve existir uma movimentação com status de *Aceite de saída* ou *Aceite de entrada* para o departamento do chefe logado no sistema
+1. Deve existir uma movimentação com status de *Aceite de saída* ou *Aceite de entrada* para o departamento do administrador logado no sistema
 
 **Pós-condição:**
 1. O bem não tem seu local atualizado;
 2. A movimentação fica com o status de *Cancelada*.
 
 **Sequência típica**
-1. O chefe de departamento entra na funcionalidade de *Aceite de entrada* ou *Aceite de Saída*;
+1. O administrador de departamento entra na funcionalidade de *Aceite de entrada* ou *Aceite de Saída*;
 2. O sistema listará todas as movimentações que se destinam ao seu departamento e estão aguardando o aval para concluir a operação;
 3. O usuário abre a movimentação que deseja avaliar;
 4. O sistema apresenta os dados do bem movimentado;
@@ -751,7 +755,7 @@ Não se aplica
 
 **Título:** Emissão de guia para atorização de transporte
 
-**Descrição resumida:** Quando uma movimentação é feita entre municípios diferentes o chefe de departamento deve emitir um guia para atorização de transporte do bem. Nesse guia deve conter:
+**Descrição resumida:** Quando uma movimentação é feita entre municípios diferentes o administrador de departamento deve emitir um guia para atorização de transporte do bem. Nesse guia deve conter:
 * Cidade de origem;
 * Cidade de destino;
 * Informações do bem movimentado.
@@ -765,7 +769,7 @@ Não se aplica
 1. É emitido a guia de atorização.
 
 **Sequência típica**
-1. O chefe de departamento entra na funcionalidade de *Emissão de guia de transporte*;
+1. O administrador de departamento entra na funcionalidade de *Emissão de guia de transporte*;
 2. O sistema apresenta a tela com uma lista de movimentações geradas;
 3. Usuário deve informar qual a movimentação que originará a guia;
 4. Será apresentada a guia com as informações da movimentação;
@@ -797,8 +801,8 @@ Não se aplica.
 1. É emitido relatório com os bens patrimoniais do departamento.
 
 **Sequência típica**
-1. O chefe de departamento entra na funcionalidade de *Emissão de relatório patrimonial*;
-2. O sistema apresenta a tela o relatório de todos os bens vinculados ao departamento do qual o usuário é chefe;
+1. O administrador de departamento entra na funcionalidade de *Emissão de relatório patrimonial*;
+2. O sistema apresenta a tela o relatório de todos os bens vinculados ao departamento do qual o usuário é administrador .
 3. Usuário imprime o relatório.
 
 **Exceções da Sequência Típica**
@@ -872,13 +876,13 @@ Não se aplica.
 |6|Usuário deixa de informar algum dado.|O sistema informa que dado obrigatório não foi preenchido.|5|
 |7|Usuário desiste da operação.|O sistema volta para a tela inicial.|3|
 
-## Chefe de departamento de bem patrimonial
+## Chefe do Patrimônio
 
 ### *EmInv*
 
 **Título:** Emitir inventário
 
-**Descrição resumida:** O chefe do departamento de patrimônio precisa emitir o inventário que é na verdade a relação de bens da instituição. No inventário o sistema deverá permitir que o usuário acompanhe a evolução de bem no momento de publicar o balanço patrimonial, além de acompanhamento de depreciação para poder fazer projeções de compras no futuro.
+**Descrição resumida:** O chefe do patrimônio precisa emitir o inventário que é na verdade a relação de bens da instituição. No inventário o sistema deverá permitir que o usuário acompanhe a evolução de bem no momento de publicar o balanço patrimonial, além de acompanhamento de depreciação para poder fazer projeções de compras no futuro.
 
 **ator:** Chefe do patrimônio
 
@@ -1042,4 +1046,3 @@ Não se aplica.
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
 |2|Nenhum bem condiz aos critérios de busca utilizados|O sistema lançará uma exceção informando que não há bens cadastrados com estes critérios ou o usuário informou algo errado|1|
-
