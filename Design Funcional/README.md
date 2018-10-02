@@ -6,7 +6,7 @@ Essa sessão apresenta o projeto de alto nível do sistema. Casos de uso, diagra
 
 * [Diagrama de classes](./Modelo%20de%20Classe)
 
-* [Diagrama de classes detalhado](./Diagrama%20de%20Sequência)
+* [Diagrama de classes detalhado](./Diagrama%20de%20Classe%20Detalhado)
 
 * [Diagrama de sequência](./Diagrama%20de%20Sequência)
 
