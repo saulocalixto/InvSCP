@@ -9,24 +9,24 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 	- [EmInv](#eminv)
 	- [BaixPat](#baixpat)
 * [Administrador de Departamento](#administrador-de-departamento)
-	* Bens Patromoniais
+	* Bens Patromoniais:
 		- [ManPat](#manpat)
 		- [VisHis](#VisHis)
-	* Usuários
+	* Usuários:
 		- [ManUsr](#manusr)
-	* Localizações
+	* Localizações:
 		- [ManLoc](#manloc)
-	* Departamentos
+	* Departamentos:
 		- [ManDep](#mandep)
 		- [VincSal](#vincsal)
 		- [DesvSal](#desvsal)
-	* Movimentações
+	* Movimentações:
 		- [MovPatEx](#movpatex)
 		- [MovPatIn](#movpatin)
 		- [AceiMov](#aceimov)
 		- [CanMov](#canmov)
 		- [Emgutransp](#emgutransp)
-	* Serviços
+	* Serviços:
 		- [Emrelpat](#emrelpat)
 		- [RegOS](#regos)
 		- [FechOS](#fechos)
