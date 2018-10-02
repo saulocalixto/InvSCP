@@ -21,8 +21,6 @@ Nessa sessão trataremos sobre os casos de uso que são significativos para os u
 		- [VincSal](#vincsal)
 		- [DesvSal](#desvsal)
 	* Movimentações:
-		- [MovPatEx](#movpatex)
-		- [MovPatIn](#movpatin)
 		- [AceiMov](#aceimov)
 		- [CanMov](#canmov)
 		- [Emgutransp](#emgutransp)
@@ -696,74 +694,6 @@ Não se aplica
 |4|Localização não está vinculada ao departamento do usuário.|O sistema avisa o usuário que não poderá desvincular a localização.|3|
 |6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|3|
 
-### *MovPatEx*
-
-**Título:** Movimentação de bem patrimonial externo
-
-**Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando atorização de origem. Como esta movimentação está sendo feita pelo Administrador de seção, a movimentação vai para o estado Aceite de entrada automaticamente, pois é ele mesmo seria responsável por dar o Aceite de saída.
-
-**ator:** Administrador de departamento
-
-**Pré-condição:**
-1. O bem não pode estar com o status de baixa.
-
-**Pós-condição:**
-1. A movimentação em estado de Aceite de entrada no destino.
-
-**Sequência típica**
-1. O usuário localiza o bem no sistema;
-2. O sistema apresenta a ficha do bem;
-3. Usuário aciona a funcionalidade de movimentação;
-4. Sistema apresenta tela de registro de movimentação;
-5. Usuário preenche informações relativas à movimentação;
-6. Usuário salva movimentação;
-7. O sistema cria a movimentação e registra o aceite de saída automaticamente.
-8. O sistema apresenta para o usuário a ficha de bem com informação pertinente à movimentação recém cadastrada.
-
-**Exceções da Sequência Típica**
-
-| Passo | Condição | Tratamento da Exceção | Retorno |
-|-------|----------|-----------------------|---------|
-|2|Bem pesquisado não foi localizado|O sistema informará que o bem não foi encontrado|1|
-|5|Usuário deixa de informar uma das informações obrigatórias|O sistema lança uma mensagem informando que o dado obrigatório não foi informado|4|
-|6|Usuário desiste da operação|O sistema cancela a criação da movimentação|2|
-
-
-### *MovPatIn*
-
-**Título:** Movimentação de bem patrimonial interno
-
-**Descrição resumida:** Movimentações entre salas do mesmo departamento não precisam do aceite do administrador do departamento, sendo marcadas imediatamente como *Finalizadas*.
-
-**ator:** Administrador de departamento
-
-**Pré-condição:**
-1. O bem não pode estar com o status de baixa;
-2. A movimentação deve ser entre salas do mesmo departamento.
-
-**Pós-condição:**
-1. O item movimentado fica com o status de *Finalizado* imediatamente;
-2. O local onde o item está guardado é atualizado no sistema.
-
-**Sequência típica**
-1. O usuário localiza o bem no sistema;
-2. O sistema apresenta a ficha do bem;
-3. Usuário aciona a funcionalidade de movimentação;
-4. Sistema apresenta tela de registro de movimentação;
-5. Usuário preenche informações relativas à movimentação;
-6. Usuário salva movimentação;
-7. Sistema apresenta ficha de bem com informação pertinente à movimentação recém cadastrada.
-
-**Exceções da Sequência Típica**
-
-| Passo | Condição | Tratamento da Exceção | Retorno |
-|-------|----------|-----------------------|---------|
-|2|Bem pesquisado não foi localizado|O sistema informará que o bem não foi encontrado.|1|
-|3|O usuário não tem permissão para movimentar o bem.|O sistema informa ao usuário que ele não tem permissão para realizar a ação.|2|
-|5|Usuário deixa de informar uma das informações obrigatórias.|O sistema lança uma mensagem informando que o dado obrigatório não foi informado.|4|
-|5|Usuário informa uma localização fora do departamento no qual o bem está lotado.|O sistema cadastra a movimentação mas com o status de *Aceite de Saída*.|7|
-|6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|2|
-
 ### *AceiMov*
 
 **Título:** Aceite de entrada de bem movimentado
@@ -951,7 +881,7 @@ Não se aplica.
 
 **Título:** Registrar uma movimentação
 
-**Descrição resumida:** Ao criar a movimentação ela não se conclui imediatamente, mas fica com o status de Aceite de saída, o que significa que ela está aguardando atorização de origem.
+**Descrição resumida:** Quando um bem patrimonial tem que ser movido, esta movimentação deve ser registrada, dependendo de quem a resgistrou o restultado pode ser diferente como mostra os fluxos alternativos.
 
 **ator:** Funcionário.
 
@@ -959,7 +889,7 @@ Não se aplica.
 1. O bem não pode estar com o status de baixa.
 
 **Pós-condição:**
-1. A movimentação com o estado de Aceite de saída;
+1. A movimentação com o estado de Aceite de saída.;
 
 **Sequência típica**
 1. O usuário localiza o bem no sistema;
@@ -974,10 +904,73 @@ Não se aplica.
 
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
-|1|Bem pesquisado não foi localizado|O sistema informará que o bem não foi encontrado|1|
 |3|O usuário não tem permissão para movimentar o bem|O sistema informa ao usuário que ele não tem permissão para realizar a ação|2|
-|5|Usuário deixa de informar uma das informações obrigatórias|O sistema lança uma mensagem informando que o dado obrigatório não foi informado|3|
 |5|Usuário desiste da operação|O sistema cancela o registro da movimentação|4|
+
+#### *Fluxo alternativo I*
+
+**Título:** Movimentação de bem patrimonial externo
+
+**Descrição resumida:** Neste caso o Administrador do departamento no qual o bem patrimonial está sendo retirado é o usuário que registra a movimentação
+
+**ator:** Administrador de departamento
+
+**Pré-condição:**
+1. O bem não pode estar com o status de baixa.
+
+**Pós-condição:**
+1. A movimentação em estado de Aceite de entrada no destino.
+
+**Sequência típica**
+1. O usuário localiza o bem no sistema;
+2. O sistema apresenta a ficha do bem;
+3. Usuário aciona a funcionalidade de movimentação;
+4. Sistema apresenta tela de registro de movimentação;
+5. Usuário preenche informações relativas à movimentação;
+6. Usuário salva movimentação;
+7. O sistema cria a movimentação e registra o aceite de saída automaticamente.
+8. O sistema apresenta para o usuário a ficha de bem com informação pertinente à movimentação recém cadastrada.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|3|O usuário não tem permissão para movimentar o bem.|O sistema informa ao usuário que ele não tem permissão para realizar a ação.|1|
+|6|Usuário desiste da operação|O sistema cancela a criação da movimentação|2|
+
+
+#### *Fluxo alternativo II*
+
+**Título:** Movimentação de bem patrimonial interno
+
+**Descrição resumida:** Movimentações entre salas do mesmo departamento não precisam do aceite do administrador do departamento, sendo marcadas imediatamente como *Finalizadas*.
+
+**ator:** Administrador de departamento
+
+**Pré-condição:**
+1. O bem não pode estar com o status de baixa;
+2. A movimentação deve ser entre salas do mesmo departamento.
+
+**Pós-condição:**
+1. O item movimentado fica com o status de *Finalizado* imediatamente;
+2. O local onde o item está guardado é atualizado no sistema.
+
+**Sequência típica**
+1. O usuário localiza o bem no sistema;
+2. O sistema apresenta a ficha do bem;
+3. Usuário aciona a funcionalidade de movimentação;
+4. Sistema apresenta tela de registro de movimentação;
+5. Usuário preenche informações relativas à movimentação;
+6. Usuário salva movimentação;
+7. Sistema apresenta ficha de bem com informação pertinente à movimentação recém cadastrada.
+
+**Exceções da Sequência Típica**
+
+| Passo | Condição | Tratamento da Exceção | Retorno |
+|-------|----------|-----------------------|---------|
+|3|O usuário não tem permissão para movimentar o bem.|O sistema informa ao usuário que ele não tem permissão para realizar a ação.|1|
+|3|O bem patrimonial esta com status de baixa.|O sistema informa ao usuário que o bem está com status de baixa.|2|
+|6|Usuário desiste da operação.|O sistema cancela o cadastro da baixa.|3|
 
 ## Público
 
