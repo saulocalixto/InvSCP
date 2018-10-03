@@ -452,7 +452,6 @@ Não se aplica.
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
 |2|A localização não está cadastrada.|O sistema lança exceção informando que a localização não está cadastrada.|1|
-|6|Usuário deixa alguma informação obrigatória sem preencher.|O sistema lança exceção de dado obrigatório não preenchido.|5|
 |7|Usuário desiste da operação.|O sistema volta para a ficha da localização.|3|
 
 #### *Fluxo alternativo II*
@@ -839,7 +838,6 @@ Não se aplica.
 
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
-|4|Usuário deixa de preencher algum dado obrigatório.|O sistema apresenta exceção informando que dado obrigatório não foi informado.|3|
 |5|Usuário desiste da operação.|O sistema volta para a tela inicial.|1|
 
 ### *FechOS*
@@ -870,10 +868,8 @@ Não se aplica.
 
 | Passo | Condição | Tratamento da Exceção | Retorno |
 |-------|----------|-----------------------|---------|
-|2|Os não está cadastrada.|O sistema informa que Os não foi encontrada.|1|
-|4|Os não está com o status de *Em conserto*.|Sistema informa que Os não encontra-se aberta.|3|
-|6|Usuário deixa de informar algum dado.|O sistema informa que dado obrigatório não foi preenchido.|5|
-|7|Usuário desiste da operação.|O sistema volta para a tela inicial.|3|
+|4|Os não está com o status de *Em conserto*.|Sistema informa que Os não encontra-se aberta.|1|
+|7|Usuário desiste da operação.|O sistema volta para a tela inicial.|2|
 
 ## Funcionário
 
