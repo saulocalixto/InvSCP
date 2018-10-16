@@ -13,9 +13,7 @@ import java.io.IOException;
  * Classe principal do Cliente InvSCP
  * @author Lucas Sampaio Dias
  */
-public class Aplicacao {
-    private static final int MAX_OPCOES_MENU_PRINCIPAL = 2;
-    
+public class Aplicacao {    
     private static boolean sair = false;
     private static Usuario usuario;
     
