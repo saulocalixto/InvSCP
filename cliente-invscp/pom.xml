@@ -102,7 +102,7 @@
     <build>
 
         <!-- Define o nome do arquivo a ser gerado (.jar é acrescentada) -->
-        <finalName>Exemplo</finalName>
+        <finalName>Cliente-InvSCP</finalName>
 
         <plugins>
 

@@ -25,7 +25,7 @@ public class Aplicacao {
         
         TerminalUI.escreverMensagemInicial();
 
-        if (usuario.Login() == false) {
+        if (usuario.login() == false) {
             return;
         }
         System.out.println("Bem-vindo, " + usuario.getNome() + "!");
@@ -35,7 +35,7 @@ public class Aplicacao {
         
         while (sair == false) {
             TerminalUI.escreverOpcoes();
-            opcao = IO.getOpcao(0, MAX_OPCOES_MENU_PRINCIPAL);
+            opcao = IO.readInt();
             tratarOpcao(opcao);
         }
         
@@ -52,6 +52,9 @@ public class Aplicacao {
         switch (TerminalUI.menuAtual()) {
             case "Menu Principal":
                 switch (opcao) {
+                    default:
+                        System.out.println("Opção inválida! Tente novamente");
+                        break;
                     case 0:
                         sair = true;
                         break;
@@ -63,6 +66,9 @@ public class Aplicacao {
                 break;
             case "Bens":
                 switch (opcao) {
+                    default:
+                        System.out.println("Opção inválida! Tente novamente");
+                        break;
                     case 0:
                         TerminalUI.voltarMenu();
                         break;
@@ -73,6 +79,9 @@ public class Aplicacao {
                 break;
             case "Locais":
                 switch (opcao) {
+                    default:
+                        System.out.println("Opção inválida! Tente novamente");
+                        break;
                     case 0:
                         TerminalUI.voltarMenu();
                         break;
