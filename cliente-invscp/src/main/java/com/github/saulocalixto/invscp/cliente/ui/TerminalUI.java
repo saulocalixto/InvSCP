@@ -5,7 +5,10 @@
  */
 package com.github.saulocalixto.invscp.cliente.ui;
 
+import com.github.saulocalixto.invscp.cliente.ui.screens.UIScreenMenuPrincipal;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Realiza a comunicação entre o usuário e a aplicação através do Terminal.
@@ -13,46 +16,7 @@ import java.util.ArrayList;
  */
 public class TerminalUI {
     private static ArrayList<Integer> menu = new ArrayList<Integer>();
-    
-    /**
-     * Acessa o menu requisitado tendo como referência o menu atual.
-     * Exemplo: Se o menu atual for "Menu Principal", acessarMenu(1) acessa o
-     * menu "Bens".
-     * @param opcao id do menu a ser acessado de acordo com o menu atual.
-     */
-    public static void acessarMenu(int opcao) {
-        TerminalUI.menu.add(opcao);
-    }
-    
-    /**
-     * Retorna o nome do menu atual.
-     * @return Nome do menu atual (ex.: "Menu Principal")
-     */
-    public static String menuAtual() {
-        int pilha = 1;
-        int menuID = 0;
-        for (int i = 0; i < menu.size(); i++) {
-            menuID += menu.get(i) * pilha;
-            pilha *= 10;
-        }
-        
-        switch (menuID) {
-            case 0:
-                return "Menu Principal";
-            case 10:
-                return "Bens";
-            case 20:
-                return "Locais";
-        }
-        return "";
-    }
-    
-    /**
-     * Sai do menu atual, voltando para o menu anterior.
-     */
-    public static void voltarMenu() {
-        menu.remove(menu.size() - 1);
-    }
+    private static Stack<UIScreen> menusAbertos = new Stack<>();
     
     /**
      * Escreve na saída principal a mensagem de boas-vindas.
@@ -62,36 +26,39 @@ public class TerminalUI {
         System.out.println("###### Cliente InvSCP ######");
         System.out.println("############################");
     }
-
-    /**
-     * Escreve na saída principal as opções do menu atual
-     */
-    public static void escreverOpcoes() {
-        switch (menuAtual()) {
-            case "Menu Principal":
-                System.out.println("\nInsira o número correspondente à opção "
-                        + "desejada");
-                System.out.println("1 - Bens");
-                System.out.println("2 - Locais");
-                System.out.println("0 - Sair");
-                System.out.println("");
-                break;
-            case "Bens":
-                System.out.println("\nBENS");
-                System.out.println("Insira o número correspondente à opção "
-                        + "desejada");
-                System.out.println("0 - Voltar");
-                System.out.println("");
-                break;
-            case "Locais":
-                System.out.println("\nLOCAIS");
-                System.out.println("Insira o número correspondente à opção "
-                        + "desejada");
-                System.out.println("1 - Departamentos");
-                System.out.println("2 - Prédios");
-                System.out.println("0 - Voltar");
-                System.out.println("");
-                break;
+    
+    public static void mostrar(UIScreen menu) throws IOException {
+        menusAbertos.add(menu);
+        mostrarMenuAtual();
+    }
+    
+    public static void mostrarMenuAtual() throws IOException {
+        menusAbertos.peek().mostrar();
+        menusAbertos.peek().lerOpcao();
+    }
+    
+    public static void voltar() throws IOException {
+        if (menusAbertos.size() > 1) {
+            menusAbertos.pop();
+            mostrarMenuAtual();
         }
+        else {
+            System.out.println("\nObrigado por usar o InvSCP!\n");
+            System.exit(0);
+        }
+    }
+    
+    public static String opcaoZero() {
+        if (menusAbertos.size() <= 1) {
+            return "0 - Sair\n";
+        }
+        else {
+            return "0 - Voltar\n";
+        }
+    }
+    
+    public static void reset() {
+        menusAbertos = new Stack<>();
+        menusAbertos.add(new UIScreenMenuPrincipal());
     }
 }
