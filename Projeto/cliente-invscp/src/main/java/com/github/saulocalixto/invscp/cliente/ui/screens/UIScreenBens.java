@@ -19,6 +19,7 @@ public class UIScreenBens extends UIScreen{
     static
     {
         opcoes = new HashMap<>();
+        // Será implementado na Etapa 2
     }
     
     public UIScreenBens() {

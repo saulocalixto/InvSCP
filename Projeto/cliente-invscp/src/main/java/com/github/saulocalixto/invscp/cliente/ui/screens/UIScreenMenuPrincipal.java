@@ -39,6 +39,14 @@ public class UIScreenMenuPrincipal extends UIScreen{
                         Level.SEVERE, null, ex);
             }
         }));
+        opcoes.put(3, new UIScreenOption("Usuários", () -> {
+            try {
+                TerminalUI.mostrar(new UIScreenUsuarios());
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenMenuPrincipal.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            }
+        }));
     }
     
     public UIScreenMenuPrincipal() {
