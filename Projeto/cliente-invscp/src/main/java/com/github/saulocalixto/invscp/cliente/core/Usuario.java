@@ -6,7 +6,6 @@
 package com.github.saulocalixto.invscp.cliente.core;
 
 import com.github.saulocalixto.invscp.cliente.ui.IO;
-import java.io.Console;
 import java.io.IOException;
 
 /**
@@ -14,7 +13,7 @@ import java.io.IOException;
  * @author Lucas Sampaio Dias
  */
 public class Usuario {
-    private String nome;
+    private String email;
     
     /**
      * Realiza o login do usuário, pedindo na saída principal o nome do usuário
@@ -22,12 +21,11 @@ public class Usuario {
      * @return true se o login foi realizado com sucesso, false se a tentativa 
      * de login falhar.
      */
-    public boolean login() throws IOException {
-        Console console = System.console();
+    public boolean loginTerminal() throws IOException {
         boolean logado = false;
         
         while (logado == false) {
-            nome = IO.readNomeUsuario("Usuário: ");
+            email = IO.readNomeUsuario("E-mail: ");
             String senha = IO.readSenha("Senha: ");
             logado = checarSenha(senha);
         }
@@ -35,12 +33,19 @@ public class Usuario {
         return true;
     }
     
-    private static boolean checarSenha(String senha) {
+    public static boolean isEmail(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean checarSenha(String senha) {
         //Falta implementar
         return true;
     }
     
     public String getNome() {
-        return nome;
+        return email;
     }
 }
