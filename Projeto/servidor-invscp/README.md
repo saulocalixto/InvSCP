@@ -14,7 +14,7 @@ $~ mvn package
 ```
 $~ java -jar target/servidor-invscp-1.0-SNAPSHOT.jar
 ```
-Após esse comando o servidor entrará em ação, nesse caso será possível ter acesso à api criada, ou utilizando o [cliente](./cliente-invscp).
+Após esse comando o servidor entrará em ação, nesse caso será possível ter acesso à api criada, ou utilizando o [cliente](../cliente-invscp).
 
 ### Para realizar os testes de unidade (Requer: Maven)
 ```
