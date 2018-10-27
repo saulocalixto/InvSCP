@@ -6,10 +6,15 @@ import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
  * Created by Saulo Calixto on 23/10/18.
  */
 public class Usuario extends ModelPadrao {
+
     private String nomeDeUsuario;
+
     private String nome;
+
     private String cpf;
+
     private String senha;
+
     private EnumGrupoDeAcesso grupo;
 
     public String getNomeDeUsuario() {

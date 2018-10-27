@@ -1,14 +1,17 @@
 package com.github.saulocalixto.Invscp.servidor.servico;
 
-import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
+import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioUsuario;
+import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.Usuario;
-
 import java.util.List;
 
 /**
  * Created by Saulo Calixto on 23/10/18.
  */
 public class ServicoUsuario implements IServico<Usuario> {
+
+    private IRepositorioUsuario repositorio;
+
     public Usuario Consultar(String id) {
         return null;
     }
@@ -18,24 +21,30 @@ public class ServicoUsuario implements IServico<Usuario> {
     }
 
     public Usuario ConsultarPorCpf(String cpf) {
-        Usuario usuario = new Usuario();
-        usuario.setNomeDeUsuario("saulocalixto");
-        usuario.setNome("Saulo");
-        usuario.setCpf(cpf);
-        usuario.setGrupo(EnumGrupoDeAcesso.CHEFE_DEPARTAMENTO);
+        Usuario usuario;
+
+        usuario = repositorio().ConsultarPorCpf(cpf);
 
         return usuario;
     }
 
     public void Salvar(Usuario objeto) {
 
+        // Criar Validação
+        // Chamar repositório ou devolver inconsistência
     }
 
     public void Atualizar(Usuario objeto) {
-
+        // Criar Validação
+        // Chamar repositório ou devolver inconsistência
     }
 
     public void Excluir(String id) {
+        // Criar Validação
+        // Chamar repositório ou devolver inconsistência
+    }
 
+    private IRepositorioUsuario repositorio() {
+        return repositorio != null ? repositorio : (repositorio = new RepositorioUsuario());
     }
 }

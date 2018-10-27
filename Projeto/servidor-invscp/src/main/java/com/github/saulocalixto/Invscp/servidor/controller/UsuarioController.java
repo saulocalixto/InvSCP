@@ -26,4 +26,10 @@ public class UsuarioController {
         Usuario usuario = servicoUsuario().ConsultarPorCpf(cpf);
         return usuario;
     }
+
+    @RequestMapping("/cadastre")
+    public boolean usuario(@RequestParam(value="usuario") Usuario usuario) {
+        servicoUsuario().Salvar(usuario);
+        return true;
+    }
 }

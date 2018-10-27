@@ -24,6 +24,12 @@ Em particular, o software é utilizado para assinar digitalmente as movimentaç�
 * Registro de ordem de serviço
 * Baixa de bem patrimonial
 
+### Artefatos
+
+* [Design Funcional](./Design%20Funcional)
+* [Cliente](./Projeto/cliente-invscp)
+* [Servidor](./servidor-invscp)
+
 ### Considerações Finais
 
 O InvSCP é um projeto **Open Source**. Qualquer um pode ajudar a melhorá-lo.
