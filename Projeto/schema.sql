@@ -4,10 +4,9 @@ CREATE DATABASE invscp
  
 USE invscp;
 
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY '123456';
 
-CREATE USER IF NOT EXISTS 'new_user'@'localhost' IDENTIFIED BY '123456';
-
-GRANT ALL PRIVILEGES ON invscp To 'amdin'@'localhost' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON invscp To 'admin'@'localhost' IDENTIFIED BY '123456';
  
 CREATE TABLE IF NOT EXISTS Usuario (
     id varchar(40) NOT NULL PRIMARY KEY,
@@ -19,10 +18,6 @@ CREATE TABLE IF NOT EXISTS Usuario (
 );
  
 CREATE TABLE IF NOT EXISTS Departamento(
-	id varchar(40) NOT NULL PRIMARY KEY
-);
-
-CREATE TABLE IF NOT EXISTS Predio(
 	id varchar(40) NOT NULL PRIMARY KEY
 );
 
@@ -38,8 +33,24 @@ CREATE TABLE IF NOT EXISTS Endereco(
 	bairro varchar(80) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS Predio(
+	id varchar(40) NOT NULL PRIMARY KEY,
+	idEndereco varchar(40) NOT NULL,
+	idFilial varchar(40) NOT NULL,
+	FOREIGN KEY (idEndereco)
+        REFERENCES Endereco(id),
+	FOREIGN KEY (idFilial)
+        REFERENCES Filial(id)
+);
+
 CREATE TABLE IF NOT EXISTS Sala(
-	id varchar(40) NOT NULL PRIMARY KEY
+	id varchar(40) NOT NULL PRIMARY KEY,
+	idDepartamento varchar(40) NOT NULL,
+	idPredio varchar(40) NOT NULL,
+	FOREIGN KEY (idDepartamento)
+        REFERENCES Departamento(id),
+	FOREIGN KEY (idPredio)
+        REFERENCES Predio(id)
 );
 
 CREATE TABLE IF NOT EXISTS Movimentacao (
