@@ -11,11 +11,6 @@ public class Sala extends CRUDModelPadrao {
 
     private Departamento departamentoAQuePertence;
 
-    public Sala (String nomeDaSala, Predio predioEmQueEstaLocalizada, Departamento departamentoAQuePertence){
-        this.nomeDaSala = nomeDaSala;
-        this.predioEmQueEstaLocalizada = predioEmQueEstaLocalizada;
-        this.departamentoAQuePertence = departamentoAQuePertence;
-    }
 
     public String getNomeDaSala() {
         return nomeDaSala;

@@ -11,11 +11,6 @@ public class Predio extends CRUDModelPadrao {
 
     private Filial filialAQuePertence;
 
-    public Predio (String nomeDoPredio, String enderecoDoPredio, Filial filialAQuePertence){
-        this.nomeDoPredio = nomeDoPredio;
-        this.enderecoDoPredio = enderecoDoPredio;
-        this. filialAQuePertence = filialAQuePertence;
-    }
 
     public String getNomeDoPredio() {
         return nomeDoPredio;

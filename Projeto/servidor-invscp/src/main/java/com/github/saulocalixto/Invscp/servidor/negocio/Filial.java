@@ -7,9 +7,6 @@ public class Filial extends CRUDModelPadrao {
 
     private String nomeDaFilial;
 
-    public Filial (String nomeDaFilial){
-        this.nomeDaFilial = nomeDaFilial;
-    }
 
     public String getNomeDaFilial() {
         return nomeDaFilial;

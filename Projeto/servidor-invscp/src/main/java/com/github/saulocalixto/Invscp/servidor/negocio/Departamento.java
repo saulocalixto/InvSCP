@@ -7,9 +7,6 @@ public class Departamento extends CRUDModelPadrao {
 
     private String nomeDoDepartamento;
 
-    public Departamento (String NomeDoDepartamento) {
-        this.nomeDoDepartamento = nomeDoDepartamento;
-    }
 
     public String getNomeDoDepartamento() {
         return nomeDoDepartamento;

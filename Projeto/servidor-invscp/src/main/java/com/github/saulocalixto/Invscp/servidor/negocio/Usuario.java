@@ -17,12 +17,6 @@ public class Usuario extends CRUDModelPadrao {
 
     private EnumGrupoDeAcesso grupo;
 
-    public Usuario (String nomeDeUsuario, String nome, String cpf, String senha){
-        this.nomeDeUsuario = nomeDeUsuario;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.senha = senha;
-    }
 
     public String getNomeDeUsuario() {
         return nomeDeUsuario;
