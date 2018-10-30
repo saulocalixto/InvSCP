@@ -3,7 +3,7 @@ package com.github.saulocalixto.Invscp.servidor.negocio;
 /**
  * Created by Marcos Rafael on 29/10/18.
  */
-public class Sala extends ModelPadrao {
+public class Sala extends CRUDModelPadrao {
 
     private String nomeDaSala;
 
@@ -11,7 +11,11 @@ public class Sala extends ModelPadrao {
 
     private Departamento departamentoAQuePertence;
 
-    private boolean eDeletavel;
+    public Sala (String nomeDaSala, Predio predioEmQueEstaLocalizada, Departamento departamentoAQuePertence){
+        this.nomeDaSala = nomeDaSala;
+        this.predioEmQueEstaLocalizada = predioEmQueEstaLocalizada;
+        this.departamentoAQuePertence = departamentoAQuePertence;
+    }
 
     public String getNomeDaSala() {
         return nomeDaSala;
@@ -35,13 +39,5 @@ public class Sala extends ModelPadrao {
 
     public void setDepartamentoAQuePertence(Departamento departamentoAQuePertence) {
         this.departamentoAQuePertence = departamentoAQuePertence;
-    }
-
-    public boolean getEDeletavel() {
-        return eDeletavel;
-    }
-
-    public void setEDeletavel(boolean eDeletavel) {
-        this.eDeletavel = eDeletavel;
     }
 }
