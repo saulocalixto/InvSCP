@@ -21,17 +21,20 @@ public class ServicoUsuario implements IServico<Usuario> {
     }
 
     public Usuario ConsultarPorCpf(String cpf) {
-        Usuario usuario;
+        Usuario usuario = new Usuario();
 
-        usuario = repositorio().ConsultarPorCpf(cpf);
+        usuario.setNome("Saulo");
+        usuario.setSenha("123456");
+
+        //usuario = repositorio().ConsultarPorCpf(cpf);
 
         return usuario;
     }
 
     public void Salvar(Usuario objeto) {
 
-        // Criar Validação
-        // Chamar repositório ou devolver inconsistência
+        //valida objeto
+        repositorio().Salvar(objeto);
     }
 
     public void Atualizar(Usuario objeto) {

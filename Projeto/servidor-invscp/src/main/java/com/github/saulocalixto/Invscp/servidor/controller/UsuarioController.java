@@ -3,9 +3,7 @@ package com.github.saulocalixto.Invscp.servidor.controller;
 import com.github.saulocalixto.Invscp.servidor.negocio.Usuario;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoUsuario;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Saulo on 23/10/18.
@@ -27,8 +25,8 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping("/cadastre")
-    public boolean usuario(@RequestParam(value="usuario") Usuario usuario) {
+    @RequestMapping(value = "/cadastre", method = RequestMethod.PUT)
+    public boolean usuario(@RequestBody Usuario usuario) {
         servicoUsuario().Salvar(usuario);
         return true;
     }

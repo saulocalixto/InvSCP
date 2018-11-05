@@ -15,6 +15,8 @@ public class Usuario extends CRUDModelPadrao {
 
     private String senha;
 
+    private String email;
+
     private EnumGrupoDeAcesso grupo;
 
 
@@ -56,5 +58,13 @@ public class Usuario extends CRUDModelPadrao {
 
     public void setGrupo(EnumGrupoDeAcesso grupo) {
         this.grupo = grupo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -13,8 +13,6 @@ public class ModelPadrao {
 
     private String id;
 
-    private UUID randomID;
-
     public String getId() {
         return this.id;
     }
@@ -23,7 +21,6 @@ public class ModelPadrao {
         this.id = id;
     }
 
-    public String getRandomID() {
-        return randomID.randomUUID().toString();
+    public String getRandomID() { return UUID.randomUUID().toString();
     }
 }
