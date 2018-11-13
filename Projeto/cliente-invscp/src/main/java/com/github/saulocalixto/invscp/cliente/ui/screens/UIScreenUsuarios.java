@@ -40,8 +40,16 @@ public class UIScreenUsuarios extends UIScreen{
             System.out.println("Funcionalidade não implementada");
         }));
         opcoes.put(4, new UIScreenOption("Deletar", () -> {
-            System.out.println("Funcionalidade não implementada");
+            try {
+                deletarUsuario();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
+    }
+    
+    private static void cadastrarUsuario() {
+        
     }
 
     private static void visualizarUsuario() throws IOException {
@@ -49,6 +57,15 @@ public class UIScreenUsuarios extends UIScreen{
         final String json = InventoryAPI.getUsuario(email);
         JSONObject obj = new JSONObject(json);
         System.out.println("Nome: " + obj.get("nome"));
+    }
+    
+    private static void editarUsuario() {
+        
+    }
+    
+    private static void deletarUsuario() throws IOException {
+        final String email = IO.readString("Insira o e-mail do usuario:");
+        InventoryAPI.deletarUsuario(email);
     }
     
     public UIScreenUsuarios() {
