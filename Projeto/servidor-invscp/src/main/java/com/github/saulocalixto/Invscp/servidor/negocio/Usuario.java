@@ -8,9 +8,10 @@ import javax.persistence.Table;
 /**
  * Created by Saulo Calixto on 23/10/18.
  */
+
 @Entity
 @Table(name = "`usuario`")
-public class Usuario extends CRUDModelPadrao {
+public class Usuario extends ModelPadrao {
 
     private String nomeDeUsuario;
 
