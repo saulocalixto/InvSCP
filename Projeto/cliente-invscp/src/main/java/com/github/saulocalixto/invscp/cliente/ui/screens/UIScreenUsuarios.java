@@ -5,10 +5,16 @@
  */
 package com.github.saulocalixto.invscp.cliente.ui.screens;
 
+import com.github.saulocalixto.invscp.cliente.core.InventoryAPI;
+import com.github.saulocalixto.invscp.cliente.ui.IO;
 import com.github.saulocalixto.invscp.cliente.ui.TerminalUI;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreen;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreenOption;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONObject;
 
 /**
  *
@@ -24,7 +30,11 @@ public class UIScreenUsuarios extends UIScreen{
             System.out.println("Funcionalidade não implementada");
         }));
         opcoes.put(2, new UIScreenOption("Visualizar", () -> {
-            System.out.println("Funcionalidade não implementada");
+            try {
+                visualizarUsuario();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(3, new UIScreenOption("Editar", () -> {
             System.out.println("Funcionalidade não implementada");
@@ -32,6 +42,13 @@ public class UIScreenUsuarios extends UIScreen{
         opcoes.put(4, new UIScreenOption("Deletar", () -> {
             System.out.println("Funcionalidade não implementada");
         }));
+    }
+
+    private static void visualizarUsuario() throws IOException {
+        final String email = IO.readString("Insira o e-mail do usuario:");
+        final String json = InventoryAPI.getUsuario(email);
+        JSONObject obj = new JSONObject(json);
+        System.out.println("Nome: " + obj.get("nome"));
     }
     
     public UIScreenUsuarios() {

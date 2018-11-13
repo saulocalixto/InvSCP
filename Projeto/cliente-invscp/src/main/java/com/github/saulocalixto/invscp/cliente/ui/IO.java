@@ -17,6 +17,15 @@ public class IO {
     private static BufferedReader br = new 
         BufferedReader(new InputStreamReader(System.in));
     
+    public static String readString() throws IOException {
+        return br.readLine();
+    }
+    
+    public static String readString(String message) throws IOException {
+        System.out.println(message);
+        return readString();
+    }
+    
     public static int readInt(int min, int max) throws IOException{
         while(true) {
             try {
