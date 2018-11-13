@@ -5,7 +5,7 @@ import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
 /**
  * Created by Saulo Calixto on 23/10/18.
  */
-public class Usuario extends CRUDModelPadrao {
+public class Usuario extends ModelPadrao {
 
     private String nomeDeUsuario;
 

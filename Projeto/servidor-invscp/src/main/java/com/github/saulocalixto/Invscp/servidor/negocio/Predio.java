@@ -3,7 +3,7 @@ package com.github.saulocalixto.Invscp.servidor.negocio;
 /**
  * Created by Marcos Rafael on 29/10/18.
  */
-public class Predio extends CRUDModelPadrao {
+public class Predio extends ModelPadrao {
 
     private String nomeDoPredio;
 
