@@ -2,9 +2,14 @@ package com.github.saulocalixto.Invscp.servidor.negocio;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by Saulo Calixto on 23/10/18.
  */
+@Entity
+@Table(name = "`usuario`")
 public class Usuario extends CRUDModelPadrao {
 
     private String nomeDeUsuario;

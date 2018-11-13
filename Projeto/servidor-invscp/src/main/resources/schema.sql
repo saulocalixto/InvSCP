@@ -17,6 +17,13 @@ CREATE TABLE IF NOT EXISTS Usuario (
     cpf varchar(11) NOT NULL UNIQUE
 );
 
+CREATE TABLE IF NOT EXISTS Login (
+    id varchar(40) NOT NULL PRIMARY KEY,
+    token varchar(40) NULL,
+    FOREIGN KEY (idUsuario)
+            REFERENCES Usuario(id),
+);
+
 CREATE TABLE IF NOT EXISTS Sessao(
 	id varchar(40) NOT NULL PRIMARY KEY,
 	token varchar(40) NOT NULL UNIQUE,
