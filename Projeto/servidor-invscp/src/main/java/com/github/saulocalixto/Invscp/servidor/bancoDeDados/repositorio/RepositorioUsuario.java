@@ -40,7 +40,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
             stmt.setString(2, objeto.getSenha());
             stmt.setString(3, objeto.getNome());
             stmt.setString(4, objeto.getEmail());
-            //stmt.setString(5, objeto.getGrupo().name());
+            stmt.setString(5, objeto.getGrupo().name());
             stmt.setString(5, objeto.getCpf());
             stmt.execute();
             stmt.close();

@@ -23,6 +23,10 @@ public class InventoryAPI {
         return getJson(new URL(BASE_URL + "/usuario/consulte?email=" + email));
     }
     
+    public static void deletarUsuario(String email) {
+        System.out.println("Funcionalidade ainda não implementada!");
+    }
+    
     private static String getJson(URL url) throws IOException {
         if ("".equals(BASE_URL)) {
             return null;

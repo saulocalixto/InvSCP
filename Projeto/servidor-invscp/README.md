@@ -5,16 +5,16 @@ Os dados são disponibilidades via rest api, os quais o cliente tem acesso media
 ## Utilização
 Abra o terminal no diretório cliente-invscp e execute os seguintes comandos:
 
-### Para gerar o executável do Cliente InvSCP (Requer: Maven)
+### Para gerar o executável do Servidor InvSCP (Requer: Maven)
 ```
 $~ mvn package
 ```
-### Para iniciar a aplicação do sevidor InvSCP
+### Para iniciar a aplicação do Servidor InvSCP
 
 ```
 $~ java -jar target/servidor-invscp-1.0-SNAPSHOT.jar
 ```
-Após esse comando o servidor entrará em ação, nesse caso será possível ter acesso à api criada, ou utilizando o [cliente](../cliente-invscp).
+Após esse comando o servidor entrará em ação, sendo possível ter acesso à API criada via [Cliente InvSCP](../cliente-invscp).
 
 ### Para realizar os testes de unidade (Requer: Maven)
 ```
