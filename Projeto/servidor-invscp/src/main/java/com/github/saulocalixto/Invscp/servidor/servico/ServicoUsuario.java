@@ -20,13 +20,10 @@ public class ServicoUsuario implements IServico<Usuario> {
         return null;
     }
 
-    public Usuario ConsultarPorCpf(String cpf) {
+    public Usuario consultarPorEmail(String email) {
         Usuario usuario = new Usuario();
 
-        usuario.setNome("Saulo");
-        usuario.setSenha("123456");
-
-        //usuario = repositorio().ConsultarPorCpf(cpf);
+        usuario = repositorio().consultarPorEmail(email);
 
         return usuario;
     }
@@ -39,12 +36,12 @@ public class ServicoUsuario implements IServico<Usuario> {
 
     public void Atualizar(Usuario objeto) {
         // Criar Validação
-        // Chamar repositório ou devolver inconsistência
+        repositorio().Atualizar(objeto);
     }
 
     public void Excluir(String id) {
         // Criar Validação
-        // Chamar repositório ou devolver inconsistência
+        repositorio().Excluir(id);
     }
 
     private IRepositorioUsuario repositorio() {

@@ -10,7 +10,7 @@ GRANT ALL PRIVILEGES ON invscp To 'admin'@'localhost' IDENTIFIED BY '123456';
  
 CREATE TABLE IF NOT EXISTS Usuario (
     id varchar(40) NOT NULL PRIMARY KEY,
-    grupo ENUM('Administrador de departamento','Chefe do patrimônio','Funcionário') NOT NULL,
+    grupo ENUM('ADMINISTRADOR_DEPARTAMENTO','CHEFE_PATRIMONIO','FUNCIONARIO') NOT NULL,
     email varchar(60) NOT NULL UNIQUE,
     senha char(60) NOT NULL,
     nome char(255) NOT NULL,
@@ -20,8 +20,9 @@ CREATE TABLE IF NOT EXISTS Usuario (
 CREATE TABLE IF NOT EXISTS Login (
     id varchar(40) NOT NULL PRIMARY KEY,
     token varchar(40) NULL,
+    idUsuario varchar(40) NOT NULL,
     FOREIGN KEY (idUsuario)
-            REFERENCES Usuario(id),
+            REFERENCES Usuario(id)
 );
 
 CREATE TABLE IF NOT EXISTS Sessao(

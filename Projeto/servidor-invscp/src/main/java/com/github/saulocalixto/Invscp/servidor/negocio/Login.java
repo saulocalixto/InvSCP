@@ -24,4 +24,12 @@ public class Login extends ModelPadrao {
     public String getTokenAcesso() {
         return tokenAcesso;
     }
+
+    public void setTokenAcesso(String tokenAcesso) {
+        this.tokenAcesso = tokenAcesso;
+    }
+
+    public void limpaTokenAcesso() {
+        this.tokenAcesso = null;
+    }
 }

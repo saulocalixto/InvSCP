@@ -2,18 +2,11 @@ package com.github.saulocalixto.Invscp.servidor.negocio;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  * Created by Saulo Calixto on 23/10/18.
  */
 
-@Entity
-@Table(name = "`usuario`")
 public class Usuario extends ModelPadrao {
-
-    private String nomeDeUsuario;
 
     private String nome;
 
@@ -24,15 +17,6 @@ public class Usuario extends ModelPadrao {
     private String email;
 
     private EnumGrupoDeAcesso grupo;
-
-
-    public String getNomeDeUsuario() {
-        return nomeDeUsuario;
-    }
-
-    public void setNomeDeUsuario(String nomeDeUsuario) {
-        this.nomeDeUsuario = nomeDeUsuario;
-    }
 
     public String getSenha() {
         return senha;
@@ -62,8 +46,8 @@ public class Usuario extends ModelPadrao {
         return grupo;
     }
 
-    public void setGrupo(EnumGrupoDeAcesso grupo) {
-        this.grupo = grupo;
+    public void setGrupo(String grupo) {
+        this.grupo = EnumGrupoDeAcesso.valueOf(grupo);
     }
 
     public String getEmail() {

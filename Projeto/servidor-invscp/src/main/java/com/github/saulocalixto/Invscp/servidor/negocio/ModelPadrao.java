@@ -21,6 +21,6 @@ public class ModelPadrao {
         this.id = id;
     }
 
-    public String getRandomID() { return UUID.randomUUID().toString();
+    protected String getRandomID() { return UUID.randomUUID().toString();
     }
 }
