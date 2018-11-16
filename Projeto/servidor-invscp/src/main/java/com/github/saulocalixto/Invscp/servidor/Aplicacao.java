@@ -1,8 +1,6 @@
 package com.github.saulocalixto.Invscp.servidor;
 
-import com.github.saulocalixto.Invscp.servidor.negocio.Usuario;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoUsuario;
-import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

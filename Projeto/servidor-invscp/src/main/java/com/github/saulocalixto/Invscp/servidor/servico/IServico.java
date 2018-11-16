@@ -1,5 +1,8 @@
 package com.github.saulocalixto.Invscp.servidor.servico;
 
+import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
+
+import javax.xml.bind.ValidationException;
 import java.util.List;
 
 /**
@@ -8,7 +11,7 @@ import java.util.List;
 public interface IServico<T> {
     public T Consultar(String id);
     public List<T> ConsultarLista();
-    public void Salvar(T objeto);
+    public List<Inconsistencia> Salvar(T objeto) throws ValidationException;
     public void Atualizar(T objeto);
     public void Excluir(String id);
 }

@@ -1,7 +1,6 @@
 package com.github.saulocalixto.Invscp.servidor.controller;
 
 import com.github.saulocalixto.Invscp.servidor.negocio.Login;
-import com.github.saulocalixto.Invscp.servidor.negocio.Usuario;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoLogin;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 

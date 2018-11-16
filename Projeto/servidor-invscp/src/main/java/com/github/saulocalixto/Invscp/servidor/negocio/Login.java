@@ -1,5 +1,7 @@
 package com.github.saulocalixto.Invscp.servidor.negocio;
 
+import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
+
 /**
  * Created by Saulo Calixto on 13/11/18.
  */

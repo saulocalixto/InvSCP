@@ -5,7 +5,8 @@ import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.Reposito
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioLogin;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.Login;
-import com.github.saulocalixto.Invscp.servidor.negocio.Usuario;
+import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
+import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 
 import java.util.List;
 
@@ -53,7 +54,8 @@ public class ServicoLogin implements IServico<Login> {
     }
 
     @Override
-    public void Salvar(Login objeto) {
+    public List<Inconsistencia> Salvar(Login objeto) {
+        return null;
     }
 
     @Override

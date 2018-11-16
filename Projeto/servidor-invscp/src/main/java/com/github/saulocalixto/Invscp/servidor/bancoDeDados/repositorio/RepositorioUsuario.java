@@ -2,7 +2,7 @@ package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.UsuarioMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
-import com.github.saulocalixto.Invscp.servidor.negocio.Usuario;
+import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

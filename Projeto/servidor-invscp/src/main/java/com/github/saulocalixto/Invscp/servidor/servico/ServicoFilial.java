@@ -3,6 +3,7 @@ package com.github.saulocalixto.Invscp.servidor.servico;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioFilial;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioFilial;
 import com.github.saulocalixto.Invscp.servidor.negocio.Filial;
+import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 
 import java.util.List;
 
@@ -22,10 +23,11 @@ public class ServicoFilial implements IServico<Filial>{
     }
 
 
-    public void Salvar(Filial objeto) {
+    public List<Inconsistencia> Salvar(Filial objeto) {
 
         //valida objeto
         repositorio().Salvar(objeto);
+        return null;
     }
 
     public void Atualizar(Filial objeto) {

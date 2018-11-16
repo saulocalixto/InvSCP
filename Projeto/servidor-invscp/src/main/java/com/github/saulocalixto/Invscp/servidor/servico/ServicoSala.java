@@ -3,6 +3,7 @@ package com.github.saulocalixto.Invscp.servidor.servico;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioSala;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioSala;
 import com.github.saulocalixto.Invscp.servidor.negocio.Sala;
+import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 
 import java.util.List;
 
@@ -20,10 +21,11 @@ public class ServicoSala implements IServico<Sala>{
     }
 
 
-    public void Salvar(Sala objeto) {
+    public List<Inconsistencia> Salvar(Sala objeto) {
 
         //valida objeto
         repositorio().Salvar(objeto);
+        return null;
     }
 
     public void Atualizar(Sala objeto) {

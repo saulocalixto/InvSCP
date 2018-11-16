@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class ModelPadrao {
 
-    ModelPadrao() {
+    public ModelPadrao() {
         id = getRandomID();
     }
 

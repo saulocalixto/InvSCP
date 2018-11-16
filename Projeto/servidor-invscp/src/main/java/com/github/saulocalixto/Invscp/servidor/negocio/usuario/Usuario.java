@@ -1,6 +1,7 @@
-package com.github.saulocalixto.Invscp.servidor.negocio;
+package com.github.saulocalixto.Invscp.servidor.negocio.usuario;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
+import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 
 /**
  * Created by Saulo Calixto on 23/10/18.

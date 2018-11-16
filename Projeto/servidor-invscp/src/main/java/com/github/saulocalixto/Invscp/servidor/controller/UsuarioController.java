@@ -1,12 +1,15 @@
 package com.github.saulocalixto.Invscp.servidor.controller;
 
-import com.github.saulocalixto.Invscp.servidor.negocio.Usuario;
+import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
+import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoLogin;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoUsuario;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by Saulo on 23/10/18.
@@ -41,8 +44,8 @@ public class UsuarioController {
     @RequestMapping(method= RequestMethod.PUT)
     public ResponseEntity salva(@RequestHeader String autorizacao, @RequestBody Usuario usuario) {
         if(servicoLogin().tokenValido(autorizacao)) {
-            servicoUsuario().Salvar(usuario);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(true);
+            List<Inconsistencia> inconsistencias = servicoUsuario().Salvar(usuario);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(inconsistencias);
         } else {
             return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body("Usuário não autenticado.");
         }
