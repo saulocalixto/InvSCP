@@ -35,9 +35,4 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
 
     }
 
-    @Override
-    public String NomeTabela() {
-        return "Sala";
-    }
-
 }

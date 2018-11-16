@@ -4,4 +4,5 @@ import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
 
 public interface IRepositorioUsuario extends IRepositorio<Usuario> {
     Usuario consultarPorEmail(String email);
+    Boolean usuarioNaoExiste(String email);
 }

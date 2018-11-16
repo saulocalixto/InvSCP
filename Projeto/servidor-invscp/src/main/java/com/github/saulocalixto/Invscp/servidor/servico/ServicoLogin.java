@@ -7,13 +7,17 @@ import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfac
 import com.github.saulocalixto.Invscp.servidor.negocio.Login;
 import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
+import com.github.saulocalixto.Invscp.servidor.utilitarios.SenhaEncript;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
 /**
  * Created by Saulo Calixto on 13/11/18.
  */
-public class ServicoLogin implements IServico<Login> {
+public class ServicoLogin {
 
     private IRepositorioUsuario repositorioUsuario;
     private IRepositorioLogin repositorioLogin;
@@ -21,7 +25,7 @@ public class ServicoLogin implements IServico<Login> {
     public Login validaLogin(String email, String senha) {
         Usuario usuario = repositorioUsuario().consultarPorEmail(email);
         Login login = new Login();
-        if(usuario != null && usuario.getSenha().equals(senha)) {
+        if(usuario != null && SenhaEncript.valideSenhe(usuario.getSenha(), senha)) {
 
             login.setUsuario(usuario);
             Login loginAntigo = repositorioLogin().retorneLoginUsuario(login.getUsuario().getId());
@@ -30,7 +34,7 @@ public class ServicoLogin implements IServico<Login> {
                 return loginAntigo;
             }
 
-            repositorioLogin().Salvar(login);
+            repositorioLogin().efetuarLogin(login);
 
             return login;
         }
@@ -39,33 +43,12 @@ public class ServicoLogin implements IServico<Login> {
         return login;
     }
 
+    public void deslogar(String tokenAcesso) {
+        repositorioLogin().deslogar(tokenAcesso);
+    }
+
     public Boolean tokenValido(String token) {
         return repositorioLogin().tokenValido(token);
-    }
-
-    @Override
-    public Login Consultar(String id) {
-        return null;
-    }
-
-    @Override
-    public List<Login> ConsultarLista() {
-        return null;
-    }
-
-    @Override
-    public List<Inconsistencia> Salvar(Login objeto) {
-        return null;
-    }
-
-    @Override
-    public void Atualizar(Login objeto) {
-
-    }
-
-    @Override
-    public void Excluir(String id) {
-
     }
 
     private IRepositorioUsuario repositorioUsuario() {

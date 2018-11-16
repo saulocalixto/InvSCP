@@ -1,10 +1,12 @@
 package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
+import com.github.saulocalixto.Invscp.servidor.bancoDeDados.ConexaoBd;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.LoginMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioLogin;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.Login;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,22 +15,12 @@ import java.util.List;
 /**
  * Created by Saulo Calixto on 13/11/18.
  */
-public class RepositorioLogin extends RepositorioPadrao<Login> implements IRepositorioLogin {
+public class RepositorioLogin implements IRepositorioLogin {
 
     private IRepositorioUsuario repositorioUsuario;
 
     @Override
-    public Login Consultar(String id) {
-        return null;
-    }
-
-    @Override
-    public List<Login> ConsultarLista() {
-        return null;
-    }
-
-    @Override
-    public void Salvar(Login objeto) {
+    public void efetuarLogin(Login objeto) {
 
         String sql = String.format("INSERT INTO %s(%s,%s,%s) VALUES(?,?,?)",
                 LoginMap.nomeTabela,
@@ -49,18 +41,18 @@ public class RepositorioLogin extends RepositorioPadrao<Login> implements IRepos
     }
 
     @Override
-    public void Atualizar(Login objeto) {
-
-    }
-
-    @Override
-    public void Excluir(String id) {
-
-    }
-
-    @Override
-    public String NomeTabela() {
-        return null;
+    public void deslogar(String tokeAcesso) {
+        String sql = String.format("DELETE FROM %s WHERE %s = '%s'",
+                LoginMap.nomeTabela,
+                LoginMap.token,
+                tokeAcesso);
+        try {
+            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
     }
 
     @Override
@@ -110,5 +102,9 @@ public class RepositorioLogin extends RepositorioPadrao<Login> implements IRepos
 
     private IRepositorioUsuario repositorioUsuario() {
         return repositorioUsuario != null ? repositorioUsuario : (repositorioUsuario = new RepositorioUsuario());
+    }
+
+    private Connection RetorneConexaoBd() {
+        return ConexaoBd.getConexaoMySQL();
     }
 }

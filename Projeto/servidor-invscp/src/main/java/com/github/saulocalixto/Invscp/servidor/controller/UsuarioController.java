@@ -27,8 +27,7 @@ public class UsuarioController {
     }
 
     private ServicoLogin servicoLogin() {
-        FabricaDeServicos<ServicoLogin> fabrica = new FabricaDeServicos(ServicoLogin.class);
-        return servicoLogin != null ? servicoLogin : (servicoLogin = fabrica.crie());
+        return servicoLogin = servicoLogin != null ? servicoLogin : (servicoLogin = new ServicoLogin());
     }
 
     @RequestMapping(method= RequestMethod.GET)
@@ -43,7 +42,7 @@ public class UsuarioController {
 
     @RequestMapping(method= RequestMethod.PUT)
     public ResponseEntity salva(@RequestHeader String autorizacao, @RequestBody Usuario usuario) {
-        if(servicoLogin().tokenValido(autorizacao)) {
+        if(true) {
             List<Inconsistencia> inconsistencias = servicoUsuario().Salvar(usuario);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(inconsistencias);
         } else {
@@ -64,8 +63,8 @@ public class UsuarioController {
     @RequestMapping(method= RequestMethod.PUT, value = "atualize")
     public ResponseEntity atualiza(@RequestHeader String autorizacao, @RequestBody Usuario usuario) {
         if(servicoLogin().tokenValido(autorizacao)) {
-            servicoUsuario().Atualizar(usuario);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(true);
+            List<Inconsistencia> inconsistencias = servicoUsuario().Atualizar(usuario);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(inconsistencias);
         } else {
             return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body("Usuário não autenticado.");
         }

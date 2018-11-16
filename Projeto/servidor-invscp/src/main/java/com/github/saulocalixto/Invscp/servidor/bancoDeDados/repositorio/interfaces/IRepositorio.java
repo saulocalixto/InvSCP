@@ -12,6 +12,5 @@ public interface IRepositorio<T> {
     void Salvar(T objeto);
     void Atualizar(T objeto);
     void Excluir(String id);
-    String NomeTabela();
     Connection RetorneConexaoBd();
 }

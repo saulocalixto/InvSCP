@@ -15,19 +15,18 @@ public class LoginController {
     private ServicoLogin servicoLogin;
 
     private ServicoLogin servicoLogin() {
-        FabricaDeServicos<ServicoLogin> fabrica = new FabricaDeServicos(ServicoLogin.class);
-        return servicoLogin != null ? servicoLogin : (servicoLogin = fabrica.crie());
+        return servicoLogin = servicoLogin != null ? servicoLogin : (servicoLogin = new ServicoLogin());
     }
 
     @RequestMapping(method= RequestMethod.GET)
-    public ResponseEntity<Login> consulta(@RequestParam(value="email") String email, @RequestParam(value="senha") String senha) {
+    public ResponseEntity<Login> logue(@RequestParam(value="email") String email, @RequestParam(value="senha") String senha) {
 
         return ResponseEntity.ok(servicoLogin().validaLogin(email, senha));
     }
 
     @RequestMapping(method= RequestMethod.DELETE)
-    public boolean exclue(@RequestParam(value="id") String id) {
-        servicoLogin().Excluir(id);
+    public boolean deslogue(@RequestParam(value="tokenAcesso") String token) {
+        servicoLogin().deslogar(token);
         return true;
     }
 }

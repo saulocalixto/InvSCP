@@ -34,10 +34,4 @@ public class RepositorioFilial extends RepositorioPadrao<Filial> implements IRep
     public void Excluir(String id) {
 
     }
-
-    @Override
-    public String NomeTabela() {
-        return "Filial";
-    }
-
 }

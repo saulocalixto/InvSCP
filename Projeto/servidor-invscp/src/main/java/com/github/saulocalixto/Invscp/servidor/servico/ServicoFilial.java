@@ -30,9 +30,10 @@ public class ServicoFilial implements IServico<Filial>{
         return null;
     }
 
-    public void Atualizar(Filial objeto) {
+    public List<Inconsistencia> Atualizar(Filial objeto) {
         // Criar Validação
         // Chamar repositório ou devolver inconsistência
+        return null;
     }
 
     public void Excluir(String id) {

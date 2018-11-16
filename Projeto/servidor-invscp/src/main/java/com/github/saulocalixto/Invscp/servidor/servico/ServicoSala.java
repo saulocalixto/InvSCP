@@ -28,9 +28,10 @@ public class ServicoSala implements IServico<Sala>{
         return null;
     }
 
-    public void Atualizar(Sala objeto) {
+    public List<Inconsistencia> Atualizar(Sala objeto) {
         // Criar Validação
         // Chamar repositório ou devolver inconsistência
+        return null;
     }
 
     public void Excluir(String id) {

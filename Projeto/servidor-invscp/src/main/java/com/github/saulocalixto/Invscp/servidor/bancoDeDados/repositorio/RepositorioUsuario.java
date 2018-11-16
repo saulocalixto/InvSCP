@@ -85,11 +85,6 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
     }
 
     @Override
-    public String NomeTabela() {
-        return "Usuario";
-    }
-
-    @Override
     public Usuario consultarPorEmail(String email) {
         String sql = "SELECT * FROM Usuario WHERE email = ?";
         Usuario usuario = new Usuario();
@@ -111,5 +106,27 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
             throw new RuntimeException(u);
         }
         return usuario;
+    }
+
+    @Override
+    public Boolean usuarioNaoExiste(String email) {
+        String sql = String.format("SELECT %s FROM %s WHERE %s = '%s'",
+                UsuarioMap.id,
+                UsuarioMap.nomeTabela,
+                UsuarioMap.email,
+                email);
+        try {
+            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                return false;
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+
+        return true;
     }
 }
