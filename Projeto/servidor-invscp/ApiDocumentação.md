@@ -7,7 +7,7 @@ Para poder ter acesso a qualquer serviço do servidor antes é preciso que o usu
 Para fazê-lo é preciso fazer uma requisição passando o login e a senha:
 
 ```
-http://localhost:8090/login?email=email@email.com.br,senha=senhaValida
+http://localhost:8090/login?email=email@email.com.br&senha=senhaValida
 ```
 
 O resultado é um json contendo entre outras informações, o token de acesso que deve ser passado via header em cada requisição feita.
