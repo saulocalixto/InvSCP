@@ -68,7 +68,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
     }
 
     public void senhaValida() {
-        if(objetoValidado.getSenha().length() > 6) {
+        if(objetoValidado.getSenha().length() >= 6) {
             return;
         } else {
             adicioneInconsistencia("Senha deve ter no mínimo 6 dígitos.", "Senha");

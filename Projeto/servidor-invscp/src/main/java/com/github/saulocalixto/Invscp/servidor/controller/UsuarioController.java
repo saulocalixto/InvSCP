@@ -42,7 +42,7 @@ public class UsuarioController {
 
     @RequestMapping(method= RequestMethod.PUT)
     public ResponseEntity salva(@RequestHeader String autorizacao, @RequestBody Usuario usuario) {
-        if(true) {
+        if(servicoLogin().tokenValido(autorizacao)) {
             List<Inconsistencia> inconsistencias = servicoUsuario().Salvar(usuario);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(inconsistencias);
         } else {
