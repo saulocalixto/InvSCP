@@ -2,6 +2,8 @@ package com.github.saulocalixto.Invscp.servidor.negocio.usuario;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioUsuario;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
+import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
+import com.github.saulocalixto.Invscp.servidor.negocio.Login;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
 
@@ -27,68 +29,82 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         return super.ValideAtualizacao();
     }
 
+    public List<Inconsistencia> ValideExclusao() {
+        usuarioTemPermissaoParaAlterarUsuario();
+        return super.ValideExclusao();
+    }
+
     public void emailObrigatorio() {
-        if(objetoValidado.getEmail() != null && !objetoValidado.getEmail().isEmpty()) {
-            return;
-        } else {
-            adicioneInconsistencia("E-mail não informado.", "E-Mail");
-        }
+        this.conceito("E-Mail")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getEmail() != null && !objetoValidado.getEmail().isEmpty())
+                .comMensagem("E-mail não informado.")
+                .valide();
     }
 
     public void emailValido() {
-        if(objetoValidado.getEmail().contains("@")) {
-            return;
-        } else {
-            adicioneInconsistencia("E-mail inválido.", "E-Mail");
-        }
+        this.conceito("E-Mail")
+                .validarSe(objetoValidado != null && objetoValidado.getEmail() != null)
+                .ehValidoQuando(objetoValidado.getEmail().contains("@"))
+                .comMensagem("E-mail inválido.")
+                .valide();
     }
 
     public void emailNaoCadastrado() {
-        if(repositorio().usuarioNaoExiste(objetoValidado.getEmail())) {
-            return;
-        } else {
-            adicioneInconsistencia("O E-mail informado já está cadastrado.", "E-mail");
-        }
+        this.conceito("E-Mail")
+                .validarSe(objetoValidado != null && objetoValidado.getEmail() != null)
+                .ehValidoQuando(repositorio().usuarioNaoExiste(objetoValidado.getEmail()))
+                .comMensagem("O E-mail informado já está cadastrado.")
+                .valide();
     }
 
     public void cpfValido() {
-        if(cpfValido(objetoValidado.getCpf())) {
-            return;
-        } else {
-            adicioneInconsistencia("Cpf inválido.", "Cpf");
-        }
+        this.conceito("Cpf")
+                .validarSe(objetoValidado != null && objetoValidado.getCpf() != null)
+                .ehValidoQuando(cpfValido(objetoValidado.getCpf()))
+                .comMensagem("Cpf inválido.")
+                .valide();
     }
 
     public void cpfObrigatorio() {
-        if(objetoValidado.getCpf() != null && !objetoValidado.getCpf().isEmpty()) {
-            return;
-        } else {
-            adicioneInconsistencia("Cpf não informado.", "Cpf");
-        }
+        this.conceito("Cpf")
+                .validarSe(objetoValidado != null && objetoValidado.getCpf() != null)
+                .ehValidoQuando(objetoValidado.getCpf() != null && !objetoValidado.getCpf().isEmpty())
+                .comMensagem("Cpf não informado.")
+                .valide();
     }
 
     public void senhaValida() {
-        if(objetoValidado.getSenha().length() >= 6) {
-            return;
-        } else {
-            adicioneInconsistencia("Senha deve ter no mínimo 6 dígitos.", "Senha");
-        }
+        this.conceito("Senha")
+                .validarSe(objetoValidado != null && objetoValidado.getSenha() != null)
+                .ehValidoQuando(objetoValidado.getSenha().length() >= 6)
+                .comMensagem("Senha deve ter no mínimo 6 dígitos.")
+                .valide();
     }
 
     public void senhaObrigatoria() {
-        if(objetoValidado.getSenha() != null && !objetoValidado.getSenha().isEmpty()) {
-            return;
-        } else {
-            adicioneInconsistencia("Senha não informada.", "Senha");
-        }
+        this.conceito("Senha")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getSenha() != null && !objetoValidado.getSenha().isEmpty())
+                .comMensagem("Senha não informada.")
+                .valide();
     }
 
     public void grupoObrigatorio() {
-        if(objetoValidado.getGrupo() != null) {
-            return;
-        } else {
-            adicioneInconsistencia("Grupo não informado ou inválido.", "Grupo");
-        }
+        this.conceito("Grupo")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getGrupo() != null)
+                .comMensagem("Grupo não informado ou inválido.")
+                .valide();
+    }
+
+    public void usuarioTemPermissaoParaAlterarUsuario() {
+        this.conceito("Grupo")
+                .validarSe(permissaoDoUsuario != null)
+                .ehValidoQuando(permissaoDoUsuario == EnumGrupoDeAcesso.ADMINISTRADOR_DEPARTAMENTO
+                        || permissaoDoUsuario == EnumGrupoDeAcesso.CHEFE_PATRIMONIO)
+                .comMensagem("Usuário não tem permissão para alterar outro usuário.")
+                .valide();
     }
 
     private void comumCadastroEAtualizacao() {
@@ -99,6 +115,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         senhaObrigatoria();
         cpfObrigatorio();
         grupoObrigatorio();
+        usuarioTemPermissaoParaAlterarUsuario();
     }
 
     private boolean cpfValido(String CPF) {

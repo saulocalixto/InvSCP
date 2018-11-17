@@ -8,6 +8,7 @@ import com.github.saulocalixto.Invscp.servidor.negocio.Login;
 import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.SenhaEncript;
+import com.github.saulocalixto.Invscp.servidor.utilitarios.UtilitarioDaSessao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,7 +49,13 @@ public class ServicoLogin {
     }
 
     public Boolean tokenValido(String token) {
-        return repositorioLogin().tokenValido(token);
+        Boolean tokenValido = repositorioLogin().tokenValido(token);
+        if(tokenValido) {
+            Usuario usuario = repositorioLogin().retorneUsuario(token);
+            UtilitarioDaSessao.setPermissaoDeUsuarioLogado(usuario.getGrupo());
+            UtilitarioDaSessao.setTokenAcesso(token);
+        }
+        return tokenValido;
     }
 
     private IRepositorioUsuario repositorioUsuario() {

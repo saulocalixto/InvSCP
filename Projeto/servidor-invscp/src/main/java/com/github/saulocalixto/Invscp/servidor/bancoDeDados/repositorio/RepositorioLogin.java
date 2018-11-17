@@ -5,6 +5,7 @@ import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.LoginMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioLogin;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.Login;
+import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -98,6 +99,28 @@ public class RepositorioLogin implements IRepositorioLogin {
             throw new RuntimeException(u);
         }
         return login;
+    }
+
+    @Override
+    public Usuario retorneUsuario(String token) {
+        String sql = String.format("SELECT %s FROM %s WHERE %s = '%s'",
+                LoginMap.idUsuario,
+                LoginMap.nomeTabela,
+                LoginMap.token,
+                token);
+        Login login = new Login();
+        try {
+            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                login.setUsuario(repositorioUsuario().Consultar(rs.getString(LoginMap.idUsuario)));
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+        return login.getUsuario();
     }
 
     private IRepositorioUsuario repositorioUsuario() {

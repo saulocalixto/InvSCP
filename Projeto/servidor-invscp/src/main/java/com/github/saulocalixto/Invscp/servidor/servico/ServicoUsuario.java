@@ -7,11 +7,6 @@ import com.github.saulocalixto.Invscp.servidor.negocio.usuario.ValidacoesUsuario
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.SenhaEncript;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.xml.bind.ValidationException;
 import java.util.List;
 
 /**
@@ -43,7 +38,7 @@ public class ServicoUsuario implements IServico<Usuario> {
 
         List<Inconsistencia> inconsistencias = validador.ValideInclusao();
 
-        if(validador.ehValido()) {
+        if(validador.naoHouveInconsistencias()) {
             objeto.setSenha(SenhaEncript.criptografeSenha(objeto.getSenha()));
             repositorio().Salvar(objeto);
         }
@@ -57,7 +52,7 @@ public class ServicoUsuario implements IServico<Usuario> {
 
         List<Inconsistencia> inconsistencias = validador.ValideAtualizacao();
 
-        if(validador.ehValido()) {
+        if(validador.naoHouveInconsistencias()) {
             objeto.setSenha(SenhaEncript.criptografeSenha(objeto.getSenha()));
             repositorio().Atualizar(objeto);
         }
