@@ -9,7 +9,7 @@ public class Predio extends ModelPadrao {
 
     private String nomeDoPredio;
 
-    private String enderecoDoPredio;
+    private Endereco enderecoDoPredio;
 
     private Filial filialAQuePertence;
 
@@ -23,11 +23,11 @@ public class Predio extends ModelPadrao {
         this.nomeDoPredio = nomeDoPredio;
     }
 
-    public String getEnderecoDoPredio() {
+    public Endereco getEnderecoDoPredio() {
         return enderecoDoPredio;
     }
 
-    public void setEnderecoDoPredio(String enderecoDoPredio) {
+    public void setEnderecoDoPredio(Endereco enderecoDoPredio) {
         this.enderecoDoPredio = enderecoDoPredio;
     }
 
