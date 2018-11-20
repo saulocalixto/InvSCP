@@ -16,7 +16,9 @@ import java.util.Scanner;
  * @author Lucas Sampaio Dias
  */
 public class InventoryAPI {
-    private static final String BASE_URL = "http://10.0.2.15:8090";
+    //10.0.2.15
+    //192.168.56.1
+    private static final String BASE_URL = "http://192.168.56.1:8090";
     
     public static String login(String email, String senha) 
             throws MalformedURLException, IOException {
