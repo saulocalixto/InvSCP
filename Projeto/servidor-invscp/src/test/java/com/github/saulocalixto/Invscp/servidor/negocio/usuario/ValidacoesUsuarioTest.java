@@ -52,7 +52,26 @@ public class ValidacoesUsuarioTest {
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 1);
         assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Cpf inválido");
+    }
 
+    @Test
+    public void emailNaoInformado() throws Exception {
+        usuarioTeste.setCpf("00818193158");
+        usuarioTeste.setEmail("");
+        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.emailObrigatorio();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
+        assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "E-mail não informado");
+    }
+
+    @Test
+    public void emailValido() throws Exception {
+        usuarioTeste.setEmail("joaodasilva@invscp.com.br");
+        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.emailValido();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 0);
     }
 
 }
