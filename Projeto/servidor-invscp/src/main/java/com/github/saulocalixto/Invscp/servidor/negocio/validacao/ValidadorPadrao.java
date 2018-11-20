@@ -1,7 +1,6 @@
 package com.github.saulocalixto.Invscp.servidor.negocio.validacao;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
-import com.github.saulocalixto.Invscp.servidor.negocio.Login;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.UtilitarioDaSessao;
 
 import java.util.ArrayList;
