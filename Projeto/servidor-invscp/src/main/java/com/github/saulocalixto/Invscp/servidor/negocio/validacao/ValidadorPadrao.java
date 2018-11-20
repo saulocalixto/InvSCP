@@ -23,6 +23,10 @@ public abstract class ValidadorPadrao<T> {
         inconsistencias = new ArrayList<>();
     }
 
+    public void altereUsuarioValidado(T objeto) {
+        objetoValidado = objeto;
+    }
+
     public Boolean naoHouveInconsistencias() {
         return inconsistencias.size() == 0;
     }
@@ -39,6 +43,10 @@ public abstract class ValidadorPadrao<T> {
 
     public List<Inconsistencia> ValideExclusao () {
 
+        return inconsistencias;
+    }
+
+    public List<Inconsistencia> retorneInconsistencias() {
         return inconsistencias;
     }
 
