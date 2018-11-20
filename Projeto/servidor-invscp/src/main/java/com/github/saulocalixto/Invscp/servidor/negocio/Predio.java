@@ -1,5 +1,7 @@
 package com.github.saulocalixto.Invscp.servidor.negocio;
 
+import java.util.List;
+
 /**
  * Created by Marcos Rafael on 29/10/18.
  */
@@ -11,6 +13,7 @@ public class Predio extends ModelPadrao {
 
     private Filial filialAQuePertence;
 
+    private List<Sala> listaDeSalas;
 
     public String getNomeDoPredio() {
         return nomeDoPredio;
