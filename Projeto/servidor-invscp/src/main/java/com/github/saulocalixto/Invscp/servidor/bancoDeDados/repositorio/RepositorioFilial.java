@@ -39,7 +39,7 @@ public class RepositorioFilial extends RepositorioPadrao<Filial> implements IRep
     }
 
     public void Salvar(Filial objeto) {
-        String sql = String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s) VALUES(?,?,?,?,?,?)",
+        String sql = String.format("INSERT INTO %s(%s,%s) VALUES(?,?)",
                 FilialMap.nomeTabela,
                 FilialMap.id,
                 FilialMap.nomeDaFilial);
@@ -90,6 +90,5 @@ public class RepositorioFilial extends RepositorioPadrao<Filial> implements IRep
         }
         return filial;
     }
-    
 
 }
