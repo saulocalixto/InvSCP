@@ -2,7 +2,7 @@ package com.github.saulocalixto.Invscp.servidor.servico;
 
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 
-import javax.xml.bind.ValidationException;
+import javax.validation.ValidationException;
 import java.util.List;
 
 /**

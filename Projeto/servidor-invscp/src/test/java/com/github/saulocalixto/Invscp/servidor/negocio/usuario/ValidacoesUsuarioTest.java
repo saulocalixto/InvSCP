@@ -32,11 +32,11 @@ public class ValidacoesUsuarioTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test
-    public void cpfValido() throws Exception {
+    public void cpfValido() {
 
         validacao.cpfValido();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
@@ -45,7 +45,7 @@ public class ValidacoesUsuarioTest {
     }
 
     @Test
-    public void cpfInvalido() throws Exception {
+    public void cpfInvalido() {
         usuarioTeste.setCpf("12345678910");
         validacao.altereUsuarioValidado(usuarioTeste);
         validacao.cpfValido();
@@ -55,7 +55,7 @@ public class ValidacoesUsuarioTest {
     }
 
     @Test
-    public void emailNaoInformado() throws Exception {
+    public void emailNaoInformado() {
         usuarioTeste.setCpf("00818193158");
         usuarioTeste.setEmail("");
         validacao.altereUsuarioValidado(usuarioTeste);
@@ -66,12 +66,42 @@ public class ValidacoesUsuarioTest {
     }
 
     @Test
-    public void emailValido() throws Exception {
+    public void emailValido() {
         usuarioTeste.setEmail("joaodasilva@invscp.com.br");
         validacao.altereUsuarioValidado(usuarioTeste);
         validacao.emailValido();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 0);
+    }
+
+    @Test
+    public void senhaInvalida() {
+        usuarioTeste.setSenha("12345");
+        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.senhaValida();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
+        assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Senha deve ter no " +
+                "mínimo 6 dígitos");
+    }
+
+    @Test
+    public void senhaValida() {
+        usuarioTeste.setSenha("123456");
+        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.senhaValida();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 0);
+    }
+
+    @Test
+    public void senhaNula() {
+        usuarioTeste.setSenha("");
+        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.senhaObrigatoria();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
+        assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Senha não informada");
     }
 
 }
