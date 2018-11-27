@@ -1,5 +1,7 @@
 package com.github.saulocalixto.Invscp.servidor.negocio;
 
+import java.util.List;
+
 /**
  * Created by Marcos Rafael on 29/10/18.
  */
@@ -7,10 +9,11 @@ public class Predio extends ModelPadrao {
 
     private String nomeDoPredio;
 
-    private String enderecoDoPredio;
+    private Endereco enderecoDoPredio;
 
     private Filial filialAQuePertence;
 
+    private List<Sala> listaDeSalas;
 
     public String getNomeDoPredio() {
         return nomeDoPredio;
@@ -20,11 +23,11 @@ public class Predio extends ModelPadrao {
         this.nomeDoPredio = nomeDoPredio;
     }
 
-    public String getEnderecoDoPredio() {
+    public Endereco getEnderecoDoPredio() {
         return enderecoDoPredio;
     }
 
-    public void setEnderecoDoPredio(String enderecoDoPredio) {
+    public void setEnderecoDoPredio(Endereco enderecoDoPredio) {
         this.enderecoDoPredio = enderecoDoPredio;
     }
 

@@ -38,7 +38,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("E-Mail")
                 .validarSe(objetoValidado != null)
                 .ehValidoQuando(objetoValidado.getEmail() != null && !objetoValidado.getEmail().isEmpty())
-                .comMensagem("E-mail não informado.")
+                .comMensagem("E-mail não informado")
                 .valide();
     }
 
@@ -46,7 +46,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("E-Mail")
                 .validarSe(objetoValidado != null && objetoValidado.getEmail() != null)
                 .ehValidoQuando(objetoValidado.getEmail().contains("@"))
-                .comMensagem("E-mail inválido.")
+                .comMensagem("E-mail inválido")
                 .valide();
     }
 
@@ -54,7 +54,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("E-Mail")
                 .validarSe(objetoValidado != null && objetoValidado.getEmail() != null)
                 .ehValidoQuando(repositorio().usuarioNaoExiste(objetoValidado.getEmail()))
-                .comMensagem("O E-mail informado já está cadastrado.")
+                .comMensagem("O E-mail informado já está cadastrado")
                 .valide();
     }
 
@@ -62,7 +62,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("Cpf")
                 .validarSe(objetoValidado != null && objetoValidado.getCpf() != null)
                 .ehValidoQuando(cpfValido(objetoValidado.getCpf()))
-                .comMensagem("Cpf inválido.")
+                .comMensagem("Cpf inválido")
                 .valide();
     }
 
@@ -70,7 +70,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("Cpf")
                 .validarSe(objetoValidado != null && objetoValidado.getCpf() != null)
                 .ehValidoQuando(objetoValidado.getCpf() != null && !objetoValidado.getCpf().isEmpty())
-                .comMensagem("Cpf não informado.")
+                .comMensagem("Cpf não informado")
                 .valide();
     }
 
@@ -78,7 +78,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("Senha")
                 .validarSe(objetoValidado != null && objetoValidado.getSenha() != null)
                 .ehValidoQuando(objetoValidado.getSenha().length() >= 6)
-                .comMensagem("Senha deve ter no mínimo 6 dígitos.")
+                .comMensagem("Senha deve ter no mínimo 6 dígitos")
                 .valide();
     }
 
@@ -86,7 +86,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("Senha")
                 .validarSe(objetoValidado != null)
                 .ehValidoQuando(objetoValidado.getSenha() != null && !objetoValidado.getSenha().isEmpty())
-                .comMensagem("Senha não informada.")
+                .comMensagem("Senha não informada")
                 .valide();
     }
 
@@ -94,7 +94,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("Grupo")
                 .validarSe(objetoValidado != null)
                 .ehValidoQuando(objetoValidado.getGrupo() != null)
-                .comMensagem("Grupo não informado ou inválido.")
+                .comMensagem("Grupo não informado ou inválido")
                 .valide();
     }
 
@@ -103,7 +103,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
                 .validarSe(permissaoDoUsuario != null)
                 .ehValidoQuando(permissaoDoUsuario == EnumGrupoDeAcesso.ADMINISTRADOR_DEPARTAMENTO
                         || permissaoDoUsuario == EnumGrupoDeAcesso.CHEFE_PATRIMONIO)
-                .comMensagem("Usuário não tem permissão para alterar outro usuário.")
+                .comMensagem("Usuário não tem permissão para alterar outro usuário")
                 .valide();
     }
 
