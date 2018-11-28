@@ -2,9 +2,11 @@ package com.github.saulocalixto.Invscp.servidor.enumeradores;
 
 
 public enum EnumMotivoBaixa {
+    SUBSTITUIDO,
     ESTRAGADO,
     ROUBADO,
     VENDIDO,
-    SUBSTITUIDO,
-    DOADO;
+    DOADO,
+    PERDIDO,
+    CONSUMIDO;
 }
