@@ -16,9 +16,7 @@ import java.util.Scanner;
  * @author Lucas Sampaio Dias
  */
 public class InventoryAPI {
-    //10.0.2.15
-    //192.168.56.1
-    private static final String BASE_URL = "http://192.168.56.1:8090";
+    private static final String BASE_URL = "http://localhost:8090";
     
     public static String login(String email, String senha) 
             throws MalformedURLException, IOException {
@@ -37,17 +35,14 @@ public class InventoryAPI {
     }
     
     private static String getJson(URL url) throws IOException {
-        if ("".equals(BASE_URL)) {
-            return null;
-        }
-        
+
         StringBuilder file = new StringBuilder();
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
         conn.connect();
         int responsecode = conn.getResponseCode();
         if (responsecode != 200) {
-            throw new RuntimeException("HttpResponseCode: " +responsecode);
+            throw new RuntimeException("HttpResponseCode: " + responsecode);
         }
         else {
             Scanner sc = new Scanner(url.openStream());

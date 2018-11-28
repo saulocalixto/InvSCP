@@ -18,12 +18,13 @@ public class Aplicacao {
     public static void main(String[] args) throws IOException {
         int opcao = 0;
         usuario = new Usuario();
-        System.out.println(InventoryAPI.getUsuario("eu@eu.com"));
+        //System.out.println(InventoryAPI.getUsuario("eu@eu.com"));
         TerminalUI.escreverMensagemInicial();
 
         if (usuario.loginTerminal() == false) {
             return;
         }
+
         System.out.println("Bem-vindo, " + usuario.getNome() + "!\n");
         
         TerminalUI.reset();

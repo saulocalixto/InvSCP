@@ -106,7 +106,7 @@ public class IO {
         }
  
         consoleEraser.halt();
-        System.out.print("\b");
+        //System.out.print("\b");
  
         return password;
     }
@@ -119,7 +119,7 @@ public class IO {
         private boolean running = true;
         public void run() {
             while (running) {
-                System.out.print("\b ");
+                //System.out.print("\b ");
                 try {
                     Thread.currentThread().sleep(1);
                 }

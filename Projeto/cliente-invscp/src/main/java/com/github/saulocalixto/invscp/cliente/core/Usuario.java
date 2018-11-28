@@ -27,7 +27,7 @@ public class Usuario {
         while (logado == false) {
             email = IO.readNomeUsuario("E-mail: ");
             String senha = IO.readSenha("Senha: ");
-            logado = checarSenha(senha);
+            logado = checarLogin(email, senha);
         }
         
         return true;
@@ -40,8 +40,12 @@ public class Usuario {
         return true;
     }
     
-    private boolean checarSenha(String senha) {
-        //Falta implementar
+    private boolean checarLogin(String email, String senha) {
+        try {
+            InventoryAPI.login(email, senha);
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
     
