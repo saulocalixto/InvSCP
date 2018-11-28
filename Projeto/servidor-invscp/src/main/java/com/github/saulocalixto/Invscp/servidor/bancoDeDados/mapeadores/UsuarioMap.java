@@ -7,4 +7,5 @@ public abstract class UsuarioMap extends ModelPadraoMap {
     public static String cpf = "cpf";
     public static String email = "email";
     public static String senha = "senha";
+    public static String idDepartamento = "idDepartamento";
 }

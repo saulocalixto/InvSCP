@@ -2,6 +2,7 @@ package com.github.saulocalixto.Invscp.servidor.negocio.usuario;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
+import com.github.saulocalixto.Invscp.servidor.negocio.Departamento;
 import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 
 /**
@@ -17,6 +18,8 @@ public class Usuario extends ModelPadrao {
     private String senha;
 
     private String email;
+
+    private Departamento departamento;
 
     private EnumGrupoDeAcesso grupo;
 
@@ -46,6 +49,18 @@ public class Usuario extends ModelPadrao {
 
     public EnumGrupoDeAcesso getGrupo() {
         return grupo;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public void setGrupo(EnumGrupoDeAcesso grupo) {
+        this.grupo = grupo;
     }
 
     public void setGrupo(String grupo) {

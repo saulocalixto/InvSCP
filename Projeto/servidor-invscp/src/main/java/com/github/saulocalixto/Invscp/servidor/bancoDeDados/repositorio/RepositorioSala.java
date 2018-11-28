@@ -35,4 +35,18 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
 
     }
 
+    @Override
+    public void atualizarDepartamento(String id, String idDepartamento) {
+        String sql = String.format("UPDATE %s SET %s = %s WHERE id = %s",
+                SalaMap.nomeTabela,
+                SalaMap.departamentoAQuePertence,
+                idDepartamento, id);
+        try {
+            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+    }
 }

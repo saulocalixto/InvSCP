@@ -3,4 +3,5 @@ package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfa
 import com.github.saulocalixto.Invscp.servidor.negocio.Sala;
 
 public interface IRepositorioSala extends IRepositorio<Sala> {
+    void atualizarDepartamento(String id, String idDepartamento);
 }
