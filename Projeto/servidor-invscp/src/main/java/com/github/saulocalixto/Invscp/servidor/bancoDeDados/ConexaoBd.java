@@ -18,8 +18,9 @@ public class ConexaoBd {
             Class.forName(driverName);
 
             String serverName = "localhost";    //caminho do servidor do BD
-            String mydatabase ="invscp";        //nome do seu banco de dados
-            String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
+            String port = "3306";        //porta do seu banco de dados
+            String databaseName = "invscp";     //nome do seu banco no MySQL
+            String url = "jdbc:mysql://" + serverName + ":" + port + "/" + databaseName;
             String username = "admin";        //nome de um usuário de seu BD
             String password = "123456";      //sua senha de acesso
             connection = DriverManager.getConnection(url, username, password);
@@ -33,17 +34,16 @@ public class ConexaoBd {
                 status = ("STATUS--->Não foi possivel realizar conexão");
             }
 
+            System.gc();
             return connection;
 
         } catch (ClassNotFoundException e) {  //Driver não encontrado
             System.out.println("O driver expecificado nao foi encontrado.");
-
             return null;
 
         } catch (SQLException e) {
-            System.out.println("Nao foi possivel conectar ao Banco de Dados.");
+            System.out.println("Nao foi possivel conectar ao Banco de Dados. + " + e.getMessage());
             return null;
-
         }
     }
 
