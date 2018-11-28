@@ -1,32 +1,13 @@
-CREATE DATABASE IF NOT EXISTS invscp
+CREATE DATABASE invscp
   CHARACTER SET utf8
   COLLATE utf8_general_ci;
  
 USE invscp;
 
-CREATE USER IF NOT EXISTS 'admin'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
-ALTER USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
-GRANT ALL PRIVILEGES ON invscp.* TO 'admin'@'%';
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY '123456';
 
-CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
-ALTER USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
-GRANT ALL PRIVILEGES ON invscp.* TO 'admin'@'localhost';
-
-FLUSH PRIVILEGES;
-
-SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS `aceitemovimentacao`;        
-DROP TABLE IF EXISTS `departamento`;               
-DROP TABLE IF EXISTS `endereco`;                   
-DROP TABLE IF EXISTS `filial`;                     
-DROP TABLE IF EXISTS `login`;                      
-DROP TABLE IF EXISTS `movimentacao`;               
-DROP TABLE IF EXISTS `predio`;                     
-DROP TABLE IF EXISTS `sala`;                       
-DROP TABLE IF EXISTS `sessao`;                     
-DROP TABLE IF EXISTS `usuario`;
-SET FOREIGN_KEY_CHECKS = 1;
-
+GRANT ALL PRIVILEGES ON invscp To 'admin'@'localhost' IDENTIFIED BY '123456';
+ 
 CREATE TABLE IF NOT EXISTS Usuario (
     id varchar(40) NOT NULL PRIMARY KEY,
     grupo ENUM('ADMINISTRADOR_DEPARTAMENTO','CHEFE_PATRIMONIO','FUNCIONARIO') NOT NULL,
@@ -38,10 +19,10 @@ CREATE TABLE IF NOT EXISTS Usuario (
     FOREIGN KEY (idDepartamento)
       REFERENCES Departamento(id)
 );
- 
+
 CREATE TABLE IF NOT EXISTS Login (
     id varchar(40) NOT NULL PRIMARY KEY,
-    token varchar(60) NULL,
+    token varchar(40) NULL,
     idUsuario varchar(40) NOT NULL,
     FOREIGN KEY (idUsuario)
             REFERENCES Usuario(id)
@@ -54,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Sessao(
 	FOREIGN KEY (idUsuario)
             REFERENCES Usuario(id)
 );
-
+ 
 CREATE TABLE IF NOT EXISTS Departamento(
 	id varchar(40) NOT NULL PRIMARY KEY,
   nome varchar(60) NOT NULL
@@ -104,7 +85,7 @@ CREATE TABLE IF NOT EXISTS Movimentacao (
     FOREIGN KEY (destino)
         REFERENCES Sala(id)
 );
-
+ 
 CREATE TABLE IF NOT EXISTS AceiteMovimentacao (
     idDoAceiteDeMovimentacao varchar(40) NOT NULL PRIMARY KEY,
     aprovado bit NOT NULL,

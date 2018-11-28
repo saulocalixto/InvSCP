@@ -11,8 +11,6 @@ public class Departamento extends ModelPadrao {
 
     private String nomeDoDepartamento;
 
-    private List<Usuario> listaDeUsuarios;
-
     private List<Sala> listaDeSalas;
 
     public String getNomeDoDepartamento() {
@@ -21,14 +19,6 @@ public class Departamento extends ModelPadrao {
 
     public void setNomeDoDepartamento(String nomeDoDepartamento) {
         this.nomeDoDepartamento = nomeDoDepartamento;
-    }
-
-    public List<Usuario> getListaDeUsuarios() {
-        return listaDeUsuarios;
-    }
-
-    public void setListaDeUsuarios(List<Usuario> listaDeUsuarios) {
-        this.listaDeUsuarios = listaDeUsuarios;
     }
 
     public List<Sala> getListaDeSalas() {
