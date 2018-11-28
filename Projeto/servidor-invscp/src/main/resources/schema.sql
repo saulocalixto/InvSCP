@@ -4,10 +4,12 @@ CREATE DATABASE IF NOT EXISTS invscp
  
 USE invscp;
 
+DROP USER 'admin'@'%';
 CREATE USER IF NOT EXISTS 'admin'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 ALTER USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 GRANT ALL PRIVILEGES ON invscp.* TO 'admin'@'%';
 
+DROP USER 'admin'@'localhost';
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
 ALTER USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
 GRANT ALL PRIVILEGES ON invscp.* TO 'admin'@'localhost';
@@ -27,16 +29,21 @@ DROP TABLE IF EXISTS `sessao`;
 DROP TABLE IF EXISTS `usuario`;
 SET FOREIGN_KEY_CHECKS = 1;
 
+CREATE TABLE IF NOT EXISTS Departamento(
+	id varchar(40) NOT NULL PRIMARY KEY,
+	nome varchar(60) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS Usuario (
     id varchar(40) NOT NULL PRIMARY KEY,
     grupo ENUM('ADMINISTRADOR_DEPARTAMENTO','CHEFE_PATRIMONIO','FUNCIONARIO') NOT NULL,
     email varchar(60) NOT NULL UNIQUE,
     senha char(60) NOT NULL,
     nome char(255) NOT NULL,
-    cpf varchar(11) NOT NULL UNIQUE
-    idDepartamento varchar(40)
+    cpf varchar(11) NOT NULL UNIQUE,
+    idDepartamento varchar(40),
     FOREIGN KEY (idDepartamento)
-      REFERENCES Departamento(id)
+			REFERENCES Departamento(id)
 );
  
 CREATE TABLE IF NOT EXISTS Login (
@@ -53,11 +60,6 @@ CREATE TABLE IF NOT EXISTS Sessao(
 	idUsuario varchar(40) NOT NULL,
 	FOREIGN KEY (idUsuario)
             REFERENCES Usuario(id)
-);
-
-CREATE TABLE IF NOT EXISTS Departamento(
-	id varchar(40) NOT NULL PRIMARY KEY,
-  nome varchar(60) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Filial(
