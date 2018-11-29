@@ -36,9 +36,10 @@ public class ServicoFilial implements IServico<Filial>{
         return null;
     }
 
-    public void Excluir(String id) {
+    public List<Inconsistencia> Excluir(String id) {
         // Criar Validação
         // Chamar repositório ou devolver inconsistência
+        return null;
     }
 
     private IRepositorioFilial repositorio() {

@@ -13,5 +13,5 @@ public interface IServico<T> {
     List<T> ConsultarLista();
     List<Inconsistencia> Salvar(T objeto) throws ValidationException;
     List<Inconsistencia> Atualizar(T objeto);
-    void Excluir(String id);
+    List<Inconsistencia> Excluir(String id);
 }

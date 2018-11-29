@@ -34,9 +34,10 @@ public class ServicoPredio implements IServico<Predio>{
         return null;
     }
 
-    public void Excluir(String id) {
+    public List<Inconsistencia> Excluir(String id) {
         // Criar Validação
         // Chamar repositório ou devolver inconsistência
+        return null;
     }
 
     private IRepositorioPredio repositorio() {

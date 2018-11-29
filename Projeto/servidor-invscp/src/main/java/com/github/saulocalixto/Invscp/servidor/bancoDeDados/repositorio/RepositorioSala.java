@@ -1,15 +1,10 @@
 package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
 
-import com.github.saulocalixto.Invscp.servidor.bancoDeDados.ConexaoBd;
-import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.DepartamentoMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.SalaMap;
-import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorio;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioSala;
-import com.github.saulocalixto.Invscp.servidor.negocio.Departamento;
 import com.github.saulocalixto.Invscp.servidor.negocio.Sala;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

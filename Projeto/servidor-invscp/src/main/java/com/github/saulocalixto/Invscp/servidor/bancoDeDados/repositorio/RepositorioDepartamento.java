@@ -1,16 +1,14 @@
 package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.DepartamentoMap;
-import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.SalaMap;
-import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.UsuarioMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioDepartamento;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioSala;
-import com.github.saulocalixto.Invscp.servidor.negocio.Departamento;
-import com.github.saulocalixto.Invscp.servidor.negocio.Sala;
+import com.github.saulocalixto.Invscp.servidor.negocio.departamento.Departamento;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioDepartamento extends RepositorioPadrao<Departamento> implements IRepositorioDepartamento {
@@ -18,7 +16,7 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
     private IRepositorioSala repositorioSala;
 
     public Departamento Consultar(String id) {
-        String sql = "SELECT * FROM Usuario WHERE id = ?";
+        String sql = "SELECT * FROM Departamento WHERE id = ?";
         Departamento departamento = new Departamento();
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
@@ -40,7 +38,27 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
     }
 
     public List<Departamento> ConsultarLista() {
-        return null;
+
+        List<Departamento> listaDepartamento = new ArrayList<Departamento>();
+        String sql = String.format("SELECT  * FROM %s", DepartamentoMap.nomeTabela);
+
+        try {
+            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Departamento departamento = new Departamento();
+                departamento.setNomeDoDepartamento(rs.getString(DepartamentoMap.nomeDoDepartamento));
+                departamento.setId(rs.getString(DepartamentoMap.id));
+                departamento.setListaDeSalas(RepositorioDeSala().consulteSalasDeDepartamento(departamento.getId()));
+                listaDepartamento.add(departamento);
+            }
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+        return listaDepartamento;
     }
 
     public void Salvar(Departamento objeto) {

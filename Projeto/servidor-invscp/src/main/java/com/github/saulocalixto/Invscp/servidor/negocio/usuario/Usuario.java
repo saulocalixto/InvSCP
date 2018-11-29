@@ -1,8 +1,7 @@
 package com.github.saulocalixto.Invscp.servidor.negocio.usuario;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
-import com.github.saulocalixto.Invscp.servidor.negocio.Departamento;
+import com.github.saulocalixto.Invscp.servidor.negocio.departamento.Departamento;
 import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 
 /**

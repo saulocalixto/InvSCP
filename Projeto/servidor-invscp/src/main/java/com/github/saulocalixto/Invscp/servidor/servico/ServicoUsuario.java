@@ -60,9 +60,16 @@ public class ServicoUsuario implements IServico<Usuario> {
         return inconsistencias;
     }
 
-    public void Excluir(String id) {
-        // Criar Validação
-        repositorio().Excluir(id);
+    public List<Inconsistencia> Excluir(String id) {
+        Usuario usuario = Consultar(id);
+        validador = new ValidacoesUsuario(usuario);
+
+        List<Inconsistencia> inconsistencias = validador.ValideExclusao();
+        if(validador.naoHouveInconsistencias()) {
+            repositorio().Excluir(id);
+        }
+
+        return inconsistencias;
     }
 
     private IRepositorioUsuario repositorio() {

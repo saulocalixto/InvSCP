@@ -34,9 +34,10 @@ public class ServicoSala implements IServico<Sala>{
         return null;
     }
 
-    public void Excluir(String id) {
+    public List<Inconsistencia> Excluir(String id) {
         // Criar Validação
         // Chamar repositório ou devolver inconsistência
+        return null;
     }
 
     private IRepositorioSala repositorio() {
