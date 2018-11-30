@@ -6,6 +6,7 @@ import com.github.saulocalixto.Invscp.servidor.negocio.departamento.Departamento
 import com.github.saulocalixto.Invscp.servidor.negocio.departamento.validacoesDepartamento;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
+import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 
 import java.util.List;
 
@@ -14,13 +15,18 @@ public class ServicoDepartamento implements IServico<Departamento>{
 
     private IRepositorioDepartamento repositorio;
     private ValidadorPadrao<Departamento> validador;
+    private ServicoSala servicoDeSala;
 
     public Departamento Consultar(String id) {
-        return repositorio().Consultar(id);
+        Departamento departamento = repositorio().Consultar(id);
+        departamento.setListaDeSalas(servicoSala().consultarSalasDeDepartamento(id));
+        return departamento;
     }
 
     public List<Departamento> ConsultarLista() {
-        return repositorio().ConsultarLista();
+        List<Departamento> lista = repositorio().ConsultarLista();
+        lista.forEach(x -> x.setListaDeSalas(servicoSala().consultarSalasDeDepartamento(x.getId())));
+        return lista;
     }
 
 
@@ -60,5 +66,10 @@ public class ServicoDepartamento implements IServico<Departamento>{
 
     private IRepositorioDepartamento repositorio() {
         return repositorio != null ? repositorio : (repositorio = new RepositorioDepartamento());
+    }
+
+    private ServicoSala servicoSala() {
+        FabricaDeServicos<ServicoSala> fabrica = new FabricaDeServicos(ServicoSala.class);
+        return servicoDeSala != null ? servicoDeSala : (servicoDeSala = fabrica.crie());
     }
 }

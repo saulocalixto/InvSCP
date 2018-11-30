@@ -2,11 +2,13 @@ package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.UsuarioMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
+import com.github.saulocalixto.Invscp.servidor.negocio.departamento.Departamento;
 import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,29 +18,27 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
 
     public Usuario Consultar(String id) {
         String sql = "SELECT * FROM Usuario WHERE id = ?";
-        Usuario usuario = new Usuario();
+        return ConsulteUsuario(id, sql);
+    }
+
+    public List<Usuario> ConsultarLista() {
+        String sql = "SELECT * FROM Usuario";
+        List<Usuario> listaUsuario = new ArrayList<Usuario>();
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
-            stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                usuario.setNome(rs.getString(UsuarioMap.nome));
-                usuario.setEmail(rs.getString(UsuarioMap.email));
-                usuario.setCpf(rs.getString(UsuarioMap.cpf));
-                usuario.setSenha(rs.getString(UsuarioMap.senha));
-                usuario.setGrupo(rs.getString(UsuarioMap.grupo));
-                usuario.setId(rs.getString(UsuarioMap.id));
+            while(rs.next()) {
+                Usuario usuario = new Usuario();
+                PreencheUsuario(usuario, rs);
+                listaUsuario.add(usuario);
             }
             rs.close();
             stmt.close();
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
-        return usuario;
-    }
 
-    public List<Usuario> ConsultarLista() {
-        return null;
+        return listaUsuario;
     }
 
     public void Salvar(Usuario objeto) {
@@ -67,8 +67,29 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
     }
 
     public void Atualizar(Usuario objeto) {
-        Excluir(objeto.getId());
-        Salvar(objeto);
+        String sql = String.format("UPDATE %s " +
+                        "SET %s = '%s', %s = '%s', %s = '%s', %s = '%s', %s = '%s', %s = '%s' " +
+                        "WHERE %s = '%s'",
+                UsuarioMap.nomeTabela,
+                UsuarioMap.grupo,
+                objeto.getGrupo(),
+                UsuarioMap.nome,
+                objeto.getNome(),
+                UsuarioMap.email,
+                objeto.getEmail(),
+                UsuarioMap.cpf,
+                objeto.getCpf(),
+                UsuarioMap.senha,
+                objeto.getSenha(),
+                UsuarioMap.idDepartamento,
+                objeto.getDepartamento().getId(),
+                UsuarioMap.id,
+                objeto.getId());
+        try {
+            ExecutaQuery(sql);
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
     }
 
     public void Excluir(String id) {
@@ -76,9 +97,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
                 UsuarioMap.nomeTabela,
                 id);
         try {
-            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
-            stmt.execute();
-            stmt.close();
+            ExecutaQuery(sql);
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
@@ -87,25 +106,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
     @Override
     public Usuario consultarPorEmail(String email) {
         String sql = "SELECT * FROM Usuario WHERE email = ?";
-        Usuario usuario = new Usuario();
-        try {
-            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
-            stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                usuario.setNome(rs.getString(UsuarioMap.nome));
-                usuario.setEmail(rs.getString(UsuarioMap.email));
-                usuario.setCpf(rs.getString(UsuarioMap.cpf));
-                usuario.setSenha(rs.getString(UsuarioMap.senha));
-                usuario.setGrupo(rs.getString(UsuarioMap.grupo));
-                usuario.setId(rs.getString(UsuarioMap.id));
-            }
-            rs.close();
-            stmt.close();
-        } catch (SQLException u) {
-            throw new RuntimeException(u);
-        }
-        return usuario;
+        return ConsulteUsuario(email, sql);
     }
 
     @Override
@@ -115,18 +116,35 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
                 UsuarioMap.nomeTabela,
                 UsuarioMap.email,
                 email);
+        return verificaSeRetornaResultados(sql);
+    }
+
+    private void PreencheUsuario(Usuario usuario, ResultSet rs) throws SQLException {
+        Departamento departamento = new Departamento();
+        usuario.setNome(rs.getString(UsuarioMap.nome));
+        usuario.setEmail(rs.getString(UsuarioMap.email));
+        usuario.setCpf(rs.getString(UsuarioMap.cpf));
+        usuario.setSenha(rs.getString(UsuarioMap.senha));
+        usuario.setGrupo(rs.getString(UsuarioMap.grupo));
+        usuario.setId(rs.getString(UsuarioMap.id));
+        departamento.setId(rs.getString(UsuarioMap.idDepartamento));
+        usuario.setDepartamento(departamento);
+    }
+
+    private Usuario ConsulteUsuario(String id, String sql) {
+        Usuario usuario = new Usuario();
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
+            stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                return false;
+            while(rs.next()) {
+                PreencheUsuario(usuario, rs);
             }
             rs.close();
             stmt.close();
         } catch (SQLException u) {
-            throw new RuntimeException(u);
+            System.out.println("Erro de leitura.");;
         }
-
-        return true;
+        return usuario;
     }
 }

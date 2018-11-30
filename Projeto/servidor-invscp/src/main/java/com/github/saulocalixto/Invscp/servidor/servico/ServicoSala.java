@@ -40,6 +40,15 @@ public class ServicoSala implements IServico<Sala>{
         return null;
     }
 
+    public List<Sala> consultarSalasDeDepartamento(String idDepartamento) {
+        return repositorio().consulteSalasDeDepartamento(idDepartamento);
+    }
+
+    public List<Inconsistencia> atualizeDepartamentoDaSala(String idSala, String idDepartamento) {
+        repositorio().atualizarDepartamento(idSala, idDepartamento);
+        return null;
+    }
+
     private IRepositorioSala repositorio() {
         return repositorio != null ? repositorio : (repositorio = new RepositorioSala());
     }

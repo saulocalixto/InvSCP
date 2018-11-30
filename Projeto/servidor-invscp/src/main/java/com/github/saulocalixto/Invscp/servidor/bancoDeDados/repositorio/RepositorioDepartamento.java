@@ -1,6 +1,7 @@
 package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.DepartamentoMap;
+import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.UsuarioMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioDepartamento;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioSala;
 import com.github.saulocalixto.Invscp.servidor.negocio.departamento.Departamento;
@@ -12,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioDepartamento extends RepositorioPadrao<Departamento> implements IRepositorioDepartamento {
-
-    private IRepositorioSala repositorioSala;
 
     public Departamento Consultar(String id) {
         String sql = "SELECT * FROM Departamento WHERE id = ?";
@@ -28,8 +27,6 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
             }
             rs.close();
             stmt.close();
-
-            departamento.setListaDeSalas(RepositorioDeSala().consulteSalasDeDepartamento(id));
 
         } catch (SQLException u) {
             throw new RuntimeException(u);
@@ -49,7 +46,6 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
                 Departamento departamento = new Departamento();
                 departamento.setNomeDoDepartamento(rs.getString(DepartamentoMap.nomeDoDepartamento));
                 departamento.setId(rs.getString(DepartamentoMap.id));
-                departamento.setListaDeSalas(RepositorioDeSala().consulteSalasDeDepartamento(departamento.getId()));
                 listaDepartamento.add(departamento);
             }
             rs.close();
@@ -106,9 +102,23 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
         }
     }
 
-    private IRepositorioSala RepositorioDeSala() {
-        return repositorioSala != null
-                ? repositorioSala
-                : (repositorioSala = new RepositorioSala());
+    @Override
+    public Boolean departamentoTemChefe(String idDepartamento) {
+        String sql = String.format("SELECT %s FROM %s as dep, %s as us " +
+                "WHERE dep.%s = '%s' AND dep.%s = us.%s AND us.%s = 'ADMINISTRADOR_DEPARTAMENTO'",
+                DepartamentoMap.id, DepartamentoMap.nomeTabela, UsuarioMap.nomeTabela, DepartamentoMap.id,
+                idDepartamento, DepartamentoMap.id, UsuarioMap.id, UsuarioMap.grupo);
+        return verificaSeRetornaResultados(sql);
+    }
+
+    @Override
+    public Boolean departamentoExiste(String id) {
+        String sql = String.format("SELECT %s FROM %s WHERE %s = '%s'",
+                DepartamentoMap.id,
+                DepartamentoMap.nomeTabela,
+                DepartamentoMap.id,
+                id);
+
+        return !verificaSeRetornaResultados(sql);
     }
 }

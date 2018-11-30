@@ -1,6 +1,8 @@
 package com.github.saulocalixto.Invscp.servidor.negocio.usuario;
 
+import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioDepartamento;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioUsuario;
+import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioDepartamento;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
 import com.github.saulocalixto.Invscp.servidor.negocio.Login;
@@ -13,6 +15,7 @@ import java.util.List;
 public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
 
     private IRepositorioUsuario repositorio;
+    private IRepositorioDepartamento repositorioDepartamento;
 
     public ValidacoesUsuario(Usuario objetoValidado) {
         super(objetoValidado);
@@ -98,6 +101,24 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
                 .valide();
     }
 
+    public void departamentoExiste() {
+        this.conceito("Departamento")
+                .validarSe(objetoValidado != null && objetoValidado.getDepartamento() != null)
+                .ehValidoQuando(repositorioDepartamento().departamentoExiste(objetoValidado.getDepartamento().getId()))
+                .comMensagem("Departamento não cadastrado.")
+                .valide();
+    }
+
+    public void departamentoNaoTemChefe() {
+        this.conceito("Departamento")
+                .validarSe(objetoValidado != null && objetoValidado.getDepartamento() != null)
+                .ehValidoQuando(objetoValidado
+                        .getGrupo() != EnumGrupoDeAcesso.ADMINISTRADOR_DEPARTAMENTO
+                        || !repositorioDepartamento().departamentoTemChefe(objetoValidado.getDepartamento().getId()))
+                .comMensagem("Esse departamento já tem um usuário como chefe.")
+                .valide();
+    }
+
     public void usuarioTemPermissaoParaAlterarUsuario() {
         this.conceito("Grupo")
                 .validarSe(permissaoDoUsuario != null)
@@ -116,6 +137,8 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         cpfObrigatorio();
         grupoObrigatorio();
         usuarioTemPermissaoParaAlterarUsuario();
+        departamentoExiste();
+        departamentoNaoTemChefe();
     }
 
     private boolean cpfValido(String CPF) {
@@ -176,5 +199,10 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
     
     private IRepositorioUsuario repositorio() {
         return repositorio != null ? repositorio : (repositorio = new RepositorioUsuario());
+    }
+
+    private IRepositorioDepartamento repositorioDepartamento() {
+        return repositorioDepartamento != null ? repositorioDepartamento
+                : (repositorioDepartamento = new RepositorioDepartamento());
     }
 }

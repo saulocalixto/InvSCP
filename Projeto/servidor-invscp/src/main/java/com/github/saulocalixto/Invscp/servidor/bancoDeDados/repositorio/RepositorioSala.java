@@ -50,11 +50,11 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
 
     @Override
     public List<Sala> consulteSalasDeDepartamento(String idDepartamento) {
-        String sql = String.format("SELECT * FROM %s WHERE %s = %s",
+        String sql = String.format("SELECT * FROM %s WHERE %s = '%s'    ",
                 SalaMap.nomeTabela,
                 SalaMap.departamentoAQuePertence,
                 idDepartamento);
-        List<Sala> listaSalas = new ArrayList<Sala>();
+        List<Sala> listaSalas = new ArrayList<>();
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();

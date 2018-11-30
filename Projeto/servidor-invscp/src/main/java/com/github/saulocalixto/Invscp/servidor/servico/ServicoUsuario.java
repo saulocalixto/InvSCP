@@ -2,10 +2,12 @@ package com.github.saulocalixto.Invscp.servidor.servico;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioUsuario;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioUsuario;
+import com.github.saulocalixto.Invscp.servidor.negocio.departamento.Departamento;
 import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.usuario.ValidacoesUsuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
+import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.SenhaEncript;
 import java.util.List;
 
@@ -16,19 +18,34 @@ public class ServicoUsuario implements IServico<Usuario> {
 
     private IRepositorioUsuario repositorio;
     private ValidadorPadrao<Usuario> validador;
+    private ServicoDepartamento servicoDepartamento;
 
     public Usuario Consultar(String id) {
-        return null;
+        Usuario usuario = repositorio().Consultar(id);
+        if(usuario.getDepartamento() != null && usuario.getDepartamento().getId() != null) {
+            usuario.setDepartamento(servicoDepartamento().Consultar(usuario.getDepartamento().getId()));
+        }
+        return usuario;
     }
 
     public List<Usuario> ConsultarLista() {
-        return null;
+        List<Usuario> lista = repositorio().ConsultarLista();
+        lista.forEach(x -> {
+            if(x.getDepartamento() != null && x.getDepartamento().getId() != null) {
+                x.setDepartamento(servicoDepartamento().Consultar(x.getDepartamento().getId()));
+            }
+        });
+
+        return lista;
     }
 
     public Usuario consultarPorEmail(String email) {
-        Usuario usuario = new Usuario();
 
-        usuario = repositorio().consultarPorEmail(email);
+        Usuario usuario = repositorio().consultarPorEmail(email);
+
+        if(usuario.getDepartamento() != null && usuario.getDepartamento().getId() != null) {
+            usuario.setDepartamento(servicoDepartamento().Consultar(usuario.getDepartamento().getId()));
+        }
 
         return usuario;
     }
@@ -74,5 +91,10 @@ public class ServicoUsuario implements IServico<Usuario> {
 
     private IRepositorioUsuario repositorio() {
         return repositorio != null ? repositorio : (repositorio = new RepositorioUsuario());
+    }
+
+    private ServicoDepartamento servicoDepartamento() {
+        FabricaDeServicos<ServicoDepartamento> fabrica = new FabricaDeServicos(ServicoDepartamento.class);
+        return servicoDepartamento != null ? servicoDepartamento : (servicoDepartamento = fabrica.crie());
     }
 }
