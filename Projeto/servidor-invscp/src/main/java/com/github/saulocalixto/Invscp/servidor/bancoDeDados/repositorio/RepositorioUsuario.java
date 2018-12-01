@@ -17,7 +17,10 @@ import java.util.List;
 public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IRepositorioUsuario {
 
     public Usuario Consultar(String id) {
-        String sql = "SELECT * FROM Usuario WHERE id = ?";
+        String sql = String.format("SELECT * FROM %s WHERE %s = '%s'",
+                UsuarioMap.nomeTabela,
+                UsuarioMap.id,
+                id);
         return ConsulteUsuario(id, sql);
     }
 
@@ -98,7 +101,10 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
 
     @Override
     public Usuario consultarPorEmail(String email) {
-        String sql = "SELECT * FROM Usuario WHERE email = ?";
+        String sql = String.format("SELECT * FROM %s WHERE %s = '%s'",
+                UsuarioMap.nomeTabela,
+                UsuarioMap.email,
+                email);
         return ConsulteUsuario(email, sql);
     }
 
@@ -128,7 +134,6 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
         Usuario usuario = new Usuario();
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
-            stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 PreencheUsuario(usuario, rs);
@@ -136,7 +141,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
             rs.close();
             stmt.close();
         } catch (SQLException u) {
-            System.out.println("Erro de leitura.");;
+            System.out.println("Erro de leitura.");
         }
         return usuario;
     }

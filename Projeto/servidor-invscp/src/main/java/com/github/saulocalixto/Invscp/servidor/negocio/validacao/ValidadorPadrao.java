@@ -3,6 +3,7 @@ package com.github.saulocalixto.Invscp.servidor.negocio.validacao;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.UtilitarioDaSessao;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +17,21 @@ public abstract class ValidadorPadrao<T> {
     protected T objetoValidado;
     protected EnumGrupoDeAcesso permissaoDoUsuario;
 
-    public ValidadorPadrao(T objetoValidado) {
-        this.objetoValidado = objetoValidado;
+    public ValidadorPadrao() {
         this.permissaoDoUsuario = UtilitarioDaSessao.retornePermissaoDeUsuarioLogado();
         inconsistencias = new ArrayList<>();
+    }
+
+    public void setObjetoValidado(T objetoValidado) {
+        try {
+            this.objetoValidado = objetoValidado != null ? objetoValidado : (T) ((Class)((ParameterizedType)this.getClass().
+                    getGenericSuperclass()).getActualTypeArguments()[0]).newInstance();
+        }
+        catch(IllegalAccessException e) {
+            System.out.println("Erro ao instanciar classe:" + e.getMessage());
+        } catch (InstantiationException f) {
+            System.out.println("Erro ao instanciar classe:" + f.getMessage());
+        }
     }
 
     public void altereUsuarioValidado(T objeto) {

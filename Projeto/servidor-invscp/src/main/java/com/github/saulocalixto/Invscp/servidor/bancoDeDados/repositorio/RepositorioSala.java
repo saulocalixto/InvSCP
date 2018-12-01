@@ -42,7 +42,7 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
     }
 
     public void Salvar(Sala objeto) {
-        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', %s, '%s', '%s')",
+        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', %s, %s, %s)",
                 SalaMap.nomeTabela,
                 SalaMap.id,
                 SalaMap.numeroSala,
@@ -87,10 +87,12 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
 
     @Override
     public void atualizarDepartamento(String id, String idDepartamento) {
-        String sql = String.format("UPDATE %s SET %s = %s WHERE id = %s",
+        String sql = String.format("UPDATE %s SET %s = %s WHERE %s = %s",
                 SalaMap.nomeTabela,
                 SalaMap.departamentoAQuePertence,
-                idDepartamento, id);
+                idDepartamento,
+                SalaMap.id,
+                id);
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
             stmt.execute();
@@ -114,7 +116,13 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
 
     @Override
     public Boolean numeroDaSalaNaoSeRepeteNoPredio(int numeroSala, String idPredio) {
-        String sql = String.format("SELECT %s FROM %s WHERE %s = '%s' AND %s = %s");
+        String sql = String.format("SELECT %s FROM %s WHERE %s = '%s' AND %s = %s",
+                SalaMap.id,
+                SalaMap.nomeTabela,
+                SalaMap.predioEmQueEstaLocalizada,
+                idPredio,
+                SalaMap.numeroSala,
+                numeroSala);
 
         return verificaSeNaoRetornaResultados(sql);
     }

@@ -17,10 +17,6 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
     private IRepositorioUsuario repositorio;
     private IRepositorioDepartamento repositorioDepartamento;
 
-    public ValidacoesUsuario(Usuario objetoValidado) {
-        super(objetoValidado);
-    }
-
     public List<Inconsistencia> ValideInclusao () {
         emailNaoCadastrado();
         comumCadastroEAtualizacao();
@@ -114,7 +110,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
                 .validarSe(objetoValidado != null && objetoValidado.getDepartamento() != null)
                 .ehValidoQuando(objetoValidado
                         .getGrupo() != EnumGrupoDeAcesso.ADMINISTRADOR_DEPARTAMENTO
-                        || !repositorioDepartamento().departamentoTemChefe(objetoValidado.getDepartamento().getId()))
+                        || (objetoValidado.getDepartamento() != null && !repositorioDepartamento().departamentoTemChefe(objetoValidado.getDepartamento().getId())))
                 .comMensagem("Esse departamento já tem um usuário como chefe.")
                 .valide();
     }

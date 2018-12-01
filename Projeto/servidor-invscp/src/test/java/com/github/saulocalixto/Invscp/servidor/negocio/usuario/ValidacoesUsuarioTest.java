@@ -27,7 +27,8 @@ public class ValidacoesUsuarioTest {
         usuarioTeste.setGrupo("ADMINISTRADOR_DEPARTAMENTO");
         usuarioTeste.setNome("Joao da Silva");
         usuarioTeste.setSenha("123456");
-        validacao = new ValidacoesUsuario(usuarioTeste);
+        validacao = new ValidacoesUsuario();
+        validacao.setObjetoValidado(usuarioTeste);
 
     }
 
@@ -47,7 +48,7 @@ public class ValidacoesUsuarioTest {
     @Test
     public void cpfInvalido() {
         usuarioTeste.setCpf("12345678910");
-        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.setObjetoValidado(usuarioTeste);
         validacao.cpfValido();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 1);
@@ -58,7 +59,7 @@ public class ValidacoesUsuarioTest {
     public void emailNaoInformado() {
         usuarioTeste.setCpf("00818193158");
         usuarioTeste.setEmail("");
-        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.setObjetoValidado(usuarioTeste);
         validacao.emailObrigatorio();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 1);
@@ -68,7 +69,7 @@ public class ValidacoesUsuarioTest {
     @Test
     public void emailValido() {
         usuarioTeste.setEmail("joaodasilva@invscp.com.br");
-        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.setObjetoValidado(usuarioTeste);
         validacao.emailValido();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 0);
@@ -77,7 +78,7 @@ public class ValidacoesUsuarioTest {
     @Test
     public void senhaInvalida() {
         usuarioTeste.setSenha("12345");
-        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.setObjetoValidado(usuarioTeste);
         validacao.senhaValida();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 1);
@@ -88,7 +89,7 @@ public class ValidacoesUsuarioTest {
     @Test
     public void senhaValida() {
         usuarioTeste.setSenha("123456");
-        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.setObjetoValidado(usuarioTeste);
         validacao.senhaValida();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 0);
@@ -97,7 +98,7 @@ public class ValidacoesUsuarioTest {
     @Test
     public void senhaNula() {
         usuarioTeste.setSenha("");
-        validacao.altereUsuarioValidado(usuarioTeste);
+        validacao.setObjetoValidado(usuarioTeste);
         validacao.senhaObrigatoria();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 1);

@@ -5,10 +5,7 @@ import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao
 
 import java.util.List;
 
-public class validacoesDepartamento extends ValidadorPadrao<Departamento> {
-
-    public validacoesDepartamento(Departamento objetoValidado) {
-        super(objetoValidado); }
+public class ValidacoesDepartamento extends ValidadorPadrao<Departamento> {
 
     public List<Inconsistencia> ValideInclusao () {
         comumCadastroEAtualizacao();

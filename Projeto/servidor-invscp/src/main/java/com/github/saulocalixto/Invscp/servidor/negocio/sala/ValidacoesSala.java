@@ -11,10 +11,6 @@ public class ValidacoesSala extends ValidadorPadrao<Sala> {
 
     private IRepositorioSala repositorio;
 
-    public ValidacoesSala(Sala objetoValidado) {
-        super(objetoValidado);
-    }
-
     public List<Inconsistencia> ValideInclusao () {
         comumCadastroEAtualizacao();
         return super.ValideInclusao();
