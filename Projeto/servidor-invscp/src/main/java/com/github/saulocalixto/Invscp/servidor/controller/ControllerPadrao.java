@@ -6,7 +6,6 @@ import com.github.saulocalixto.Invscp.servidor.servico.ServicoPadrao;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoSala;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 import com.google.gson.*;
-import jdk.jfr.ContentType;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
