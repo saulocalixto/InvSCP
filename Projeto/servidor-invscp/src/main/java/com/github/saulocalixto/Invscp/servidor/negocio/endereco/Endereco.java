@@ -1,4 +1,6 @@
-package com.github.saulocalixto.Invscp.servidor.negocio;
+package com.github.saulocalixto.Invscp.servidor.negocio.endereco;
+
+import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 
 public class Endereco extends ModelPadrao {
 

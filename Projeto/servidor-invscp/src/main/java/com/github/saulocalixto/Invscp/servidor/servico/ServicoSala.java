@@ -11,7 +11,7 @@ import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao
 import java.util.List;
 
 
-public class ServicoSala extends ServicoPadrao<Sala>{
+public class ServicoSala extends ServicoPadrao<Sala> {
 
     public Sala Consultar(String id) {
         return repositorio().Consultar(id);
