@@ -16,7 +16,7 @@ public class BemPatrimonial extends ModelPadrao {
 
     private String denominacao;
 
-    private Date dataDeAquisição;
+    private Date dataDeAquisicao;
 
     private String especificacao;
 
@@ -56,12 +56,12 @@ public class BemPatrimonial extends ModelPadrao {
         this.denominacao = denominacao;
     }
 
-    public Date getDataDeAquisição() {
-        return dataDeAquisição;
+    public Date getDataDeAquisicao() {
+        return dataDeAquisicao;
     }
 
-    public void setDataDeAquisição(Date dataDeAquisição) {
-        this.dataDeAquisição = dataDeAquisição;
+    public void setDataDeAquisicao(Date dataDeAquisicao) {
+        this.dataDeAquisicao = dataDeAquisicao;
     }
 
     public String getEspecificacao() {
