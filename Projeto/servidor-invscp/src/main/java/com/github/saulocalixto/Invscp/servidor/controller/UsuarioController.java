@@ -4,6 +4,7 @@ import com.github.saulocalixto.Invscp.servidor.negocio.Login;
 import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoLogin;
+import com.github.saulocalixto.Invscp.servidor.servico.ServicoPadrao;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoUsuario;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.UtilitarioDaSessao;
@@ -19,6 +20,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController extends ControllerPadrao<Usuario> {
+
+    @Override
+    protected ServicoPadrao<Usuario> getServico() {
+        FabricaDeServicos<ServicoPadrao<Usuario>> fabrica = new FabricaDeServicos(ServicoUsuario.class);
+        return servico != null ? servico : (servico = fabrica.crie());
+    }
 
     @RequestMapping(method= RequestMethod.GET)
     public ResponseEntity consulta(@RequestHeader String autorizacao, @RequestParam(value="email") String email) {

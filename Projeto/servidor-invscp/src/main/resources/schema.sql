@@ -127,8 +127,14 @@ CREATE TABLE IF NOT EXISTS BemPatrimonial (
 	valorDeCompra NOT NULL,
 	situacao NOT NULL,
 	notaFiscal NOT NULL,
-	FOREIGN KEY ()
-        REFERENCES (id)
+	grupoDeMaterial NOT NULL,
+	ordemDeServico NOT NULL,
+	FOREIGN KEY (grupoDeMaterial)
+        REFERENCES GrupoDeMaterial(id),
+	FOREIGN KEY (localAtual)
+        REFERENCES Sala(id),
+	FOREIGN KEY (ordemDeServico)
+        REFERENCES OrdemDeServico(id)
 );
 
 CREATE INDEX sala_numero

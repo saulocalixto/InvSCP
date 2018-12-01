@@ -3,21 +3,16 @@ package com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeMaterial;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumStatusBemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
-import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
-
-import java.util.Date;
 
 public class BemPatrimonial extends ModelPadrao {
 
-
-
     private String numeroDeTombamento;
 
-    private Sala localAtual;
+    private String localAtual;
 
     private String denominacao;
 
-    private Date dataDeAquisicao;
+    private String dataDeAquisicao;
 
     private String especificacao;
 
@@ -27,11 +22,21 @@ public class BemPatrimonial extends ModelPadrao {
 
     private double valorDeCompra;
 
-    private String identificadorDaNotaFiscal;
+    private String notaFiscal;
+
+    private String ordemDeServico;
 
     private EnumStatusBemPatrimonial status;
 
     private EnumGrupoDeMaterial grupoDeMaterial;
+
+    public String getOrdemDeServico() {
+        return ordemDeServico;
+    }
+
+    public void setOrdemDeServico(String ordemDeServico) {
+        this.ordemDeServico = ordemDeServico;
+    }
 
     public String getNumeroDeTombamento() {
         return numeroDeTombamento;
@@ -41,11 +46,11 @@ public class BemPatrimonial extends ModelPadrao {
         this.numeroDeTombamento = numeroDeTombamento;
     }
 
-    public Sala getLocalAtual() {
+    public String getLocalAtual() {
         return localAtual;
     }
 
-    public void setLocalAtual(Sala localAtual) {
+    public void setLocalAtual(String localAtual) {
         this.localAtual = localAtual;
     }
 
@@ -57,11 +62,11 @@ public class BemPatrimonial extends ModelPadrao {
         this.denominacao = denominacao;
     }
 
-    public Date getDataDeAquisicao() {
+    public String getDataDeAquisicao() {
         return dataDeAquisicao;
     }
 
-    public void setDataDeAquisicao(Date dataDeAquisicao) {
+    public void setDataDeAquisicao(String dataDeAquisicao) {
         this.dataDeAquisicao = dataDeAquisicao;
     }
 
@@ -105,6 +110,14 @@ public class BemPatrimonial extends ModelPadrao {
         this.status = status;
     }
 
+    public void setStatus(String status) {
+        try {
+            this.status = EnumStatusBemPatrimonial.valueOf(status);
+        } catch (Exception e) {
+            this.status = null;
+        }
+    }
+
     public EnumGrupoDeMaterial getGrupoDeMaterial() {
         return grupoDeMaterial;
     }
@@ -113,11 +126,19 @@ public class BemPatrimonial extends ModelPadrao {
         this.grupoDeMaterial = grupoDeMaterial;
     }
 
-    public String getIdentificadorDaNotaFiscal() {
-        return identificadorDaNotaFiscal;
+    public void setGrupoDeMaterial(String grupoDeMaterial) {
+        try {
+            this.grupoDeMaterial = EnumGrupoDeMaterial.valueOf(grupoDeMaterial);
+        } catch (Exception e) {
+            this.grupoDeMaterial = null;
+        }
     }
 
-    public void setIdentificadorDaNotaFiscal(String identificadorDaNotaFiscal) {
-        this.identificadorDaNotaFiscal = identificadorDaNotaFiscal;
+    public String getNotaFiscal() {
+        return notaFiscal;
+    }
+
+    public void setNotaFiscal(String notaFiscal) {
+        this.notaFiscal = notaFiscal;
     }
 }
