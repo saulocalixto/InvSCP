@@ -5,9 +5,12 @@ import com.github.saulocalixto.Invscp.servidor.servico.ServicoLogin;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoPadrao;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoSala;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
-import com.google.gson.Gson;
+import com.google.gson.*;
+import jdk.jfr.ContentType;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +21,7 @@ public abstract class ControllerPadrao<T> {
 
     private ServicoLogin servicoLogin;
     protected ServicoPadrao<T> servico;
-    private JSONObject json;
+    private JsonObject json;
 
     @RequestMapping(method= RequestMethod.GET)
     public ResponseEntity consulta(@RequestHeader String autorizacao, @RequestParam(value="id") String id) {
@@ -51,12 +54,16 @@ public abstract class ControllerPadrao<T> {
 
     protected abstract ServicoPadrao<T> getServico();
 
-    protected String toJson(T objeto) {
-        return GsonCreator().toJson(objeto);
+    protected JsonElement toJson(T objeto) {
+        return GsonCreator().toJsonTree(objeto);
     }
 
-    protected String toListJson(List<T> objetos) {
-        return GsonCreator().toJson(objetos);
+    protected JsonArray toListJson(List<T> objetos) {
+        JsonArray array = new JsonArray();
+        for (T objeto: objetos) {
+            array.add(toJson(objeto));
+        }
+        return array;
     }
 
     protected String toJson(List<Inconsistencia> inconsistencias) {
@@ -64,44 +71,52 @@ public abstract class ControllerPadrao<T> {
     }
 
     protected ResponseEntity retorneInconsistencias(List<Inconsistencia> inconsistencias) {
-        json = new org.json.JSONObject();
+        json = new JsonObject();
         try {
-            json.put("erro", toJson(inconsistencias));
-        } catch (JSONException e) {
+            json.add("erro", toJson((T) inconsistencias));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(json.toString());
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .header("content-type", "application/json;charset=UTF-8")
+                .body(json.toString());
     }
 
     protected ResponseEntity retorneErroDeAutenticacao() {
-        json = new org.json.JSONObject();
+        json = new JsonObject();
         try {
-            json.put("erro", "Usuário não autenticado.");
-        } catch (JSONException e) {
+            json.add("erro", toJson((T) "Usuário não autenticado."));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body(json.toString());
+        return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED)
+                .header("content-type", "application/json;charset=UTF-8")
+                .body(json.toString());
     }
 
     protected ResponseEntity retorneObjeto(T objeto) {
-        json = new org.json.JSONObject();
+        json = new JsonObject();
         try {
-            json.put("data", toJson(objeto));
-        } catch (JSONException e) {
+            json.add("data", toJson(objeto));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(json.toString());
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .header("content-type", "application/json;charset=UTF-8")
+                .body(json.toString());
     }
 
     protected ResponseEntity retorneObjeto(List<T> objetos) {
-        json = new org.json.JSONObject();
+        json = new JsonObject();
         try {
-            json.put("data", toListJson(objetos));
-        } catch (JSONException e) {
+            json.add("data", toListJson(objetos));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(json.toString());
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .header("content-type", "application/json;charset=UTF-8")
+                .body(json.toString());
     }
 
     protected ResponseEntity consultarConceito(String autorizacao, String id) {

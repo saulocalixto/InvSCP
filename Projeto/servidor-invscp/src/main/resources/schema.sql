@@ -115,20 +115,36 @@ CREATE TABLE IF NOT EXISTS AceiteMovimentacao (
     dataAceite date NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS GrupoDeMaterial (
+	id varchar(40) NOT NULL PRIMARY KEY,
+	vidaUtil numeric NOT NULL,
+	taxaDeDepreciacao numeric NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS OrdemDeServico (
+	id varchar(40) NOT NULL PRIMARY KEY,
+	motivo varchar(40) NOT NULL,
+	observacao varchar(40) NOT NULL,
+	dataAbertura varchar(40) NOT NULL,
+	nomeDaPrestadora varchar(40) NOT NULL,
+	situacao varchar(40) NOT NULL,
+	dataFechamento varchar(40) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS BemPatrimonial (
     id varchar(40) NOT NULL PRIMARY KEY,
-	localAtual NOT NULL,
-	numeroDoTombamento NOT NULL,
-	denominacao NOT NULL,
-	dataDeAquisicao NOT NULL,
-	especificacao NOT NULL,
-	garantia NOT NULL,
-	marca NOT NULL,
-	valorDeCompra NOT NULL,
-	situacao NOT NULL,
-	notaFiscal NOT NULL,
-	grupoDeMaterial NOT NULL,
-	ordemDeServico NOT NULL,
+	localAtual varchar(40) NOT NULL,
+	numeroDeTombamento varchar(40) NOT NULL,
+	denominacao varchar(40) NOT NULL,
+	dataDeAquisicao varchar(40) NOT NULL,
+	especificacao varchar(40) NOT NULL,
+	garantia varchar(40) NOT NULL,
+	marca varchar(40) NOT NULL,
+	valorDeCompra numeric NOT NULL,
+	situacao varchar(40) NOT NULL,
+	notaFiscal varchar(40) NOT NULL,
+	grupoDeMaterial varchar(40) NOT NULL,
+	ordemDeServico varchar(40) NULL,
 	FOREIGN KEY (grupoDeMaterial)
         REFERENCES GrupoDeMaterial(id),
 	FOREIGN KEY (localAtual)
