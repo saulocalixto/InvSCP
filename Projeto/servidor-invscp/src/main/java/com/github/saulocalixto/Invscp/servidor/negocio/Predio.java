@@ -1,5 +1,7 @@
 package com.github.saulocalixto.Invscp.servidor.negocio;
 
+import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
+
 import java.util.List;
 
 /**

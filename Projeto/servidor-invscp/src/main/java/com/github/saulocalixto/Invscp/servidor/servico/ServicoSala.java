@@ -2,7 +2,7 @@ package com.github.saulocalixto.Invscp.servidor.servico;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioSala;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioSala;
-import com.github.saulocalixto.Invscp.servidor.negocio.Sala;
+import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 
 import java.util.List;
@@ -13,11 +13,11 @@ public class ServicoSala implements IServico<Sala>{
     private IRepositorioSala repositorio;
 
     public Sala Consultar(String id) {
-        return null;
+        return repositorio().Consultar(id);
     }
 
     public List<Sala> ConsultarLista() {
-        return null;
+        return repositorio().ConsultarLista();
     }
 
 

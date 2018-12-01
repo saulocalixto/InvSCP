@@ -13,7 +13,7 @@ public abstract class RepositorioPadrao<T> implements IRepositorio<T> {
         return ConexaoBd.getConexaoMySQL();
     }
 
-    protected Boolean verificaSeRetornaResultados(String sql) {
+    protected Boolean verificaSeNaoRetornaResultados(String sql) {
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -33,5 +33,16 @@ public abstract class RepositorioPadrao<T> implements IRepositorio<T> {
         PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
         stmt.execute();
         stmt.close();
+    }
+
+    protected void ExcluirPadrao(String nomeTabela, String id) {
+        String sql = String.format("DELETE FROM %s WHERE id = '%s'",
+                nomeTabela,
+                id);
+        try {
+            ExecutaQuery(sql);
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
     }
 }

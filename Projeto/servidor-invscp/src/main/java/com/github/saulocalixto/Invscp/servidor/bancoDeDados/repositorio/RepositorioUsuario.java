@@ -93,14 +93,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
     }
 
     public void Excluir(String id) {
-        String sql = String.format("DELETE FROM %s WHERE id = '%s'",
-                UsuarioMap.nomeTabela,
-                id);
-        try {
-            ExecutaQuery(sql);
-        } catch (SQLException u) {
-            throw new RuntimeException(u);
-        }
+        ExcluirPadrao(UsuarioMap.nomeTabela, id);
     }
 
     @Override
@@ -116,7 +109,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
                 UsuarioMap.nomeTabela,
                 UsuarioMap.email,
                 email);
-        return verificaSeRetornaResultados(sql);
+        return verificaSeNaoRetornaResultados(sql);
     }
 
     private void PreencheUsuario(Usuario usuario, ResultSet rs) throws SQLException {

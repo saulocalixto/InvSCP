@@ -1,8 +1,7 @@
 package com.github.saulocalixto.Invscp.servidor.negocio.departamento;
 
 import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
-import com.github.saulocalixto.Invscp.servidor.negocio.Sala;
-import com.github.saulocalixto.Invscp.servidor.negocio.usuario.Usuario;
+import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
 
 import java.util.List;
 

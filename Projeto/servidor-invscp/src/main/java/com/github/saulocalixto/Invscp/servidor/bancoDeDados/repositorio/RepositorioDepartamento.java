@@ -3,7 +3,6 @@ package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.DepartamentoMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.UsuarioMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioDepartamento;
-import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioSala;
 import com.github.saulocalixto.Invscp.servidor.negocio.departamento.Departamento;
 
 import java.sql.PreparedStatement;
@@ -90,16 +89,7 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
     }
 
     public void Excluir(String id) {
-        String sql = String.format("DELETE FROM %s WHERE id = '%s'",
-                DepartamentoMap.nomeTabela,
-                id);
-        try {
-            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
-            stmt.execute();
-            stmt.close();
-        } catch (SQLException u) {
-            throw new RuntimeException(u);
-        }
+        ExcluirPadrao(DepartamentoMap.nomeTabela, id);
     }
 
     @Override
@@ -108,7 +98,7 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
                 "WHERE dep.%s = '%s' AND dep.%s = us.%s AND us.%s = 'ADMINISTRADOR_DEPARTAMENTO'",
                 DepartamentoMap.id, DepartamentoMap.nomeTabela, UsuarioMap.nomeTabela, DepartamentoMap.id,
                 idDepartamento, DepartamentoMap.id, UsuarioMap.id, UsuarioMap.grupo);
-        return verificaSeRetornaResultados(sql);
+        return verificaSeNaoRetornaResultados(sql);
     }
 
     @Override
@@ -119,6 +109,6 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
                 DepartamentoMap.id,
                 id);
 
-        return !verificaSeRetornaResultados(sql);
+        return !verificaSeNaoRetornaResultados(sql);
     }
 }

@@ -2,6 +2,8 @@ package com.github.saulocalixto.Invscp.servidor.negocio;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeMaterial;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumStatusBemPatrimonial;
+import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
+
 import java.util.Date;
 
 public class BemPatrimonial extends ModelPadrao {

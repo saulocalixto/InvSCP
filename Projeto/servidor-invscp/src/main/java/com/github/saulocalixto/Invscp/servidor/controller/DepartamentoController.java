@@ -37,6 +37,16 @@ public class DepartamentoController {
         }
     }
 
+    @RequestMapping(method= RequestMethod.GET, value = "consulteTodos")
+    public ResponseEntity consultaTodos(@RequestHeader String autorizacao) {
+        if(servicoLogin().tokenValido(autorizacao)) {
+            List<Departamento> departamentos = servicoDepartamento().ConsultarLista();
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(departamentos);
+        } else {
+            return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body("Usuário não autenticado.");
+        }
+    }
+
     @RequestMapping(method= RequestMethod.PUT)
     public ResponseEntity salva(@RequestHeader String autorizacao, @RequestBody Departamento departamento) {
         if(servicoLogin().tokenValido(autorizacao)) {

@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS Predio(
 
 CREATE TABLE IF NOT EXISTS Sala(
 	id varchar(40) NOT NULL PRIMARY KEY,
+  numeroSala numeric NOT NULL,
 	idDepartamento varchar(40) NULL,
 	idPredio varchar(40) NULL,
 	FOREIGN KEY (idDepartamento)
@@ -112,3 +113,6 @@ CREATE TABLE IF NOT EXISTS AceiteMovimentacao (
     aprovado bit NOT NULL,
     dataAceite date NOT NULL
 );
+
+CREATE INDEX sala_numero
+ON Sala (numeroSala);
