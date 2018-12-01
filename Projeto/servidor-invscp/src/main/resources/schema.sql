@@ -116,3 +116,6 @@ CREATE TABLE IF NOT EXISTS AceiteMovimentacao (
 
 CREATE INDEX sala_numero
 ON Sala (numeroSala);
+
+CREATE INDEX usuario_Email
+ON Usuario (email);

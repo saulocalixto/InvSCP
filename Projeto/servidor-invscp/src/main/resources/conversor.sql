@@ -7,3 +7,6 @@ ALTER TABLE Sala MODIFY COLUMN idPredio varchar(40) NULL;
 ALTER TABLE Sala ADD COLUMN numeroSala numeric NOT NULL;
 CREATE INDEX sala_numero
 ON Sala (numeroSala);
+CREATE INDEX usuario_Email
+ON Usuario (email);
+
