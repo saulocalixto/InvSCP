@@ -1,8 +1,8 @@
 package com.github.saulocalixto.Invscp.servidor.utilitarios;
 
-import com.github.saulocalixto.Invscp.servidor.servico.IServico;
+import com.github.saulocalixto.Invscp.servidor.servico.ServicoPadrao;
 
-public class FabricaDeServicos<T extends IServico> {
+public class FabricaDeServicos<T extends ServicoPadrao> {
 
     public Class<T> servico;
 

@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class ControllerPadrao<T> {
 
     private ServicoLogin servicoLogin;
-    private ServicoPadrao<T> servico;
+    protected ServicoPadrao<T> servico;
     private JSONObject json;
 
     @RequestMapping(method= RequestMethod.GET)
@@ -49,10 +49,7 @@ public abstract class ControllerPadrao<T> {
         return servicoLogin = servicoLogin != null ? servicoLogin : (servicoLogin = new ServicoLogin());
     }
 
-    protected ServicoPadrao<T> getServico() {
-        FabricaDeServicos<ServicoSala> fabrica = new FabricaDeServicos(ServicoSala.class);
-        return servico != null ? servico : (servico = (ServicoPadrao<T>) fabrica.crie());
-    }
+    protected abstract ServicoPadrao<T> getServico();
 
     protected String toJson(T objeto) {
         return GsonCreator().toJson(objeto);
