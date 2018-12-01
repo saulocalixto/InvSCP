@@ -44,7 +44,8 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
     public void emailValido() {
         this.conceito("E-Mail")
                 .validarSe(objetoValidado != null && objetoValidado.getEmail() != null)
-                .ehValidoQuando(objetoValidado.getEmail().contains("@"))
+                .ehValidoQuando(objetoValidado.getEmail() == null
+                        || objetoValidado.getEmail().contains("@"))
                 .comMensagem("E-mail inválido")
                 .valide();
     }
@@ -52,7 +53,8 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
     public void emailNaoCadastrado() {
         this.conceito("E-Mail")
                 .validarSe(objetoValidado != null && objetoValidado.getEmail() != null)
-                .ehValidoQuando(repositorio().usuarioNaoExiste(objetoValidado.getEmail()))
+                .ehValidoQuando(objetoValidado.getEmail() == null
+                        || repositorio().usuarioNaoExiste(objetoValidado.getEmail()))
                 .comMensagem("O E-mail informado já está cadastrado")
                 .valide();
     }
@@ -97,10 +99,20 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
                 .valide();
     }
 
+    public void departamentoInformado() {
+        this.conceito("Departamento")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getDepartamento() != null
+                        && objetoValidado.getDepartamento().getId() != null)
+                .comMensagem("Departamento deve ser informado")
+                .valide();
+    }
+
     public void departamentoExiste() {
         this.conceito("Departamento")
                 .validarSe(objetoValidado != null && objetoValidado.getDepartamento() != null)
-                .ehValidoQuando(repositorioDepartamento().departamentoExiste(objetoValidado.getDepartamento().getId()))
+                .ehValidoQuando(objetoValidado.getDepartamento() == null
+                        || repositorioDepartamento().departamentoExiste(objetoValidado.getDepartamento().getId()))
                 .comMensagem("Departamento não cadastrado.")
                 .valide();
     }
@@ -135,6 +147,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         usuarioTemPermissaoParaAlterarUsuario();
         departamentoExiste();
         departamentoNaoTemChefe();
+        departamentoInformado();
     }
 
     private boolean cpfValido(String CPF) {
@@ -192,7 +205,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
             return(false);
         }
     }
-    
+
     private IRepositorioUsuario repositorio() {
         return repositorio != null ? repositorio : (repositorio = new RepositorioUsuario());
     }
