@@ -72,6 +72,7 @@ public class RepositorioFilial extends RepositorioPadrao<Filial> implements IRep
         }
     }
 
+    @Override
     public Filial consultarPorNome(String nomeDaFilial) {
         String sql = "SELECT * FROM Filial WHERE nomeDaFilial = ?";
         Filial filial = new Filial();
