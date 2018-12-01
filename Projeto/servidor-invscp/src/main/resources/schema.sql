@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS Predio(
 
 CREATE TABLE IF NOT EXISTS Sala(
 	id varchar(40) NOT NULL PRIMARY KEY,
-  numeroSala numeric NOT NULL,
+	numeroSala numeric NOT NULL,
 	idDepartamento varchar(40) NULL,
 	idPredio varchar(40) NULL,
 	FOREIGN KEY (idDepartamento)

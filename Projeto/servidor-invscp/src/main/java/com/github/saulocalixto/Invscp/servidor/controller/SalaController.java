@@ -2,12 +2,6 @@ package com.github.saulocalixto.Invscp.servidor.controller;
 
 import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
-import com.github.saulocalixto.Invscp.servidor.servico.ServicoLogin;
-import com.github.saulocalixto.Invscp.servidor.servico.ServicoSala;
-import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
