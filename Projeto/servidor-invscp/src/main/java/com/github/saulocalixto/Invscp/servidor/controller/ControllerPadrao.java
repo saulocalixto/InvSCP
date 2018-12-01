@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +19,31 @@ public abstract class ControllerPadrao<T> {
     private ServicoLogin servicoLogin;
     private ServicoPadrao<T> servico;
     private JSONObject json;
+
+    @RequestMapping(method= RequestMethod.GET)
+    public ResponseEntity consulta(@RequestHeader String autorizacao, @RequestParam(value="id") String id) {
+        return consultarConceito(autorizacao, id);
+    }
+
+    @RequestMapping(method= RequestMethod.GET, value = "consulteTodos")
+    public ResponseEntity consultaTodos(@RequestHeader String autorizacao) {
+        return consultarTodos(autorizacao);
+    }
+
+    @RequestMapping(method= RequestMethod.PUT)
+    public ResponseEntity salva(@RequestHeader String autorizacao, @RequestBody T objeto) {
+        return salvarConceito(autorizacao, objeto);
+    }
+
+    @RequestMapping(method= RequestMethod.DELETE)
+    public ResponseEntity exclue(@RequestHeader String autorizacao, @RequestParam(value="id") String id) {
+        return deletarConceito(autorizacao, id);
+    }
+
+    @RequestMapping(method= RequestMethod.PUT, value = "atualize")
+    public ResponseEntity atualiza(@RequestHeader String autorizacao, @RequestBody T objeto) {
+        return atualizarConceito(autorizacao, objeto);
+    }
 
     protected ServicoLogin servicoLogin() {
         return servicoLogin = servicoLogin != null ? servicoLogin : (servicoLogin = new ServicoLogin());
@@ -79,6 +105,52 @@ public abstract class ControllerPadrao<T> {
             e.printStackTrace();
         }
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(json.toString());
+    }
+
+    protected ResponseEntity consultarConceito(String autorizacao, String id) {
+        if(servicoLogin().tokenValido(autorizacao)) {
+            T objeto = getServico().Consultar(id);
+            return retorneObjeto(objeto);
+        } else {
+            return retorneErroDeAutenticacao();
+        }
+    }
+
+    protected ResponseEntity consultarTodos(String autorizacao) {
+        if(servicoLogin().tokenValido(autorizacao)) {
+            List<T> objetos = getServico().ConsultarLista();
+            return retorneObjeto(objetos);
+        } else {
+            return retorneErroDeAutenticacao();
+        }
+    }
+
+    protected ResponseEntity salvarConceito(String autorizacao, T objeto) {
+        if(servicoLogin().tokenValido(autorizacao)) {
+            List<Inconsistencia> inconsistencias = getServico().Salvar(objeto);
+            return retorneInconsistencias(inconsistencias);
+
+        } else {
+            return retorneErroDeAutenticacao();
+        }
+    }
+
+    protected ResponseEntity deletarConceito(String autorizacao, String id) {
+        if(servicoLogin().tokenValido(autorizacao)) {
+            List<Inconsistencia> inconsistencias = getServico().Excluir(id);
+            return retorneInconsistencias(inconsistencias);
+        } else {
+            return retorneErroDeAutenticacao();
+        }
+    }
+
+    protected ResponseEntity atualizarConceito(String autorizacao, T objeto) {
+        if(servicoLogin().tokenValido(autorizacao)) {
+            List<Inconsistencia> inconsistencias = getServico().Atualizar(objeto);
+            return retorneInconsistencias(inconsistencias);
+        } else {
+            return retorneErroDeAutenticacao();
+        }
     }
 
     private Gson GsonCreator() {

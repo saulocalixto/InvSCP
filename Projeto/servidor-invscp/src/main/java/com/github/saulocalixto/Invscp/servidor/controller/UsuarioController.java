@@ -18,55 +18,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioController {
-
-    private ServicoUsuario servicoUsuario;
-    private ServicoLogin servicoLogin;
-
-    private ServicoUsuario servicoUsuario() {
-            FabricaDeServicos<ServicoUsuario> fabrica = new FabricaDeServicos(ServicoUsuario.class);
-            return servicoUsuario != null ? servicoUsuario : (servicoUsuario = fabrica.crie());
-    }
-
-    private ServicoLogin servicoLogin() {
-        return servicoLogin = servicoLogin != null ? servicoLogin : (servicoLogin = new ServicoLogin());
-    }
+public class UsuarioController extends ControllerPadrao<Usuario> {
 
     @RequestMapping(method= RequestMethod.GET)
     public ResponseEntity consulta(@RequestHeader String autorizacao, @RequestParam(value="email") String email) {
         if(servicoLogin().tokenValido(autorizacao)) {
-            Usuario usuario = servicoUsuario().consultarPorEmail(email);
+            Usuario usuario = ((ServicoUsuario)getServico()).consultarPorEmail(email);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuario);
-        } else {
-            return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body("Usuário não autenticado.");
-        }
-    }
-
-    @RequestMapping(method= RequestMethod.PUT)
-    public ResponseEntity salva(@RequestHeader String autorizacao, @RequestBody Usuario usuario) {
-        if(servicoLogin().tokenValido(autorizacao)) {
-            List<Inconsistencia> inconsistencias = servicoUsuario().Salvar(usuario);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(inconsistencias);
-        } else {
-            return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body("Usuário não autenticado.");
-        }
-    }
-
-    @RequestMapping(method= RequestMethod.DELETE)
-    public ResponseEntity exclue(@RequestHeader String autorizacao, @RequestParam(value="id") String id) {
-        if(servicoLogin().tokenValido(autorizacao)) {
-            servicoUsuario().Excluir(id);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(true);
-        } else {
-            return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body("Usuário não autenticado.");
-        }
-    }
-
-    @RequestMapping(method= RequestMethod.PUT, value = "atualize")
-    public ResponseEntity atualiza(@RequestHeader String autorizacao, @RequestBody Usuario usuario) {
-        if(servicoLogin().tokenValido(autorizacao)) {
-            List<Inconsistencia> inconsistencias = servicoUsuario().Atualizar(usuario);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(inconsistencias);
         } else {
             return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body("Usuário não autenticado.");
         }
