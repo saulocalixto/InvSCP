@@ -27,10 +27,8 @@ public abstract class ValidadorPadrao<T> {
             this.objetoValidado = objetoValidado != null ? objetoValidado : (T) ((Class)((ParameterizedType)this.getClass().
                     getGenericSuperclass()).getActualTypeArguments()[0]).newInstance();
         }
-        catch(IllegalAccessException e) {
+        catch(IllegalAccessException | InstantiationException e) {
             System.out.println("Erro ao instanciar classe:" + e.getMessage());
-        } catch (InstantiationException f) {
-            System.out.println("Erro ao instanciar classe:" + f.getMessage());
         }
     }
 

@@ -27,6 +27,7 @@ DROP TABLE IF EXISTS `predio`;
 DROP TABLE IF EXISTS `sala`;                       
 DROP TABLE IF EXISTS `sessao`;                     
 DROP TABLE IF EXISTS `usuario`;
+DROP TABLE IF EXISTS `bempatrimonial`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE IF NOT EXISTS Departamento(
@@ -109,9 +110,25 @@ CREATE TABLE IF NOT EXISTS Movimentacao (
 );
 
 CREATE TABLE IF NOT EXISTS AceiteMovimentacao (
-    idDoAceiteDeMovimentacao varchar(40) NOT NULL PRIMARY KEY,
+    id varchar(40) NOT NULL PRIMARY KEY,
     aprovado bit NOT NULL,
     dataAceite date NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS BemPatrimonial (
+    id varchar(40) NOT NULL PRIMARY KEY,
+	localAtual NOT NULL,
+	numeroDoTombamento NOT NULL,
+	denominacao NOT NULL,
+	dataDeAquisicao NOT NULL,
+	especificacao NOT NULL,
+	garantia NOT NULL,
+	marca NOT NULL,
+	valorDeCompra NOT NULL,
+	situacao NOT NULL,
+	notaFiscal NOT NULL,
+	FOREIGN KEY ()
+        REFERENCES (id)
 );
 
 CREATE INDEX sala_numero

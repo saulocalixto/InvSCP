@@ -1,6 +1,8 @@
 package com.github.saulocalixto.Invscp.servidor.negocio;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumMotivoBaixa;
+import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.BemPatrimonial;
+
 import java.util.Date;
 
 public class Baixa extends ModelPadrao {

@@ -50,7 +50,7 @@ public abstract class ControllerPadrao<T> {
     }
 
     protected ServicoPadrao<T> getServico() {
-        FabricaDeServicos<ServicoSala> fabrica = new FabricaDeServicos(ServicoSala.class);
+        FabricaDeServicos<ServicoSala> fabrica = new FabricaDeServicos(ServicoPadrao.class);
         return servico != null ? servico : (servico = (ServicoPadrao<T>) fabrica.crie());
     }
 

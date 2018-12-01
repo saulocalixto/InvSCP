@@ -1,7 +1,8 @@
-package com.github.saulocalixto.Invscp.servidor.negocio;
+package com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeMaterial;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumStatusBemPatrimonial;
+import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
 
 import java.util.Date;
