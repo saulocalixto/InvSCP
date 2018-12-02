@@ -1,7 +1,6 @@
 package com.github.saulocalixto.Invscp.servidor.negocio;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumSituacaoOS;
-import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.BemPatrimonial;
 
 import java.util.Date;
 
@@ -9,15 +8,15 @@ public class OrdemDeServico extends ModelPadrao {
 
     private String identificadorDaOS;
 
-    private BemPatrimonial bem;
+    private String bem;
 
     private String motivo;
 
     private String observacao;
 
-    private Date dataAbertura;
+    private String dataAbertura;
 
-    private Date dataEncerramento;
+    private String dataEncerramento;
 
     private String nomeDaPrestadora;
 
@@ -32,11 +31,11 @@ public class OrdemDeServico extends ModelPadrao {
         this.identificadorDaOS = identificadorDaOS;
     }
 
-    public BemPatrimonial getBem() {
+    public String getBem() {
         return bem;
     }
 
-    public void setBem(BemPatrimonial bem) {
+    public void setBem(String bem) {
         this.bem = bem;
     }
 
@@ -56,19 +55,19 @@ public class OrdemDeServico extends ModelPadrao {
         this.observacao = observacao;
     }
 
-    public Date getDataAbertura() {
+    public String getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(Date dataAbertura) {
+    public void setDataAbertura(String dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public Date getDataEncerramento() {
+    public String getDataEncerramento() {
         return dataEncerramento;
     }
 
-    public void setDataEncerramento(Date dataEncerramento) {
+    public void setDataEncerramento(String dataEncerramento) {
         this.dataEncerramento = dataEncerramento;
     }
 
@@ -84,7 +83,11 @@ public class OrdemDeServico extends ModelPadrao {
         return situacao;
     }
 
-    public void setSituacao(EnumSituacaoOS situacao) {
-        this.situacao = situacao;
+    public void setSituacao(String situacao) {
+        try {
+            this.situacao = EnumSituacaoOS.valueOf(situacao);
+        } catch (Exception e) {
+            this.situacao = null;
+        }
     }
 }
