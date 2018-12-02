@@ -1,13 +1,15 @@
-package com.github.saulocalixto.Invscp.servidor.negocio;
+package com.github.saulocalixto.Invscp.servidor.negocio.baixa;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumMotivoBaixa;
-import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.BemPatrimonial;
+import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
+
+import java.util.Date;
 
 public class Baixa extends ModelPadrao {
 
     private String idBem;
 
-    private String data;
+    private Date data;
 
     private String observacao;
 
@@ -21,11 +23,11 @@ public class Baixa extends ModelPadrao {
         this.idBem = bem;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

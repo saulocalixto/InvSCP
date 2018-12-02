@@ -4,6 +4,7 @@ import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.Reposito
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorio;
 import com.github.saulocalixto.Invscp.servidor.negocio.predio.Predio;
 import com.github.saulocalixto.Invscp.servidor.negocio.endereco.Endereco;
+import com.github.saulocalixto.Invscp.servidor.negocio.predio.ValidacoesPredio;
 import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
@@ -48,17 +49,11 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
         inconsistencias = validador().ValideInclusao();
 
         if(objeto.getEndereco() != null) {
-            inconsistencias = servicoEndereco().Salvar(objeto.getEndereco());
+            inconsistencias.addAll(servicoEndereco().Salvar(objeto.getEndereco()));
         }
 
         if(validador().naoHouveInconsistencias()) {
             repositorio().Salvar(objeto);
-
-            objeto.getListaDeSalas().forEach(sala -> {
-                inconsistencias
-                        .addAll(((ServicoSala)servicoSala()).atualizeSalasDePredio(sala.getId(), objeto.getId()));
-            });
-
         }
 
         return inconsistencias;
@@ -70,16 +65,11 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
         inconsistencias = validador().ValideAtualizacao();
 
         if(objeto.getEndereco() != null) {
-            inconsistencias = servicoEndereco().Atualizar(objeto.getEndereco());
+            inconsistencias.addAll(servicoEndereco().Atualizar(objeto.getEndereco()));
         }
 
         if(validador().naoHouveInconsistencias()) {
             repositorio().Atualizar(objeto);
-
-            objeto.getListaDeSalas().forEach(sala -> {
-                inconsistencias
-                        .addAll(((ServicoSala)servicoSala()).atualizeSalasDePredio(sala.getId(), objeto.getId()));
-            });
         }
 
         return inconsistencias;
@@ -110,7 +100,7 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
 
     @Override
     ValidadorPadrao<Predio> validador() {
-        return null;
+        return validador != null ? validador : (validador = new ValidacoesPredio());
     }
 
     private ServicoPadrao<Endereco> servicoEndereco() {

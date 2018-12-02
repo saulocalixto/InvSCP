@@ -3,6 +3,7 @@ package com.github.saulocalixto.Invscp.servidor.servico;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioBemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorio;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioBemPatrimonial;
+import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumStatusBemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.BemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.ValidacoesBemPatrimonial;
@@ -50,6 +51,17 @@ public class ServicoBemPatrimonial extends ServicoPadrao<BemPatrimonial> {
             repositorio().Excluir(id);
         }
 
+        return inconsistencias;
+    }
+
+    public List<Inconsistencia> mudarStatusBemPatrimonial(String idBem, EnumStatusBemPatrimonial status) {
+        BemPatrimonial objeto = repositorio().Consultar(idBem);
+        objeto.setStatus(status);
+        validador().setObjetoValidado(objeto);
+        inconsistencias = validador.ValideAtualizacao();
+        if(validador().naoHouveInconsistencias()) {
+            ((IRepositorioBemPatrimonial)repositorio()).mudarStatusBemPatrimonial(idBem, status);
+        }
         return inconsistencias;
     }
 

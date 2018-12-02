@@ -42,7 +42,7 @@ public class ValidacoesPredio extends ValidadorPadrao<Predio> {
         this.conceito("Grupo")
                 .validarSe(permissaoDoUsuario != null)
                 .ehValidoQuando(permissaoDoUsuario == EnumGrupoDeAcesso.CHEFE_PATRIMONIO)
-                .comMensagem("Usuário não tem permissão para alterar outro usuário")
+                .comMensagem("Usuário não tem permissão para alterar ou cadastrar prédio")
                 .valide();
     }
 
@@ -54,18 +54,9 @@ public class ValidacoesPredio extends ValidadorPadrao<Predio> {
                 .valide();
     }
 
-    public void salaObrigatoria() {
-        this.conceito("Sala")
-                .validarSe(objetoValidado != null)
-                .ehValidoQuando(objetoValidado.getListaDeSalas() != null && objetoValidado.getListaDeSalas().size() > 0)
-                .comMensagem("Pelo menos uma sala deve ser informada")
-                .valide();
-    }
-
     private void comumCadastroEAtualizacao() {
         nomeObrigatorio();
         usuarioTemPermissaoParaAlterarPredio();
         enderecoObrigatorio();
-        salaObrigatoria();
     }
 }

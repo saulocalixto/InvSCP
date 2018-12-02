@@ -2,7 +2,9 @@ package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.BaixaMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioBaixa;
-import com.github.saulocalixto.Invscp.servidor.negocio.Baixa;
+import com.github.saulocalixto.Invscp.servidor.negocio.baixa.Baixa;
+
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,7 +58,7 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
             stmt.setString(1, objeto.getId());
             stmt.setString(2, objeto.getIdBem());
-            stmt.setString(3,objeto.getData());
+            stmt.setString(3,objeto.getData().toString());
             stmt.setString(4,objeto.getObservacao());
             stmt.setString(5, objeto.getMotivo().name());
             stmt.execute();
@@ -74,7 +76,7 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
                 BaixaMap.idBem,
                 objeto.getIdBem(),
                 BaixaMap.data,
-                objeto.getData(),
+                objeto.getData().toString(),
                 BaixaMap.observacao,
                 objeto.getObservacao(),
                 BaixaMap.motivo,
@@ -120,7 +122,7 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
     private void PreencheBaixa(Baixa baixa, ResultSet rs) throws SQLException {
         baixa.setId(rs.getString(BaixaMap.id));
         baixa.setIdBem(rs.getString((BaixaMap.idBem)));
-        baixa.setData(rs.getString((BaixaMap.data)));
+        baixa.setData(Date.valueOf(rs.getString(BaixaMap.data)));
         baixa.setObservacao(rs.getString(BaixaMap.observacao));
         baixa.setMotivo(rs.getString(BaixaMap.motivo));
     }

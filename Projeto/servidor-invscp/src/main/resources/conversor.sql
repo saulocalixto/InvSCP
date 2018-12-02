@@ -14,4 +14,3 @@ Alter table Predio drop key idFilial;
 alter table Predio drop column idFilial;
 DROP TABLE IF EXISTS `filial`;
 ALTER TABLE Predio ADD COLUMN nome varchar(60) NOT NULL;
-
