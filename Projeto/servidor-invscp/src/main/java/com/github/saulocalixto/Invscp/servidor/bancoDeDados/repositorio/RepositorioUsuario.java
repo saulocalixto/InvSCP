@@ -45,14 +45,15 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
     }
 
     public void Salvar(Usuario objeto) {
-        String sql = String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s) VALUES(?,?,?,?,?,?)",
+        String sql = String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s) VALUES(?,?,?,?,?,?,?)",
                 UsuarioMap.nomeTabela,
                 UsuarioMap.id,
                 UsuarioMap.senha,
                 UsuarioMap.nome,
                 UsuarioMap.email,
                 UsuarioMap.grupo,
-                UsuarioMap.cpf);
+                UsuarioMap.cpf,
+                UsuarioMap.idDepartamento);
 
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
@@ -62,6 +63,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
             stmt.setString(4, objeto.getEmail());
             stmt.setString(5, objeto.getGrupo().name());
             stmt.setString(6, objeto.getCpf());
+            stmt.setString(7, objeto.getDepartamento() != null ? objeto.getDepartamento().getId() : null);
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {
@@ -75,7 +77,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
                         "WHERE %s = '%s'",
                 UsuarioMap.nomeTabela,
                 UsuarioMap.grupo,
-                objeto.getGrupo(),
+                objeto.getGrupo().name(),
                 UsuarioMap.nome,
                 objeto.getNome(),
                 UsuarioMap.email,

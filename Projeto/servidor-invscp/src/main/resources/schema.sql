@@ -19,8 +19,7 @@ FLUSH PRIVILEGES;
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `aceitemovimentacao`;        
 DROP TABLE IF EXISTS `departamento`;               
-DROP TABLE IF EXISTS `endereco`;                   
-DROP TABLE IF EXISTS `filial`;                     
+DROP TABLE IF EXISTS `endereco`;
 DROP TABLE IF EXISTS `login`;                      
 DROP TABLE IF EXISTS `movimentacao`;               
 DROP TABLE IF EXISTS `predio`;                     
@@ -63,10 +62,6 @@ CREATE TABLE IF NOT EXISTS Sessao(
             REFERENCES Usuario(id)
 );
 
-CREATE TABLE IF NOT EXISTS Filial(
-	id varchar(40) NOT NULL PRIMARY KEY
-);
-
 CREATE TABLE IF NOT EXISTS Endereco(
 	id varchar(40) NOT NULL PRIMARY KEY,
 	rua varchar(80) NOT NULL,
@@ -78,11 +73,9 @@ CREATE TABLE IF NOT EXISTS Endereco(
 CREATE TABLE IF NOT EXISTS Predio(
 	id varchar(40) NOT NULL PRIMARY KEY,
 	idEndereco varchar(40) NOT NULL,
-	idFilial varchar(40) NOT NULL,
+	nome varchar(60) NOT NULL,
 	FOREIGN KEY (idEndereco)
         REFERENCES Endereco(id),
-	FOREIGN KEY (idFilial)
-        REFERENCES Filial(id)
 );
 
 CREATE TABLE IF NOT EXISTS Sala(

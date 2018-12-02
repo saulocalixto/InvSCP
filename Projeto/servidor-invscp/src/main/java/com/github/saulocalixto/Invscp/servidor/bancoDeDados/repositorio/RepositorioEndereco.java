@@ -73,7 +73,6 @@ public class RepositorioEndereco extends RepositorioPadrao<Endereco> implements 
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
-
     }
 
     public void Atualizar(Endereco objeto) {
