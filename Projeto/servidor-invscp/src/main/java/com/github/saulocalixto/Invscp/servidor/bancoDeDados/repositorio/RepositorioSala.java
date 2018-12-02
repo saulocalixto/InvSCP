@@ -103,12 +103,42 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
     }
 
     @Override
+    public void atualizarPredio(String id, String idPredio) {
+        String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?'",
+                SalaMap.nomeTabela,
+                SalaMap.predioEmQueEstaLocalizada,
+                SalaMap.id);
+        try {
+            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
+            stmt.setObject(1, idPredio);
+            stmt.setObject(2, id);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+    }
+
+    @Override
     public List<Sala> consulteSalasDeDepartamento(String idDepartamento) {
         String sql = String.format("SELECT * FROM %s WHERE %s = '%s'    ",
                 SalaMap.nomeTabela,
                 SalaMap.departamentoAQuePertence,
                 idDepartamento);
         List<Sala> listaSalas = new ArrayList<>();
+        PreencheListaDeSalas(sql, listaSalas);
+
+        return listaSalas;
+    }
+
+    @Override
+    public List<Sala> consulteSalasDePredio(String idPredio) {
+        String sql = String.format("SELECT * FROM %s WHERE %s = '%s'    ",
+                SalaMap.nomeTabela,
+                SalaMap.predioEmQueEstaLocalizada,
+                idPredio);
+        List<Sala> listaSalas = new ArrayList<>();
+
         PreencheListaDeSalas(sql, listaSalas);
 
         return listaSalas;

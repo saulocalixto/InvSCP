@@ -59,6 +59,20 @@ public class ServicoSala extends ServicoPadrao<Sala> {
         return ((IRepositorioSala)repositorio()).consulteSalasDeDepartamento(idDepartamento);
     }
 
+    public List<Sala> consultarSalasDePredio(String idPredio) {
+        return ((IRepositorioSala)repositorio()).consulteSalasDePredio(idPredio);
+    }
+
+    public List<Inconsistencia> atualizeSalasDePredio(String idSala, String idPredio) {
+        Sala objeto = Consultar(idSala);
+        validador().setObjetoValidado(objeto);
+        inconsistencias = validador.ValideAtualizacao();
+        if(validador().naoHouveInconsistencias()) {
+            ((IRepositorioSala)repositorio()).atualizarPredio(idSala, idPredio);
+        }
+        return inconsistencias;
+    }
+
     public List<Inconsistencia> atualizeDepartamentoDaSala(String idSala, String idDepartamento) {
         ((IRepositorioSala)repositorio()).atualizarDepartamento(idSala, idDepartamento);
         return inconsistencias;

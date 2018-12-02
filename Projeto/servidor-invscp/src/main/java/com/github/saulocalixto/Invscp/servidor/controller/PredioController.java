@@ -1,6 +1,6 @@
 package com.github.saulocalixto.Invscp.servidor.controller;
 
-import com.github.saulocalixto.Invscp.servidor.negocio.Predio;
+import com.github.saulocalixto.Invscp.servidor.negocio.predio.Predio;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoPadrao;
 import com.github.saulocalixto.Invscp.servidor.servico.ServicoPredio;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;

@@ -3,7 +3,7 @@ package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.EnderecoMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.PredioMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioPredio;
-import com.github.saulocalixto.Invscp.servidor.negocio.Predio;
+import com.github.saulocalixto.Invscp.servidor.negocio.predio.Predio;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -82,9 +82,6 @@ public class RepositorioPredio extends RepositorioPadrao<Predio> implements IRep
                         PredioMap.endereco,
                         PredioMap.id,
                         objeto.getId());
-
-
-
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
             stmt.setObject(1, objeto.getNome(), Types.VARCHAR);

@@ -2,8 +2,9 @@ package com.github.saulocalixto.Invscp.servidor.servico;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioPredio;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorio;
-import com.github.saulocalixto.Invscp.servidor.negocio.Predio;
+import com.github.saulocalixto.Invscp.servidor.negocio.predio.Predio;
 import com.github.saulocalixto.Invscp.servidor.negocio.endereco.Endereco;
+import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class ServicoPredio extends ServicoPadrao<Predio> {
 
     private ServicoEndereco servicoEndereco;
+    private ServicoSala servicoSala;
 
     public Predio Consultar(String id) {
         Predio predio = repositorio().Consultar(id);
@@ -20,6 +22,8 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
         if(predio.getEndereco() != null && predio.getEndereco().getId() != null) {
             predio.setEndereco(servicoEndereco().Consultar(predio.getEndereco().getId()));
         }
+
+        predio.setListaDeSalas(((ServicoSala)servicoSala()).consultarSalasDePredio(id));
 
         return predio;
     }
@@ -30,6 +34,8 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
             if(x.getEndereco() != null && x.getEndereco().getId() != null) {
                 x.setEndereco(servicoEndereco().Consultar(x.getEndereco().getId()));
             }
+
+            x.setListaDeSalas(((ServicoSala)servicoSala()).consultarSalasDePredio(x.getId()));
         });
 
         return lista;
@@ -47,6 +53,12 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
 
         if(validador().naoHouveInconsistencias()) {
             repositorio().Salvar(objeto);
+
+            objeto.getListaDeSalas().forEach(sala -> {
+                inconsistencias
+                        .addAll(((ServicoSala)servicoSala()).atualizeSalasDePredio(sala.getId(), objeto.getId()));
+            });
+
         }
 
         return inconsistencias;
@@ -63,6 +75,11 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
 
         if(validador().naoHouveInconsistencias()) {
             repositorio().Atualizar(objeto);
+
+            objeto.getListaDeSalas().forEach(sala -> {
+                inconsistencias
+                        .addAll(((ServicoSala)servicoSala()).atualizeSalasDePredio(sala.getId(), objeto.getId()));
+            });
         }
 
         return inconsistencias;
@@ -74,6 +91,11 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
         validador.setObjetoValidado(predio);
 
         inconsistencias = validador.ValideExclusao();
+
+        predio.getListaDeSalas().forEach(sala -> {
+            inconsistencias.addAll(((ServicoSala)servicoSala()).atualizeSalasDePredio(null, predio.getId()));
+        });
+
         if(validador.naoHouveInconsistencias()) {
             repositorio().Excluir(id);
         }
@@ -93,5 +115,9 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
 
     private ServicoPadrao<Endereco> servicoEndereco() {
         return servicoEndereco != null ? servicoEndereco : (servicoEndereco = new ServicoEndereco());
+    }
+
+    private ServicoPadrao<Sala> servicoSala() {
+        return servicoSala != null ? servicoSala : (servicoSala = new ServicoSala());
     }
 }

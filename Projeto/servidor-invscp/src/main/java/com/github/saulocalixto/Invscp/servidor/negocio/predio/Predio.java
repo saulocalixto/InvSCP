@@ -1,5 +1,6 @@
-package com.github.saulocalixto.Invscp.servidor.negocio;
+package com.github.saulocalixto.Invscp.servidor.negocio.predio;
 
+import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 import com.github.saulocalixto.Invscp.servidor.negocio.endereco.Endereco;
 import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
 
@@ -30,5 +31,13 @@ public class Predio extends ModelPadrao {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public List<Sala> getListaDeSalas() {
+        return listaDeSalas;
+    }
+
+    public void setListaDeSalas(List<Sala> listaDeSalas) {
+        this.listaDeSalas = listaDeSalas;
     }
 }
