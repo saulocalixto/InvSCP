@@ -9,6 +9,7 @@ import com.github.saulocalixto.Invscp.servidor.servico.ServicoUsuario;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.UtilitarioDaSessao;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class UsuarioController extends ControllerPadrao<Usuario> {
     public ResponseEntity consulta(@RequestHeader String autorizacao, @RequestParam(value="email") String email) {
         if(servicoLogin().tokenValido(autorizacao)) {
             Usuario usuario = ((ServicoUsuario)getServico()).consultarPorEmail(email);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuario);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).contentType(MediaType.APPLICATION_JSON).body(usuario);
         } else {
             return ResponseEntity.status(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED).body("Usuário não autenticado.");
         }

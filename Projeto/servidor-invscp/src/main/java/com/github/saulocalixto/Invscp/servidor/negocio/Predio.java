@@ -10,35 +10,25 @@ import java.util.List;
  */
 public class Predio extends ModelPadrao {
 
-    private String nomeDoPredio;
+    private String nome;
 
-    private Endereco enderecoDoPredio;
-
-    private Filial filialAQuePertence;
+    private Endereco endereco;
 
     private List<Sala> listaDeSalas;
 
-    public String getNomeDoPredio() {
-        return nomeDoPredio;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeDoPredio(String nomeDoPredio) {
-        this.nomeDoPredio = nomeDoPredio;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Endereco getEnderecoDoPredio() {
-        return enderecoDoPredio;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setEnderecoDoPredio(Endereco enderecoDoPredio) {
-        this.enderecoDoPredio = enderecoDoPredio;
-    }
-
-    public Filial getFilialAQuePertence() {
-        return filialAQuePertence;
-    }
-
-    public void setFilialAQuePertence(Filial filialAQuePertence) {
-        this.filialAQuePertence = filialAQuePertence;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
