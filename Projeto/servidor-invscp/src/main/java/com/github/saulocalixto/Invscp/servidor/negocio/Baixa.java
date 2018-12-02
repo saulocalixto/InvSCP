@@ -3,31 +3,29 @@ package com.github.saulocalixto.Invscp.servidor.negocio;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumMotivoBaixa;
 import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.BemPatrimonial;
 
-import java.util.Date;
-
 public class Baixa extends ModelPadrao {
 
-    private BemPatrimonial bem;
+    private String idBem;
 
-    private Date data;
+    private String data;
 
     private String observacao;
 
     private EnumMotivoBaixa motivo;
 
-    public BemPatrimonial getBem() {
-        return bem;
+    public String getIdBem() {
+        return idBem;
     }
 
-    public void setBem(BemPatrimonial bem) {
-        this.bem = bem;
+    public void setIdBem(String bem) {
+        this.idBem = bem;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -43,7 +41,11 @@ public class Baixa extends ModelPadrao {
         return motivo;
     }
 
-    public void setMotivo(EnumMotivoBaixa motivo) {
-        this.motivo = motivo;
+    public void setMotivo(String motivo) {
+        try {
+            this.motivo = EnumMotivoBaixa.valueOf(motivo);
+        } catch (Exception e) {
+            this.motivo = null;
+        }
     }
 }
