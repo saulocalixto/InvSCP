@@ -4,10 +4,13 @@ import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.BaixaMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioBaixa;
 import com.github.saulocalixto.Invscp.servidor.negocio.baixa.Baixa;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +61,9 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
             stmt.setString(1, objeto.getId());
             stmt.setString(2, objeto.getIdBem());
-            stmt.setString(3,objeto.getData().toString());
+            stmt.setString(3,converteData(objeto.getData()));
             stmt.setString(4,objeto.getObservacao());
-            stmt.setString(5, objeto.getMotivo().name());
+            stmt.setInt(5, objeto.getMotivo().ordinal());
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {
@@ -122,9 +125,26 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
     private void PreencheBaixa(Baixa baixa, ResultSet rs) throws SQLException {
         baixa.setId(rs.getString(BaixaMap.id));
         baixa.setIdBem(rs.getString((BaixaMap.idBem)));
-        baixa.setData(Date.valueOf(rs.getString(BaixaMap.data)));
+        baixa.setData(converteData(rs.getString(BaixaMap.data)));
         baixa.setObservacao(rs.getString(BaixaMap.observacao));
         baixa.setMotivo(rs.getString(BaixaMap.motivo));
+    }
+
+    private String converteData(Date data) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        String dataConvertida = df.format(data);
+        return dataConvertida;
+    }
+
+    private Date converteData(String data) {
+        try {
+            String dataString = data;
+            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            Date date = formatter.parse(dataString);
+            return date;
+        } catch (ParseException e) {
+            return new Date();
+        }
     }
 
 }

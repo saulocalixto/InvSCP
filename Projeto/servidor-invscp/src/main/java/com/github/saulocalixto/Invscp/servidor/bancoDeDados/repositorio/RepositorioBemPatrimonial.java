@@ -14,7 +14,7 @@ import java.util.List;
 public class RepositorioBemPatrimonial extends RepositorioPadrao<BemPatrimonial> implements IRepositorioBemPatrimonial {
 
     public BemPatrimonial Consultar(String id) {
-        String sql = String.format("SELECT * FROM %s WHERE %s = %s",
+        String sql = String.format("SELECT * FROM %s WHERE %s = '%s'",
                 BemPatrimonialMap.nomeTabela,
                 BemPatrimonialMap.numeroDeTombamento,
                 id);
