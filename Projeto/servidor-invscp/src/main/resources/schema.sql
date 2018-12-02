@@ -116,12 +116,13 @@ CREATE TABLE IF NOT EXISTS GrupoDeMaterial (
 
 CREATE TABLE IF NOT EXISTS OrdemDeServico (
 	id varchar(40) NOT NULL PRIMARY KEY,
+	identificadorDaOS varchar(40),
 	motivo varchar(40) NOT NULL,
 	observacao varchar(40) NOT NULL,
 	dataAbertura varchar(40) NOT NULL,
+	dataEncerramento varchar(40) NOT NULL
 	nomeDaPrestadora varchar(40) NOT NULL,
 	situacao varchar(40) NOT NULL,
-	dataFechamento varchar(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS BemPatrimonial (
