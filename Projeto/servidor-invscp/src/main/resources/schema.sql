@@ -26,6 +26,8 @@ DROP TABLE IF EXISTS `predio`;
 DROP TABLE IF EXISTS `sala`;                       
 DROP TABLE IF EXISTS `sessao`;                     
 DROP TABLE IF EXISTS `usuario`;
+DROP TABLE IF EXISTS `grupoDeMaterial`;
+DROP TABLE IF EXISTS `ordemDeServico`;
 DROP TABLE IF EXISTS `bempatrimonial`;
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -48,7 +50,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
  
 CREATE TABLE IF NOT EXISTS Login (
     id varchar(40) NOT NULL PRIMARY KEY,
-    token varchar(60) NULL,
+    token varchar(60) NULL UNIQUE,
     idUsuario varchar(40) NOT NULL,
     FOREIGN KEY (idUsuario)
             REFERENCES Usuario(id)
@@ -75,7 +77,7 @@ CREATE TABLE IF NOT EXISTS Predio(
 	idEndereco varchar(40) NOT NULL,
 	nome varchar(60) NOT NULL,
 	FOREIGN KEY (idEndereco)
-        REFERENCES Endereco(id),
+        REFERENCES Endereco(id)
 );
 
 CREATE TABLE IF NOT EXISTS Sala(
@@ -120,9 +122,9 @@ CREATE TABLE IF NOT EXISTS OrdemDeServico (
 	motivo varchar(40) NOT NULL,
 	observacao varchar(40) NOT NULL,
 	dataAbertura varchar(40) NOT NULL,
-	dataEncerramento varchar(40) NOT NULL
+	dataEncerramento varchar(40) NOT NULL,
 	nomeDaPrestadora varchar(40) NOT NULL,
-	situacao varchar(40) NOT NULL,
+	situacao varchar(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS BemPatrimonial (

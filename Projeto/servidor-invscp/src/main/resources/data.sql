@@ -21,14 +21,9 @@ TRUNCATE TABLE Endereco;
 INSERT INTO Endereco (id, rua, cidade, cep, bairro) VALUES
 	('endereco001', 'Rua de Testes', 'Goiânia', '74670000', 'Bairro de Testes');
 
-TRUNCATE TABLE Filial;
-INSERT INTO Filial (id) VALUES
-	('filial001'),
-	('filial002');
-
 TRUNCATE TABLE Predio;
-INSERT INTO Predio (id, idEndereco, idFilial) VALUES
-	('predio001', 'endereco001', 'filial001');
+INSERT INTO Predio (id, idEndereco, nome) VALUES
+	('predio001', 'endereco001', 'predio001');
 
 TRUNCATE TABLE Sala;
 INSERT INTO Sala (id, numeroSala, idDepartamento, idPredio) VALUES
