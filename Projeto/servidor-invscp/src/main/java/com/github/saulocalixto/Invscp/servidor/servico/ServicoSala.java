@@ -65,6 +65,7 @@ public class ServicoSala extends ServicoPadrao<Sala> {
 
     public List<Inconsistencia> atualizeSalasDePredio(String idSala, String idPredio) {
         Sala objeto = Consultar(idSala);
+        objeto.setIdPredio(idPredio);
         validador().setObjetoValidado(objeto);
         inconsistencias = validador.ValideAtualizacao();
         if(validador().naoHouveInconsistencias()) {

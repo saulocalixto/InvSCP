@@ -149,6 +149,16 @@ CREATE TABLE IF NOT EXISTS BemPatrimonial (
         REFERENCES OrdemDeServico(id)
 );
 
+CREATE TABLE IF NOT EXISTS Baixa (
+	id varchar(40) NOT NULL PRIMARY KEY,
+	idBem varchar(40) NOT NULL,
+	dataBaixa varchar(20) NOT NULL,
+	observacao varchar(100) NULL,
+	motivo numeric NULL,
+	FOREIGN KEY (idBem)
+	REFERENCES BemPatrimonial(id)
+	);
+
 CREATE INDEX sala_numero
 ON Sala (numeroSala);
 

@@ -8,9 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class RepositorioPadrao<T> implements IRepositorio<T> {
+
+    private Connection connection;
+
     @Override
     public Connection RetorneConexaoBd() {
-        return ConexaoBd.getConexaoMySQL();
+        return connection != null ? connection : (connection = ConexaoBd.getConexaoMySQL());
     }
 
     protected Boolean verificaSeNaoRetornaResultados(String sql) {

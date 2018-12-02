@@ -2,6 +2,7 @@ package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.BemPatrimonialMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioBemPatrimonial;
+import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumStatusBemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.BemPatrimonial;
 
 import java.sql.PreparedStatement;
@@ -136,6 +137,25 @@ public class RepositorioBemPatrimonial extends RepositorioPadrao<BemPatrimonial>
                 listaBensPatrimoniais.add(bemPatrimonial);
             }
             rs.close();
+            stmt.close();
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+    }
+
+    @Override
+    public void mudarStatusBemPatrimonial(String idBem, EnumStatusBemPatrimonial status) {
+        String sql = String
+                .format("UPDATE %s SET %s = '%s' WHERE %s = '%s'",
+                        BemPatrimonialMap.nomeTabela,
+                        BemPatrimonialMap.situacao,
+                        status.name(),
+                        BemPatrimonialMap.id,
+                        idBem);
+
+        try {
+            PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
+            stmt.execute();
             stmt.close();
         } catch (SQLException u) {
             throw new RuntimeException(u);

@@ -10,7 +10,7 @@ import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 
 import java.util.List;
 
-public class ServicoDepartamento extends ServicoPadrao<Departamento>{
+public class ServicoDepartamento extends ServicoPadrao<Departamento> {
 
     private ServicoSala servicoDeSala;
 
@@ -50,6 +50,7 @@ public class ServicoDepartamento extends ServicoPadrao<Departamento>{
         Departamento departamento = Consultar(id);
         validador().setObjetoValidado(departamento);
         inconsistencias = validador.ValideExclusao();
+
         if(validador().naoHouveInconsistencias()) {
             repositorio().Excluir(id);
         }
