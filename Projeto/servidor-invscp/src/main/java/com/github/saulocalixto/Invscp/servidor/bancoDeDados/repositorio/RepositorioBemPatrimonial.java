@@ -15,7 +15,7 @@ public class RepositorioBemPatrimonial extends RepositorioPadrao<BemPatrimonial>
     public BemPatrimonial Consultar(String id) {
         String sql = String.format("SELECT * FROM %s WHERE %s = %s",
                 BemPatrimonialMap.nomeTabela,
-                BemPatrimonialMap.numeroDeTombamento,
+                BemPatrimonialMap.id,
                 id);
         BemPatrimonial bemPatrimonial = new BemPatrimonial();
         try {

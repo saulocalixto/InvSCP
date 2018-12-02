@@ -23,6 +23,7 @@ public abstract class ValidadorPadrao<T> {
     }
 
     public void setObjetoValidado(T objetoValidado) {
+        inconsistencias = new ArrayList<>();
         try {
             this.objetoValidado = objetoValidado != null ? objetoValidado : (T) ((Class)((ParameterizedType)this.getClass().
                     getGenericSuperclass()).getActualTypeArguments()[0]).newInstance();
