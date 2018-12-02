@@ -42,7 +42,7 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
     }
 
     public void Salvar(Sala objeto) {
-        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', %s, %s, %s)",
+        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', %s, '%s', '%s')",
                 SalaMap.nomeTabela,
                 SalaMap.id,
                 SalaMap.numeroSala,
@@ -104,7 +104,7 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
 
     @Override
     public void atualizarPredio(String id, String idPredio) {
-        String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?'",
+        String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?",
                 SalaMap.nomeTabela,
                 SalaMap.predioEmQueEstaLocalizada,
                 SalaMap.id);
