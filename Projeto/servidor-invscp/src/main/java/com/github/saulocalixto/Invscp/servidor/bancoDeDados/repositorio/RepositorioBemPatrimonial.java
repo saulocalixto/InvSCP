@@ -90,7 +90,7 @@ public class RepositorioBemPatrimonial extends RepositorioPadrao<BemPatrimonial>
                         BemPatrimonialMap.especificacao,
                         objeto.getEspecificacao(),
                         BemPatrimonialMap.situacao,
-                        objeto.getStatus(),
+                        objeto.getStatus().name(),
                         BemPatrimonialMap.ordemDeServico,
                         objeto.getOrdemDeServico(),
                         BemPatrimonialMap.id,
