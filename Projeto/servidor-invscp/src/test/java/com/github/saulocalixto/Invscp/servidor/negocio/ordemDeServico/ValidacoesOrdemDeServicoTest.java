@@ -81,4 +81,23 @@ public class ValidacoesOrdemDeServicoTest {
                 "informado");
     }
 
+    @Test
+    public void dataDeAberturaInformada() {
+        osTeste.setDataAbertura("02/12/2018");
+        validacao.setObjetoValidado(osTeste);
+        validacao.dataAberturaDeveSerInformado();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 0);
+    }
+
+    @Test
+    public void dataDeAberturaNaoInformada() {
+        osTeste.setDataAbertura("");
+        validacao.setObjetoValidado(osTeste);
+        validacao.dataAberturaDeveSerInformado();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Data de abertura deve " +
+                "ser informada");
+    }
+
 }
