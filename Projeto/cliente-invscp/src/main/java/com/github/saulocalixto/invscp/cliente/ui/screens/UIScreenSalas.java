@@ -29,8 +29,11 @@ public class UIScreenSalas extends UIScreen{
     {
         opcoes = new HashMap<>();
         opcoes.put(1, new UIScreenOption("Cadastrar", () -> {
-            System.out.println("Funcionalidade não implementada");
-            SalaAPI.criaSala("666", "departamento001", "predio001");
+            try {
+                criarSala();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenSalas.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(2, new UIScreenOption("Visualizar", () -> {
             try {
@@ -47,15 +50,45 @@ public class UIScreenSalas extends UIScreen{
             }
         }));
         opcoes.put(4, new UIScreenOption("Editar", () -> {
-            System.out.println("Funcionalidade não implementada");
+            try {
+                editarSala();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenSalas.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(5, new UIScreenOption("Deletar", () -> {
-            System.out.println("Funcionalidade não implementada");
+            try {
+                deletarSala();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenSalas.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
     }
     
     public UIScreenSalas() {
         super("Salas", opcoes);
+    }
+    
+    public static void deletarSala() throws IOException {
+        final String id = IO.readString("Insira o id da Sala:");
+        SalaAPI.deletaSala(id);
+    }
+    
+    private static void editarSala() throws IOException {
+        final String id = IO.readString("Insira o id da Sala:");
+        final String numSala = IO.readString("Insira o número da Sala:");
+        final String idDepartamento = IO.readString("Insira o id do Departamento:");
+        final String idPredio = IO.readString("Insira o id do Prédio:");
+        
+        SalaAPI.editarSala(id, numSala, idDepartamento, idPredio);
+    }
+    
+    public static void criarSala() throws IOException {
+        final String numSala = IO.readString("Insira o número da Sala:");
+        final String idDepartamento = IO.readString("Insira o id do Departamento:");
+        final String idPredio = IO.readString("Insira o id do Prédio:");
+        
+        SalaAPI.criaSala(numSala, idDepartamento, idPredio);
     }
     
     public static void visualizarSala() throws IOException {
@@ -78,5 +111,6 @@ public class UIScreenSalas extends UIScreen{
         System.out.println("\nNúmero: " + obj.get("numeroSala"));
         System.out.println("Prédio: " + obj.get("idPredio"));
         System.out.println("Departamento: " + obj.get("idDepartamento"));
+        System.out.println("id: " + obj.get("id"));
     }
 }
