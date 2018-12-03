@@ -2,7 +2,7 @@ package com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio;
 
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.mapeadores.OrdemDeServicoMap;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioOrdemDeServico;
-import com.github.saulocalixto.Invscp.servidor.negocio.OrdemDeServico;
+import com.github.saulocalixto.Invscp.servidor.negocio.ordemDeServico.OrdemDeServico;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
