@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -56,8 +57,14 @@ public class UIScreenUsuarios extends UIScreen{
     private static void visualizarUsuario() throws IOException {
         final String email = IO.readString("Insira o e-mail do usuario:");
         final String json = UsuarioAPI.getUsuario(email);
+
         JSONObject obj = new JSONObject(json);
-        System.out.println("Nome: " + obj.get("nome"));
+        System.out.println("\nNome: " + obj.get("nome"));
+        System.out.println("Grupo: " + obj.get("grupo"));
+        
+        JSONObject depto = obj.getJSONObject("departamento");
+        System.out.println("Departamento: " + 
+                depto.getString("nomeDoDepartamento"));
     }
     
     private static void editarUsuario() {
