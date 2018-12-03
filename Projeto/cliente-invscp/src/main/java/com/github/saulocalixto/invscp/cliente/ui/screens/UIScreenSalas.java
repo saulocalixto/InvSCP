@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -61,13 +62,21 @@ public class UIScreenSalas extends UIScreen{
         final String id = IO.readString("Insira o id da Sala:");
         final String json = SalaAPI.getSala(id);
 
+        mostrarSala(new JSONObject(json).getJSONObject("data").toString());
+    }
+    
+    public static void visualizarSalas() throws IOException {
+        JSONArray salas = new JSONObject(SalaAPI.getSalas()).getJSONArray("data");
+
+        for (int i = 0; i < salas.length(); i++) {
+            mostrarSala(salas.get(i).toString());
+        }
+    }
+    
+    private static void mostrarSala(String json) {
         JSONObject obj = new JSONObject(json);
         System.out.println("\nNúmero: " + obj.get("numeroSala"));
         System.out.println("Prédio: " + obj.get("idPredio"));
         System.out.println("Departamento: " + obj.get("idDepartamento"));
-    }
-    
-    public static void visualizarSalas() throws IOException {
-        System.out.println(SalaAPI.getSalas());
     }
 }
