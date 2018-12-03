@@ -41,11 +41,7 @@ public class UIScreenUsuarios extends UIScreen{
             System.out.println("Funcionalidade não implementada");
         }));
         opcoes.put(4, new UIScreenOption("Deletar", () -> {
-            try {
-                deletarUsuario();
-            } catch (IOException ex) {
-                Logger.getLogger(UIScreenUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            deletarUsuario();
         }));
     }
     
@@ -64,9 +60,14 @@ public class UIScreenUsuarios extends UIScreen{
         
     }
     
-    private static void deletarUsuario() throws IOException {
-        final String email = IO.readString("Insira o e-mail do usuario:");
-        UsuarioAPI.deletarUsuario(email);
+    private static void deletarUsuario() {
+        final String email;
+        try {
+            email = IO.readString("Insira o e-mail do usuario:");
+            UsuarioAPI.deletarUsuario(email);
+        } catch (Exception e) {
+            System.out.println("Não foi possível deletar o usuário.");
+        }
     }
     
     public UIScreenUsuarios() {

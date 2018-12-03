@@ -32,6 +32,8 @@ public abstract class InventoryAPI {
 
     protected static final String PARAMETRO_DE_CONSULTA = "id";
 
+    protected static final String PARAMETRO_DE_DELECAO = "id";
+
     public static String getAuth() {
         return auth;
     }

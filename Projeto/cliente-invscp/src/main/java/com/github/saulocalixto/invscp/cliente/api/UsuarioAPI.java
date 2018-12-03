@@ -12,11 +12,7 @@ public class UsuarioAPI extends InventoryAPI {
         return chamadaGet(ENDPOINT_PADRAO, PARAMETRO_DE_CONSULTA, email);
     }
 
-    public static String deletarUsuario(String email) {
-        try {
-            return chamadaDelete(ENDPOINT_PADRAO, PARAMETRO_DE_CONSULTA, email);
-        } catch (IOException e) {
-            return "{}";
-        }
+    public static String deletarUsuario(String email) throws IOException {
+        return chamadaDelete(ENDPOINT_PADRAO, PARAMETRO_DE_DELECAO, email);
     }
 }
