@@ -39,15 +39,15 @@ public class UIScreenLocais extends UIScreen{
                         Level.SEVERE, null, ex);
             }
         }));
-        opcoes.put(3, new UIScreenOption("Filiais", () -> {
-            try {
-                TerminalUI.mostrar(new UIScreenFiliais());
-            } catch (IOException ex) {
-                Logger.getLogger(UIScreenMenuPrincipal.class.getName()).log(
-                        Level.SEVERE, null, ex);
-            }
-        }));
-        opcoes.put(4, new UIScreenOption("Salas", () -> {
+//        opcoes.put(3, new UIScreenOption("Filiais", () -> {
+//            try {
+//                TerminalUI.mostrar(new UIScreenFiliais());
+//            } catch (IOException ex) {
+//                Logger.getLogger(UIScreenMenuPrincipal.class.getName()).log(
+//                        Level.SEVERE, null, ex);
+//            }
+//        }));
+        opcoes.put(3, new UIScreenOption("Salas", () -> {
             try {
                 TerminalUI.mostrar(new UIScreenSalas());
             } catch (IOException ex) {

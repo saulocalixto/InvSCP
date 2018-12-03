@@ -2,14 +2,15 @@ USE invscp;
 
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE Usuario;
-INSERT INTO Usuario (id, grupo, email, senha, nome, cpf) 
+INSERT INTO Usuario (id, grupo, email, senha, nome, cpf, idDepartamento) 
 	VALUES (
 		'seilaquediabosfazisso',
 		'ADMINISTRADOR_DEPARTAMENTO',
 		'admin@admin.com',
 		'$2a$04$BBoGbYsVvFmu/TkxVA18k.5cuAbGy/JCXWVJgRJRAs.bHk2AJicEC',
 		'admin',
-		'02883758077'
+		'02883758077',
+		'departamento001'
 	);
 
 TRUNCATE TABLE Departamento;

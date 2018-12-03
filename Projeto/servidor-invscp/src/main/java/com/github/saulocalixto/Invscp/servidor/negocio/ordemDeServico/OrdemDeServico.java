@@ -1,6 +1,7 @@
-package com.github.saulocalixto.Invscp.servidor.negocio;
+package com.github.saulocalixto.Invscp.servidor.negocio.ordemDeServico;
 
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumSituacaoOS;
+import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 
 import java.util.Date;
 

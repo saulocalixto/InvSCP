@@ -37,7 +37,7 @@ public class ValidacoesEndereco extends ValidadorPadrao<Endereco> {
         this.conceito("Cidade")
                 .validarSe(objetoValidado != null)
                 .ehValidoQuando(objetoValidado.getCidade() != null && !objetoValidado.getCidade().isEmpty())
-                .comMensagem("Cidade deve ser informado")
+                .comMensagem("Cidade deve ser informada")
                 .valide();
     }
 
@@ -45,7 +45,7 @@ public class ValidacoesEndereco extends ValidadorPadrao<Endereco> {
         this.conceito("CEP")
                 .validarSe(objetoValidado != null)
                 .ehValidoQuando(objetoValidado.getCep() != null && !objetoValidado.getCep().isEmpty())
-                .comMensagem("Cidade deve ser informado")
+                .comMensagem("Cep deve ser informado")
                 .valide();
     }
 
