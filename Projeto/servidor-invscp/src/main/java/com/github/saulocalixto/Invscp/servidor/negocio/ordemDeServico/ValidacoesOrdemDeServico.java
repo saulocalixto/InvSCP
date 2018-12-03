@@ -108,8 +108,7 @@ public class ValidacoesOrdemDeServico extends ValidadorPadrao<OrdemDeServico> {
 
     private boolean verificaBemEmUso (OrdemDeServico objetoValidado) {
         String idBem = objetoValidado.getBem();
-        repositorioBemPatrimonial = repositorioBemPatrimonial();
-        BemPatrimonial bemPatrimonial = repositorioBemPatrimonial.Consultar(idBem);
+        BemPatrimonial bemPatrimonial = repositorioBemPatrimonial().Consultar(idBem);
         return (bemPatrimonial.getStatus() == EnumStatusBemPatrimonial.EM_USO);
     }
 
@@ -123,9 +122,42 @@ public class ValidacoesOrdemDeServico extends ValidadorPadrao<OrdemDeServico> {
                 .valide();
     }
 
-    private boolean verificaOSEmAndamento (OrdemDeServico objetoValidado) {
-        return (objetoValidado.getSituacao() == EnumSituacaoOS.EM_ANDAMENTO);
+    public void osNaoPodeEstarEncerrada() {
+        this.conceito("Ordem De Servico")
+                .validarSe(objetoValidado != null && objetoValidado.getId() != null && !objetoValidado.getId().isEmpty())
+                .ehValidoQuando(!verificaOSEncerrada(objetoValidado))
+                .comMensagem("Ordem de serviço já foi encerrada")
+                .valide();
     }
+
+    private boolean verificaOSEncerrada (OrdemDeServico objetoValidado) {
+        String idOS = objetoValidado.getId();
+        OrdemDeServico osConsultada = repositorioOrdemDeServico().Consultar(idOS);
+        return ((osConsultada.getSituacao() == EnumSituacaoOS.ENCERRADA ||
+                osConsultada.getSituacao() == EnumSituacaoOS.CANCELADA));
+    }
+
+    private boolean verificaOSEmAndamento (OrdemDeServico objetoValidado) {
+        String idOS = objetoValidado.getId();
+        OrdemDeServico osConsultada = repositorioOrdemDeServico().Consultar(idOS);
+        return (osConsultada.getSituacao() == EnumSituacaoOS.EM_ANDAMENTO);
+    }
+
+    public void bemDeveExistir() {
+        this.conceito("Bem Patrimonial")
+                .validarSe(objetoValidado != null && objetoValidado.getBem() != null && !objetoValidado.getBem().isEmpty())
+                .ehValidoQuando(verificaBemExiste(objetoValidado))
+                .comMensagem("O Bem Patrimonial refenciado não existe")
+                .valide();
+    }
+
+    private boolean verificaBemExiste (OrdemDeServico objetoValidado) {
+        String idBem = objetoValidado.getBem();
+        BemPatrimonial bemPatrimonial = repositorioBemPatrimonial().Consultar(idBem);
+        return (bemPatrimonial.getId() == idBem);
+    }
+
+
 
 
     private void validacoesAtualizacaodeOS() {
@@ -137,6 +169,7 @@ public class ValidacoesOrdemDeServico extends ValidadorPadrao<OrdemDeServico> {
         nomeDaPrestadoraDeveSerInformado();
         situacaoDeveSerInformado();
         osDeveEstarEmAndamento();
+        osNaoPodeEstarEncerrada();
     }
 
     private void validacoesRegistroDeOS() {
@@ -148,6 +181,7 @@ public class ValidacoesOrdemDeServico extends ValidadorPadrao<OrdemDeServico> {
         bemDeveEstarEmUso();
         situacaoDeveSerInformado();
         situacoesPossiveis();
+        bemDeveExistir();
     }
 
 
