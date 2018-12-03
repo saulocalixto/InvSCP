@@ -42,7 +42,7 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
     }
 
     public void Salvar(Sala objeto) {
-        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)",
+        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (%s, %s, %s, %s)",
                 SalaMap.nomeTabela,
                 SalaMap.id,
                 SalaMap.numeroSala,
