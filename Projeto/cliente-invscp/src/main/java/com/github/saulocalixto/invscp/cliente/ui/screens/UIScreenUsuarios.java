@@ -5,9 +5,10 @@
  */
 package com.github.saulocalixto.invscp.cliente.ui.screens;
 
-import com.github.saulocalixto.invscp.cliente.core.InventoryAPI;
+import com.github.saulocalixto.invscp.cliente.api.InventoryAPI;
+import com.github.saulocalixto.invscp.cliente.api.UsuarioAPI;
+import com.github.saulocalixto.invscp.cliente.core.Usuario;
 import com.github.saulocalixto.invscp.cliente.ui.IO;
-import com.github.saulocalixto.invscp.cliente.ui.TerminalUI;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreen;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreenOption;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class UIScreenUsuarios extends UIScreen{
 
     private static void visualizarUsuario() throws IOException {
         final String email = IO.readString("Insira o e-mail do usuario:");
-        final String json = InventoryAPI.getUsuario(email);
+        final String json = UsuarioAPI.getUsuario(email);
         JSONObject obj = new JSONObject(json);
         System.out.println("Nome: " + obj.get("nome"));
     }
@@ -65,7 +66,7 @@ public class UIScreenUsuarios extends UIScreen{
     
     private static void deletarUsuario() throws IOException {
         final String email = IO.readString("Insira o e-mail do usuario:");
-        InventoryAPI.deletarUsuario(email);
+        UsuarioAPI.deletarUsuario(email);
     }
     
     public UIScreenUsuarios() {

@@ -18,10 +18,9 @@ public class Aplicacao {
     public static void main(String[] args) throws IOException {
         int opcao = 0;
         usuario = new Usuario();
-        //System.out.println(InventoryAPI.getUsuario("eu@eu.com"));
         TerminalUI.escreverMensagemInicial();
 
-        if (usuario.loginTerminal() == false) {
+        if (!usuario.loginTerminal()) {
             return;
         }
 
