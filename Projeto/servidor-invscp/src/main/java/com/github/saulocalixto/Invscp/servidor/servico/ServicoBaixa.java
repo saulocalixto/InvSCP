@@ -5,7 +5,6 @@ import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfac
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumStatusBemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.negocio.baixa.Baixa;
 import com.github.saulocalixto.Invscp.servidor.negocio.baixa.ValidacoesBaixa;
-import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.BemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
 
@@ -40,8 +39,8 @@ public class ServicoBaixa extends ServicoPadrao<Baixa> {
 
     @Override
     public List<Inconsistencia> Salvar(Baixa objeto) throws ValidationException {
-        inconsistencias = validador().ValideInclusao();
         validador().setObjetoValidado(objeto);
+        inconsistencias = validador().ValideInclusao();
 
         if(validador().naoHouveInconsistencias()) {
             repositorio().Salvar(objeto);
