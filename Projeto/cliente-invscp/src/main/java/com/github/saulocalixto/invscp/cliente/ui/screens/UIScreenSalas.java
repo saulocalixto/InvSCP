@@ -5,6 +5,7 @@
  */
 package com.github.saulocalixto.invscp.cliente.ui.screens;
 
+import com.github.saulocalixto.invscp.cliente.api.InventoryAPI;
 import com.github.saulocalixto.invscp.cliente.api.SalaAPI;
 import com.github.saulocalixto.invscp.cliente.api.UsuarioAPI;
 import com.github.saulocalixto.invscp.cliente.ui.IO;
@@ -94,8 +95,9 @@ public class UIScreenSalas extends UIScreen{
     public static void visualizarSala() throws IOException {
         final String id = IO.readString("Insira o id da Sala:");
         final String json = SalaAPI.getSala(id);
-
-        mostrarSala(new JSONObject(json).getJSONObject("data").toString());
+        if (SalaAPI.isJsonValid(json)) {
+            mostrarSala(new JSONObject(json).getJSONObject("data").toString());
+        }
     }
     
     public static void visualizarSalas() throws IOException {

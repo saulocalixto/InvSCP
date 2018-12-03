@@ -6,6 +6,9 @@
 package com.github.saulocalixto.invscp.cliente.api;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -38,7 +41,7 @@ public abstract class InventoryAPI {
 
     static final String PARAMETRO_DE_DELECAO = "id";
 
-    static final String JSON_ERRO = "{\"erro\":[{\"mensagem\":\"Ocorreu um erro no banco de dados." +
+    private static final String JSON_ERRO = "{\"erro\":[{\"mensagem\":\"Ocorreu um erro no banco de dados." +
             " Por favor revise o que foi enviado ou reinicie o servidor.\",\"conceito\":\"Banco de dados\"}]}";
 
     public static String getAuth() {
@@ -51,9 +54,9 @@ public abstract class InventoryAPI {
 
     static String chamadaGet(String... urlParameters) {
         try {
-            return chamadaApi(formadorDeUrl(urlParameters), CONSULTA, null);
+            return validaInconsistencia(chamadaApi(formadorDeUrl(urlParameters), CONSULTA, null));
         } catch (Exception e) {
-            return JSON_ERRO;
+            return validaInconsistencia(JSON_ERRO);
         }
     }
 
@@ -62,17 +65,17 @@ public abstract class InventoryAPI {
             String endpoint = urlParameters[0];
             String[] body = new String[urlParameters.length-1];
             System.arraycopy(urlParameters, 1, body, 0, urlParameters.length - 1);
-            return chamadaApi(formadorDeUrl(endpoint), ATUALIZACAO, body);
+            return validaInconsistencia(chamadaApi(formadorDeUrl(endpoint), ATUALIZACAO, body));
         } catch (Exception e) {
-            return JSON_ERRO;
+            return validaInconsistencia(JSON_ERRO);
         }
     }
 
     static String chamadaDelete(String... urlParameters) {
         try {
-            return chamadaApi(formadorDeUrl(urlParameters), EXCLUSAO, null);
+            return validaInconsistencia(chamadaApi(formadorDeUrl(urlParameters), EXCLUSAO, null));
         } catch (Exception e) {
-            return JSON_ERRO;
+            return validaInconsistencia(JSON_ERRO);
         }
     }
 
@@ -131,5 +134,39 @@ public abstract class InventoryAPI {
             os.write( outputInBytes );
             os.close();
         } catch (Exception ignored) {}
+    }
+
+    private static String validaInconsistencia(String json) {
+        JsonParser parser = new JsonParser();
+        JsonElement jsonTree = parser.parse(json);
+        if(jsonTree.isJsonObject()){
+            JsonObject jsonObject = jsonTree.getAsJsonObject();
+
+            JsonElement erro = jsonObject.get("erro");
+
+            if(erro.isJsonObject()){
+                JsonObject mensagem = erro.getAsJsonObject();
+
+                JsonElement valor = mensagem.get("mensagem");
+
+                if(valor.isJsonObject()){
+                    System.out.println(valor.getAsString());
+                }
+            }
+        }
+        return json;
+    }
+
+    public static boolean isJsonValid(String json) {
+        JsonParser parser = new JsonParser();
+        JsonElement jsonTree = parser.parse(json);
+        if(jsonTree.isJsonObject()){
+            JsonObject jsonObject = jsonTree.getAsJsonObject();
+            JsonElement erro = jsonObject.get("erro");
+            if(erro.isJsonObject()){
+                return false;
+            }
+        }
+        return true;
     }
 }
