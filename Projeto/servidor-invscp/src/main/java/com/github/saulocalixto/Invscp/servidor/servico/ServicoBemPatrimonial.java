@@ -43,12 +43,18 @@ public class ServicoBemPatrimonial extends ServicoPadrao<BemPatrimonial> {
     }
 
     public List<Inconsistencia> Excluir(String id) {
-        BemPatrimonial bemPatrimonial = repositorio().Consultar(id);
-        validador().setObjetoValidado(bemPatrimonial);
-        inconsistencias = validador().ValideExclusao();
 
-        if(validador().naoHouveInconsistencias()) {
-            repositorio().Excluir(id);
+        BemPatrimonial bemPatrimonial = repositorio().Consultar(id);
+
+        if(bemPatrimonial.getId().equals(id)) {
+            validador().setObjetoValidado(bemPatrimonial);
+            inconsistencias = validador().ValideExclusao();
+
+            if(validador().naoHouveInconsistencias()) {
+                repositorio().Excluir(id);
+            }
+        } else {
+            CrieInconsistenciaConceitoNaoExiste();
         }
 
         return inconsistencias;

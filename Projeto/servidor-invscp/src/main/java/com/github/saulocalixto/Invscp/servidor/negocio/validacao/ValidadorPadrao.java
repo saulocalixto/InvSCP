@@ -33,10 +33,6 @@ public abstract class ValidadorPadrao<T> {
         }
     }
 
-    public void altereUsuarioValidado(T objeto) {
-        objetoValidado = objeto;
-    }
-
     public Boolean naoHouveInconsistencias() {
         return inconsistencias.size() == 0;
     }
@@ -52,7 +48,7 @@ public abstract class ValidadorPadrao<T> {
     }
 
     public List<Inconsistencia> ValideExclusao () {
-
+        conceitoExcluidoExiste();
         return inconsistencias;
     }
 
@@ -89,6 +85,14 @@ public abstract class ValidadorPadrao<T> {
             }
         }
         return this;
+    }
+
+    public void conceitoExcluidoExiste() {
+        this.conceito("Objeto que você acabou de tentar excluir")
+                .validarSe(objetoValidado == null)
+                .ehValidoQuando(objetoValidado != null)
+                .comMensagem("Conceito não existe")
+                .valide();
     }
 
     private void adicioneInconsistencia(String mensagem, String conceito) {

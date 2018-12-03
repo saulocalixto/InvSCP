@@ -63,11 +63,15 @@ public class ServicoBaixa extends ServicoPadrao<Baixa> {
     @Override
     public List<Inconsistencia> Excluir(String id) {
         Baixa baixa = Consultar(id);
-        validador().setObjetoValidado(baixa);
-        inconsistencias = validador.ValideExclusao();
-        if(validador().naoHouveInconsistencias()) {
-            repositorio().Excluir(id);
-            servicoBemPatrimonial().mudarStatusBemPatrimonial(baixa.getIdBem(), EnumStatusBemPatrimonial.EM_USO);
+        if(baixa.getId().equals(id)) {
+            validador().setObjetoValidado(baixa);
+            inconsistencias = validador.ValideExclusao();
+            if(validador().naoHouveInconsistencias()) {
+                repositorio().Excluir(id);
+                servicoBemPatrimonial().mudarStatusBemPatrimonial(baixa.getIdBem(), EnumStatusBemPatrimonial.EM_USO);
+            }
+        } else {
+            CrieInconsistenciaConceitoNaoExiste();
         }
 
         return inconsistencias;
