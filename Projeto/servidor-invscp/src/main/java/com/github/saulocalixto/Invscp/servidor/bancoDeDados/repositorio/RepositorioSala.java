@@ -42,7 +42,7 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
     }
 
     public void Salvar(Sala objeto) {
-        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (%s, %s, %s, %s)",
+        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s')",
                 SalaMap.nomeTabela,
                 SalaMap.id,
                 SalaMap.numeroSala,
@@ -145,8 +145,8 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
     }
 
     @Override
-    public Boolean numeroDaSalaNaoSeRepeteNoPredio(int numeroSala, String idPredio) {
-        String sql = String.format("SELECT %s FROM %s WHERE %s = '%s' AND %s = %s",
+    public Boolean numeroDaSalaNaoSeRepeteNoPredio(String numeroSala, String idPredio) {
+        String sql = String.format("SELECT %s FROM %s WHERE %s = '%s' AND %s = '%s'",
                 SalaMap.id,
                 SalaMap.nomeTabela,
                 SalaMap.predioEmQueEstaLocalizada,
@@ -175,7 +175,7 @@ public class RepositorioSala extends RepositorioPadrao<Sala> implements IReposit
 
     private Sala PreencheSala(ResultSet rs) throws SQLException {
         Sala sala = new Sala();
-        sala.setNumeroSala(rs.getInt(SalaMap.numeroSala));
+        sala.setNumeroSala(rs.getString(SalaMap.numeroSala));
         sala.setId(rs.getString(SalaMap.id));
         sala.setIdDepartamento(rs.getString(SalaMap.departamentoAQuePertence));
         sala.setIdPredio(rs.getString(SalaMap.predioEmQueEstaLocalizada));

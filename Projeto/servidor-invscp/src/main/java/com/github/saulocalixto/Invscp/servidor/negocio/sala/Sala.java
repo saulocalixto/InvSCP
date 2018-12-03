@@ -7,17 +7,17 @@ import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
  */
 public class Sala extends ModelPadrao {
 
-    private int numeroSala;
+    private String numeroSala;
 
     private String idPredio;
 
     private String idDepartamento;
 
-    public int getNumeroSala() {
+    public String getNumeroSala() {
         return numeroSala;
     }
 
-    public void setNumeroSala(int numeroSala) {
+    public void setNumeroSala(String numeroSala) {
         this.numeroSala = numeroSala;
     }
 

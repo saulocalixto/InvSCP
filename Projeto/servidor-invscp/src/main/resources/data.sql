@@ -28,9 +28,9 @@ INSERT INTO Predio (id, idEndereco, nome) VALUES
 
 TRUNCATE TABLE Sala;
 INSERT INTO Sala (id, numeroSala, idDepartamento, idPredio) VALUES
-	('sala001', 1, 'departamento001', 'predio001'),
-	('sala002', 2, 'departamento002', 'predio001'),
-	('sala003', 3, 'departamento002', 'predio001');
+	('sala001', '1', 'departamento001', 'predio001'),
+	('sala002', '2', 'departamento002', 'predio001'),
+	('sala003', '3', 'departamento002', 'predio001');
 	
 TRUNCATE TABLE BemPatrimonial;
 INSERT INTO BemPatrimonial (id,	localAtual,	numeroDeTombamento,	denominacao, dataDeAquisicao,

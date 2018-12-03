@@ -9,5 +9,5 @@ public interface IRepositorioSala extends IRepositorio<Sala> {
     void atualizarPredio(String id, String idPredio);
     List<Sala> consulteSalasDeDepartamento(String idDepartamento);
     List<Sala> consulteSalasDePredio(String idPredio);
-    Boolean numeroDaSalaNaoSeRepeteNoPredio(int numeroSala, String idPredio);
+    Boolean numeroDaSalaNaoSeRepeteNoPredio(String numeroSala, String idPredio);
 }

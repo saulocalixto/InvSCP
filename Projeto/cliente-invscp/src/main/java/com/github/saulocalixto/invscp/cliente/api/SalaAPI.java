@@ -24,9 +24,9 @@ public class SalaAPI extends InventoryAPI {
         return chamadaGet(ENDPOINT_CONSULTE_TODOS);
     }
 
-    public static String criaSala(String id, String numeroSala, String idDepartamento, String idPredio) {
+    public static String criaSala(String numeroSala, String idDepartamento, String idPredio) {
         try {
-            return chamadaPut(ENDPOINT_PADRAO, ID, id, NUMERO_SALA, numeroSala,
+            return chamadaPut(ENDPOINT_PADRAO, NUMERO_SALA, numeroSala,
                     ID_DEPARTAMENTO, idDepartamento, ID_PREDIO, idPredio);
         } catch (IOException e) {
             return "{}";

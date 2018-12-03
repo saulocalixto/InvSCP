@@ -29,7 +29,7 @@ public class UIScreenSalas extends UIScreen{
         opcoes = new HashMap<>();
         opcoes.put(1, new UIScreenOption("Cadastrar", () -> {
             System.out.println("Funcionalidade não implementada");
-            SalaAPI.criaSala("sala666", "666", "departamento001", "predio001");
+            SalaAPI.criaSala("666", "departamento001", "predio001");
         }));
         opcoes.put(2, new UIScreenOption("Visualizar", () -> {
             try {
