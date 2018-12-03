@@ -137,36 +137,44 @@ public abstract class InventoryAPI {
     }
 
     private static String validaInconsistencia(String json) {
-        JsonParser parser = new JsonParser();
-        JsonElement jsonTree = parser.parse(json);
-        if(jsonTree.isJsonObject()){
-            JsonObject jsonObject = jsonTree.getAsJsonObject();
+        try {
+            JsonParser parser = new JsonParser();
+            JsonElement jsonTree = parser.parse(json);
+            if(jsonTree.isJsonObject()){
+                JsonObject jsonObject = jsonTree.getAsJsonObject();
 
-            JsonElement erro = jsonObject.get("erro");
+                JsonElement erro = jsonObject.get("erro");
 
-            if(erro.isJsonObject()){
-                JsonObject mensagem = erro.getAsJsonObject();
+                if(erro.isJsonObject()){
+                    JsonObject mensagem = erro.getAsJsonObject();
 
-                JsonElement valor = mensagem.get("mensagem");
+                    JsonElement valor = mensagem.get("mensagem");
 
-                if(valor.isJsonObject()){
-                    System.out.println(valor.getAsString());
+                    if(valor.isJsonObject()){
+                        System.out.println(valor.getAsString());
+                    }
                 }
             }
+        } catch (Exception ignored) {
+        } finally {
+            return json;
         }
-        return json;
     }
 
     public static boolean isJsonValid(String json) {
-        JsonParser parser = new JsonParser();
-        JsonElement jsonTree = parser.parse(json);
-        if(jsonTree.isJsonObject()){
-            JsonObject jsonObject = jsonTree.getAsJsonObject();
-            JsonElement erro = jsonObject.get("erro");
-            if(erro.isJsonObject()){
-                return false;
+        try {
+            JsonParser parser = new JsonParser();
+            JsonElement jsonTree = parser.parse(json);
+            if(jsonTree.isJsonObject()){
+                JsonObject jsonObject = jsonTree.getAsJsonObject();
+                JsonElement erro = jsonObject.get("erro");
+                if(erro.isJsonObject()){
+                    return false;
+                }
             }
+        } catch (Exception ignored) {
+        } finally {
+            return true;
         }
-        return true;
     }
 }
