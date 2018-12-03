@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
 public class ValidacoesUsuarioTest {
 
     private ValidacoesUsuario validacao;
-
     private Usuario usuarioTeste;
 
     @Before

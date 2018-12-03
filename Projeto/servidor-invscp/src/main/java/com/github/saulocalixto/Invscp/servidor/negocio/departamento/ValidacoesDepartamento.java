@@ -26,7 +26,7 @@ public class ValidacoesDepartamento extends ValidadorPadrao<Departamento> {
             .validarSe(objetoValidado != null)
             .ehValidoQuando(objetoValidado.getNomeDoDepartamento() != null
                     && !objetoValidado.getNomeDoDepartamento().isEmpty())
-            .comMensagem("Nome não informado.")
+            .comMensagem("Nome do departamento não informado")
             .valide();
     }
 
