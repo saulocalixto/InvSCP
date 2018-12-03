@@ -28,11 +28,11 @@ public abstract class InventoryAPI {
 
     private static String auth = "";
 
-    protected static final String ENDPOINT_CONSULTE_TODOS = ENDPOINT_PADRAO + "/consulteTodos";
+    static final String ENDPOINT_CONSULTE_TODOS = ENDPOINT_PADRAO + "/consulteTodos";
 
-    protected static final String PARAMETRO_DE_CONSULTA = "id";
+    static final String PARAMETRO_DE_CONSULTA = "id";
 
-    protected static final String PARAMETRO_DE_DELECAO = "id";
+    static final String PARAMETRO_DE_DELECAO = "id";
 
     public static String getAuth() {
         return auth;
