@@ -100,4 +100,42 @@ public class ValidacoesOrdemDeServicoTest {
                 "ser informada");
     }
 
+    @Test
+    public void dataDeEncerramentoInformada() {
+        osTeste.setDataEncerramento("02/12/2018");
+        validacao.setObjetoValidado(osTeste);
+        validacao.dataEncerramentoDeveSerInformado();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 0);
+    }
+
+    @Test
+    public void dataDeEncerramentoNaoInformada() {
+        osTeste.setDataEncerramento("");
+        validacao.setObjetoValidado(osTeste);
+        validacao.dataEncerramentoDeveSerInformado();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Data de encerramento " +
+                "deve ser informada");
+    }
+
+    @Test
+    public void nomeDaFornecedoraInformado() {
+        osTeste.setNomeDaPrestadora("Prestadora de Teste 1");
+        validacao.setObjetoValidado(osTeste);
+        validacao.nomeDaPrestadoraDeveSerInformado();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 0);
+    }
+
+    @Test
+    public void nomeDaFornecedoraNaoInformado() {
+        osTeste.setNomeDaPrestadora("");
+        validacao.setObjetoValidado(osTeste);
+        validacao.nomeDaPrestadoraDeveSerInformado();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Nome da Prestador " +
+                "deve ser informado");
+    }
+
 }

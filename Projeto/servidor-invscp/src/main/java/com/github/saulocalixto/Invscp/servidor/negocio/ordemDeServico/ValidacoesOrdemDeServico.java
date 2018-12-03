@@ -76,7 +76,7 @@ public class ValidacoesOrdemDeServico extends ValidadorPadrao<OrdemDeServico> {
         this.conceito("Nome Da Prestador")
                 .validarSe(objetoValidado != null)
                 .ehValidoQuando(objetoValidado.getNomeDaPrestadora() != null && !objetoValidado.getNomeDaPrestadora().isEmpty())
-                .comMensagem("Nome Da Prestador deve ser informada")
+                .comMensagem("Nome da Prestador deve ser informado")
                 .valide();
     }
 
