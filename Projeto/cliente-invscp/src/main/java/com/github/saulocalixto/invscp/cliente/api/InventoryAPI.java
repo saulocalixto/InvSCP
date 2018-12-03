@@ -38,6 +38,9 @@ public abstract class InventoryAPI {
 
     static final String PARAMETRO_DE_DELECAO = "id";
 
+    static final String JSON_ERRO = "{\"erro\":[{\"mensagem\":\"Ocorreu um erro no banco de dados." +
+            " Por favor revise o que foi enviado ou reinicie o servidor.\",\"conceito\":\"Banco de dados\"}]}";
+
     public static String getAuth() {
         return auth;
     }
@@ -46,19 +49,31 @@ public abstract class InventoryAPI {
         InventoryAPI.auth = auth;
     }
 
-    static String chamadaGet(String... urlParameters) throws IOException {
-        return chamadaApi(formadorDeUrl(urlParameters), CONSULTA, null);
+    static String chamadaGet(String... urlParameters) {
+        try {
+            return chamadaApi(formadorDeUrl(urlParameters), CONSULTA, null);
+        } catch (Exception e) {
+            return JSON_ERRO;
+        }
     }
 
-    static String chamadaPut(String... urlParameters) throws IOException {
-        String endpoint = urlParameters[0];
-        String[] body = new String[urlParameters.length-1];
-        System.arraycopy(urlParameters, 1, body, 0, urlParameters.length - 1);
-        return chamadaApi(formadorDeUrl(endpoint), ATUALIZACAO, body);
+    static String chamadaPut(String... urlParameters) {
+        try {
+            String endpoint = urlParameters[0];
+            String[] body = new String[urlParameters.length-1];
+            System.arraycopy(urlParameters, 1, body, 0, urlParameters.length - 1);
+            return chamadaApi(formadorDeUrl(endpoint), ATUALIZACAO, body);
+        } catch (Exception e) {
+            return JSON_ERRO;
+        }
     }
 
-    static String chamadaDelete(String... urlParameters) throws IOException {
-        return chamadaApi(formadorDeUrl(urlParameters), EXCLUSAO, null);
+    static String chamadaDelete(String... urlParameters) {
+        try {
+            return chamadaApi(formadorDeUrl(urlParameters), EXCLUSAO, null);
+        } catch (Exception e) {
+            return JSON_ERRO;
+        }
     }
 
     private static URL formadorDeUrl(String... parametros) throws MalformedURLException {
