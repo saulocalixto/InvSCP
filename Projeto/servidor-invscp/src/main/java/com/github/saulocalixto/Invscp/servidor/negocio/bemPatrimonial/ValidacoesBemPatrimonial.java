@@ -6,7 +6,6 @@ import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumStatusBemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
-
 import java.util.List;
 
 public class ValidacoesBemPatrimonial extends ValidadorPadrao<BemPatrimonial> {
@@ -18,7 +17,7 @@ public class ValidacoesBemPatrimonial extends ValidadorPadrao<BemPatrimonial> {
     }
 
     public List<Inconsistencia> ValideAtualizacao () {
-        usuarioTemPermissaoParaAlterarUsuario();
+        usuarioTemPermissaoParaAlterarBem();
         comumCadastroEAtualizacao();
         return super.ValideAtualizacao();
     }
@@ -28,7 +27,7 @@ public class ValidacoesBemPatrimonial extends ValidadorPadrao<BemPatrimonial> {
         return super.ValideExclusao();
     }
 
-    public void usuarioTemPermissaoParaAlterarUsuario() {
+    public void usuarioTemPermissaoParaAlterarBem() {
         this.conceito("Grupo")
                 .validarSe(permissaoDoUsuario != null)
                 .ehValidoQuando(permissaoDoUsuario == EnumGrupoDeAcesso.ADMINISTRADOR_DEPARTAMENTO
