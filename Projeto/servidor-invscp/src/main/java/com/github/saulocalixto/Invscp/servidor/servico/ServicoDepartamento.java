@@ -48,11 +48,15 @@ public class ServicoDepartamento extends ServicoPadrao<Departamento> {
 
     public List<Inconsistencia> Excluir(String id) {
         Departamento departamento = Consultar(id);
-        validador().setObjetoValidado(departamento);
-        inconsistencias = validador.ValideExclusao();
+        if(departamento.getId().equals(id)) {
+            validador().setObjetoValidado(departamento);
+            inconsistencias = validador.ValideExclusao();
 
-        if(validador().naoHouveInconsistencias()) {
-            repositorio().Excluir(id);
+            if(validador().naoHouveInconsistencias()) {
+                repositorio().Excluir(id);
+            }
+        } else {
+            CrieInconsistenciaConceitoNaoExiste();
         }
 
         return inconsistencias;

@@ -11,6 +11,8 @@ import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.FabricaDeServicos;
 import com.github.saulocalixto.Invscp.servidor.utilitarios.SenhaEncript;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -81,12 +83,18 @@ public class ServicoUsuario extends ServicoPadrao<Usuario> {
 
     public List<Inconsistencia> Excluir(String id) {
         Usuario usuario = Consultar(id);
-        validador.setObjetoValidado(usuario);
 
-        inconsistencias = validador.ValideExclusao();
-        if(validador.naoHouveInconsistencias()) {
-            repositorio().Excluir(id);
+        if(usuario.getId().equals(id)) {
+            validador.setObjetoValidado(usuario);
+
+            inconsistencias = validador.ValideExclusao();
+            if(validador.naoHouveInconsistencias()) {
+                repositorio().Excluir(id);
+            } else {
+                CrieInconsistenciaConceitoNaoExiste();
+            }
         }
+
 
         return inconsistencias;
     }

@@ -35,7 +35,7 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
 
     public List<Departamento> ConsultarLista() {
 
-        List<Departamento> listaDepartamento = new ArrayList<Departamento>();
+        List<Departamento> listaDepartamento = new ArrayList<>();
         String sql = String.format("SELECT  * FROM %s", DepartamentoMap.nomeTabela);
 
         try {

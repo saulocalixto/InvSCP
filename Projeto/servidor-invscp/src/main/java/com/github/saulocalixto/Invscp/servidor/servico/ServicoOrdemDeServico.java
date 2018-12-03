@@ -69,11 +69,15 @@ public class ServicoOrdemDeServico extends ServicoPadrao<OrdemDeServico> {
     @Override
     public List<Inconsistencia> Excluir(String id) {
         OrdemDeServico ordemDeServico = Consultar(id);
-        validador().setObjetoValidado(ordemDeServico);
-        inconsistencias = validador.ValideExclusao();
-        if(validador().naoHouveInconsistencias()) {
-            repositorio().Excluir(id);
-            servicoBemPatrimonial().mudarStatusBemPatrimonial(ordemDeServico.getBem(), EnumStatusBemPatrimonial.EM_USO);
+        if(ordemDeServico.getId().equals(id)) {
+            validador().setObjetoValidado(ordemDeServico);
+            inconsistencias = validador.ValideExclusao();
+            if(validador().naoHouveInconsistencias()) {
+                repositorio().Excluir(id);
+                servicoBemPatrimonial().mudarStatusBemPatrimonial(ordemDeServico.getBem(), EnumStatusBemPatrimonial.EM_USO);
+            }
+        } else {
+            CrieInconsistenciaConceitoNaoExiste();
         }
 
         return inconsistencias;

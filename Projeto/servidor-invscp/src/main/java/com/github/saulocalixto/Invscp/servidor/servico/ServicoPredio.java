@@ -9,6 +9,7 @@ import com.github.saulocalixto.Invscp.servidor.negocio.sala.Sala;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -78,16 +79,22 @@ public class ServicoPredio extends ServicoPadrao<Predio> {
     public List<Inconsistencia> Excluir(String id) {
         Predio predio = Consultar(id);
 
-        validador.setObjetoValidado(predio);
+        predio = predio.getId().equals(id) ? predio : null;
 
-        inconsistencias = validador.ValideExclusao();
+        if(predio != null) {
+            validador.setObjetoValidado(predio);
+            inconsistencias = validador.ValideExclusao();
 
-        predio.getListaDeSalas().forEach(sala -> {
-            inconsistencias.addAll(((ServicoSala)servicoSala()).atualizeSalasDePredio(null, predio.getId()));
-        });
+            final String idPredio = predio.getId();
+            predio.getListaDeSalas().forEach(sala -> {
+                inconsistencias.addAll(((ServicoSala)servicoSala()).atualizeSalasDePredio(null, idPredio));
+            });
 
-        if(validador.naoHouveInconsistencias()) {
-            repositorio().Excluir(id);
+            if(validador.naoHouveInconsistencias()) {
+                repositorio().Excluir(id);
+            }
+        } else {
+            CrieInconsistenciaConceitoNaoExiste();
         }
 
         return inconsistencias;

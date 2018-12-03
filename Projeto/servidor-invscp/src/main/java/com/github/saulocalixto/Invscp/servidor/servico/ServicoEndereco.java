@@ -56,11 +56,15 @@ public class ServicoEndereco extends ServicoPadrao<Endereco> {
     @Override
     public List<Inconsistencia> Excluir(String id) {
         Endereco endereco = repositorio().Consultar(id);
-        validador().setObjetoValidado(endereco);
-        inconsistencias = validador().ValideExclusao();
+        if(endereco.getId().equals(id)) {
+            validador().setObjetoValidado(endereco);
+            inconsistencias = validador().ValideExclusao();
 
-        if(validador().naoHouveInconsistencias()) {
-            repositorio().Excluir(id);
+            if(validador().naoHouveInconsistencias()) {
+                repositorio().Excluir(id);
+            }
+        } else {
+            CrieInconsistenciaConceitoNaoExiste();
         }
 
         return inconsistencias;
