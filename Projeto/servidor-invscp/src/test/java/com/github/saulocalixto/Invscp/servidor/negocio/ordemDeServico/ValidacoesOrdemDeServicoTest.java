@@ -39,6 +39,7 @@ public class ValidacoesOrdemDeServicoTest {
         validacao.setObjetoValidado(osTeste);
         validacao.identificadorDaOSDeveSerInformado();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
         assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Identificador Da O.S. " +
                 "deve ser informado");
     }
@@ -58,6 +59,7 @@ public class ValidacoesOrdemDeServicoTest {
         validacao.setObjetoValidado(osTeste);
         validacao.bemDeveSerInformado();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
         assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Bem Patrimonial deve " +
                 "ser informado");
     }
@@ -77,6 +79,7 @@ public class ValidacoesOrdemDeServicoTest {
         validacao.setObjetoValidado(osTeste);
         validacao.motivoDeveSerInformado();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
         assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Motivo deve ser " +
                 "informado");
     }
@@ -96,6 +99,7 @@ public class ValidacoesOrdemDeServicoTest {
         validacao.setObjetoValidado(osTeste);
         validacao.dataAberturaDeveSerInformado();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
         assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Data de abertura deve " +
                 "ser informada");
     }
@@ -107,16 +111,6 @@ public class ValidacoesOrdemDeServicoTest {
         validacao.dataEncerramentoDeveSerInformado();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 0);
-    }
-
-    @Test
-    public void dataDeEncerramentoNaoInformada() {
-        osTeste.setDataEncerramento("");
-        validacao.setObjetoValidado(osTeste);
-        validacao.dataEncerramentoDeveSerInformado();
-        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
-        assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Data de encerramento " +
-                "deve ser informada");
     }
 
     @Test
@@ -134,8 +128,20 @@ public class ValidacoesOrdemDeServicoTest {
         validacao.setObjetoValidado(osTeste);
         validacao.nomeDaPrestadoraDeveSerInformado();
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
         assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Nome da Prestador " +
                 "deve ser informado");
+    }
+
+    @Test
+    public void situacaoNaoInformada() {
+        osTeste.setSituacao("");
+        validacao.setObjetoValidado(osTeste);
+        validacao.situacaoDeveSerInformado();
+        List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
+        assertEquals(listaDeInconsistencias.size(), 1);
+        assertEquals(listaDeInconsistencias.stream().findFirst().get().getMensagem(), "Situação deve ser " +
+                "informada");
     }
 
 }
