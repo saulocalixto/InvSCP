@@ -145,9 +145,7 @@ CREATE TABLE IF NOT EXISTS BemPatrimonial (
 	FOREIGN KEY (grupoDeMaterial)
         REFERENCES GrupoDeMaterial(id),
 	FOREIGN KEY (localAtual)
-        REFERENCES Sala(id),
-	FOREIGN KEY (ordemDeServico)
-        REFERENCES OrdemDeServico(id)
+        REFERENCES Sala(id)
 );
 
 CREATE TABLE IF NOT EXISTS Baixa (
