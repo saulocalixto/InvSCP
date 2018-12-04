@@ -73,7 +73,7 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
 
     public void Atualizar(Baixa objeto) {
         String sql = String.format("UPDATE %s " +
-                        "SET %s = '%s', %s = '%s', %s = '%s', %s = '%s'," +
+                        "SET %s = '%s', %s = '%s', %s = '%s', %s = '%s'" +
                         "WHERE %s = '%s'",
                 BaixaMap.nomeTabela,
                 BaixaMap.idBem,
