@@ -37,7 +37,7 @@ public class ValidacoesBaixa extends ValidadorPadrao<Baixa> {
                 .validarSe(objetoValidado != null)
                 .ehValidoQuando(objetoValidado.getId() != null &&
                     repositorioBem().Consultar(objetoValidado.getIdBem()).getStatus() == EnumStatusBemPatrimonial.EM_USO)
-                .comMensagem("Bem não pode ser baixado porque seu status está diferente de: 'Em uso'")
+                .comMensagem("Bem não pode ser baixado porque não está em uso")
                 .valide();
     }
 
@@ -50,10 +50,28 @@ public class ValidacoesBaixa extends ValidadorPadrao<Baixa> {
                 .valide();
     }
 
-    private void comumCadastroEAtualizacao() {
-        bemDeveExistir();
-        bemNaoEstaBaixado();
-        usuarioSemPermissaoParaBaixarBem();
+    public void bemDeveSerInformado() {
+        this.conceito("Bem Patrimonial")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getIdBem() != null && !objetoValidado.getIdBem().isEmpty())
+                .comMensagem("Bem Patrimonial deve ser informado")
+                .valide();
+    }
+
+    public void dataDeveSerInformado() {
+        this.conceito("Data")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getData() != null)
+                .comMensagem("Data deve ser informada")
+                .valide();
+    }
+
+    public void motivoDeveSerInformado() {
+        this.conceito("Motivo")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getMotivo() != null)
+                .comMensagem("Motivo deve ser informado")
+                .valide();
     }
 
     public void bemDeveExistir() {
@@ -68,6 +86,16 @@ public class ValidacoesBaixa extends ValidadorPadrao<Baixa> {
         String idBem = objetoValidado.getIdBem();
         BemPatrimonial bemPatrimonial = repositorioBem().Consultar(idBem);
         return (bemPatrimonial.getId().equals(idBem));
+    }
+
+
+    private void comumCadastroEAtualizacao() {
+        usuarioSemPermissaoParaBaixarBem();
+        bemDeveSerInformado();
+        bemDeveExistir();
+        bemNaoEstaBaixado();
+        dataDeveSerInformado();
+        motivoDeveSerInformado();
     }
 
     private IRepositorioBaixa repositorio() {
