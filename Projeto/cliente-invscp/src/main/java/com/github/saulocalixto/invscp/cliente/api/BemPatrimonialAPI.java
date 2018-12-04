@@ -34,68 +34,55 @@ public class BemPatrimonialAPI extends InventoryAPI {
     public static final String NOTA_FISCAL = "notaFiscal";
     
     public static final String ORDEM_DE_SERVICO = "ordemDeServico";
+    private static final String SITUACAO = "status";
+    private static final String GRUPO_DE_MATERIAL = "grupoDeMaterial";
 
-    public static String getBemParimonial(String id) throws IOException {
+    public static String getBemParimonial(String id) {
         return chamadaGet(ENDPOINT_PADRAO, PARAMETRO_DE_CONSULTA, id);
     }
     
-    public static String getBemParimoniais() throws IOException {
+    public static String getBemParimoniais() {
         return chamadaGet(ENDPOINT_CONSULTE_TODOS);
     }
 
-    public static String deletarBemParimonial(String id) throws IOException {
+    public static String deletarBemParimonial(String id) {
         return chamadaDelete(ENDPOINT_PADRAO, PARAMETRO_DE_DELECAO, id);
     }
     
     public static String criaBemParimonial(
-            String id, 
-            String numTombamento,
-            String localAtual,
-            String denomincacao,
-            String dataAquisicao,
-            String especificacao,
-            String garantia,
-            String marca,
-            String valorCompra,
-            String notaFiscal,
-            String idOrdemServico) {
-        return chamadaPut(ENDPOINT_PADRAO, 
-                ID, id,
-                NUMERO_TOMBAMENTO, numTombamento,
+            String localAtual, String numeroDeTombamento, String denominacao, String dataDeAquisicao,
+            String especificacao, String garantia, String marca, String valorDeCompra, String situacao,
+            String notaFiscal, String grupoDeMaterial) {
+        return chamadaPut(ENDPOINT_PADRAO,
+                NUMERO_TOMBAMENTO, numeroDeTombamento,
                 LOCAL_ATUAL, localAtual,
-                DENOMINACAO, denomincacao,
-                DATA_AQUISICAO, dataAquisicao,
+                DENOMINACAO, denominacao,
+                DATA_AQUISICAO, dataDeAquisicao,
                 ESPECIFICACAO, especificacao,
                 GARANTIA, garantia,
                 MARCA, marca,
-                VALOR_COMPRA, valorCompra,
+                VALOR_COMPRA, valorDeCompra,
+                SITUACAO, situacao,
                 NOTA_FISCAL, notaFiscal,
-                ORDEM_DE_SERVICO, idOrdemServico);
+                GRUPO_DE_MATERIAL, grupoDeMaterial);
     }
-    
-    public static String editarBemParimonial(
-            String id, 
-            String numTombamento,
-            String localAtual,
-            String denomincacao,
-            String dataAquisicao,
-            String especificacao,
-            String garantia,
-            String marca,
-            String valorCompra,
-            String notaFiscal,
-            String idOrdemServico) {
-        return chamadaPut(ENDPOINT_ATUALIZE, 
+
+    public static String editaBemParimonial(
+            String id, String localAtual, String numeroDeTombamento, String denominacao, String dataDeAquisicao,
+            String especificacao, String garantia, String marca, String valorDeCompra, String situacao,
+            String notaFiscal, String grupoDeMaterial) {
+        return chamadaPut(ENDPOINT_PADRAO,
                 ID, id,
-                NUMERO_TOMBAMENTO, numTombamento,
+                NUMERO_TOMBAMENTO, numeroDeTombamento,
                 LOCAL_ATUAL, localAtual,
-                DENOMINACAO, denomincacao,
-                DATA_AQUISICAO, dataAquisicao,
+                DENOMINACAO, denominacao,
+                DATA_AQUISICAO, dataDeAquisicao,
                 ESPECIFICACAO, especificacao,
                 GARANTIA, garantia,
                 MARCA, marca,
-                VALOR_COMPRA, valorCompra,
+                VALOR_COMPRA, valorDeCompra,
+                SITUACAO, situacao,
                 NOTA_FISCAL, notaFiscal,
-                ORDEM_DE_SERVICO, idOrdemServico);
+                GRUPO_DE_MATERIAL, grupoDeMaterial);
     }
 }

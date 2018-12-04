@@ -27,7 +27,12 @@ public class UIScreenBemPatrimonial extends UIScreen{
     {
         opcoes = new HashMap<>();
         opcoes.put(1, new UIScreenOption("Cadastrar", () -> {
-            cadastrar();
+            try {
+                cadastrar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenBemPatrimonial.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
         }));
         opcoes.put(2, new UIScreenOption("Visualizar", () -> {
             try {
@@ -44,7 +49,11 @@ public class UIScreenBemPatrimonial extends UIScreen{
             }
         }));
         opcoes.put(4, new UIScreenOption("Editar", () -> {
-            editar();
+            try {
+                editar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenBemPatrimonial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(5, new UIScreenOption("Deletar", () -> {
             try {
@@ -55,8 +64,20 @@ public class UIScreenBemPatrimonial extends UIScreen{
         }));
     }
     
-    private static void cadastrar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void cadastrar() throws IOException {
+        final String localAtual = IO.readString("Insira o localAtual do Bem Patrimonial:");
+        final String numeroDeTombamento = IO.readString("Insira o numeroDeTombamento do Bem Patrimonial:");
+        final String denominacao = IO.readString("Insira o denominacao do Bem Patrimonial:");
+        final String dataDeAquisicao = IO.readString("Insira o dataDeAquisicao do Bem Patrimonial:");
+        final String especificacao = IO.readString("Insira o especificacao do Bem Patrimonial:");
+        final String garantia = IO.readString("Insira o garantia do Bem Patrimonial:");
+        final String marca = IO.readString("Insira o marca do Bem Patrimonial:");
+        final String valorDeCompra = IO.readString("Insira o valorDeCompra do Bem Patrimonial:");
+        final String situacao = IO.readString("Insira o situacao do Bem Patrimonial:");
+        final String notaFiscal = IO.readString("Insira o notaFiscal do Bem Patrimonial:");
+        final String grupoDeMaterial = IO.readString("Insira o grupoDeMaterial do Bem Patrimonial:");
+        BemPatrimonialAPI.criaBemParimonial(localAtual, numeroDeTombamento, denominacao, dataDeAquisicao,
+                especificacao, garantia, marca, valorDeCompra, situacao, notaFiscal, grupoDeMaterial);
     }
     
     private static void visualizar() throws IOException {
@@ -76,8 +97,21 @@ public class UIScreenBemPatrimonial extends UIScreen{
         }
     }
     
-    private static void editar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void editar() throws IOException {
+        final String id = IO.readString("Insira o id do Bem Patrimonial:");
+        final String localAtual = IO.readString("Insira o localAtual do Bem Patrimonial:");
+        final String numeroDeTombamento = IO.readString("Insira o numeroDeTombamento do Bem Patrimonial:");
+        final String denominacao = IO.readString("Insira o denominacao do Bem Patrimonial:");
+        final String dataDeAquisicao = IO.readString("Insira o dataDeAquisicao do Bem Patrimonial:");
+        final String especificacao = IO.readString("Insira o especificacao do Bem Patrimonial:");
+        final String garantia = IO.readString("Insira o garantia do Bem Patrimonial:");
+        final String marca = IO.readString("Insira o marca do Bem Patrimonial:");
+        final String valorDeCompra = IO.readString("Insira o valorDeCompra do Bem Patrimonial:");
+        final String situacao = IO.readString("Insira o situacao do Bem Patrimonial:");
+        final String notaFiscal = IO.readString("Insira o notaFiscal do Bem Patrimonial:");
+        final String grupoDeMaterial = IO.readString("Insira o grupoDeMaterial do Bem Patrimonial:");
+        BemPatrimonialAPI.editaBemParimonial(id, localAtual, numeroDeTombamento, denominacao, dataDeAquisicao,
+                especificacao, garantia, marca, valorDeCompra, situacao, notaFiscal, grupoDeMaterial);
     }
     
     private static void deletar() throws IOException {

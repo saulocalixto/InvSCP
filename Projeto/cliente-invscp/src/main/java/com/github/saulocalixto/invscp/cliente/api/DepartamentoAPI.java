@@ -26,16 +26,16 @@ public class DepartamentoAPI extends InventoryAPI {
         return chamadaGet(ENDPOINT_PADRAO, PARAMETRO_DE_CONSULTA, id);
     }
     
-    public static String getDepartamentos() throws IOException {
+    public static String getDepartamentos() {
         return chamadaGet(ENDPOINT_CONSULTE_TODOS);
     }
 
-    public static String criaDepartamento(String id, String nome) {
+    public static String criaDepartamento(String nome) {
         return chamadaPut(ENDPOINT_PADRAO, NOME_DEPARTAMENTO, nome);
     }
     
-    public  static String deletaDepartamento(String id, String nome) throws IOException {
-        return chamadaDelete(ENDPOINT_PADRAO, PARAMETRO_DE_DELECAO, id, nome);
+    public  static String deletaDepartamento(String id) {
+        return chamadaDelete(ENDPOINT_PADRAO, PARAMETRO_DE_DELECAO, id);
     }
     
     public static String editarDepartamento(String id, String nome) {

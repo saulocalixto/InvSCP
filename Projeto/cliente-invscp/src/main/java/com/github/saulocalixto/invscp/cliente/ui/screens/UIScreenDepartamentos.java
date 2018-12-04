@@ -48,17 +48,24 @@ public class UIScreenDepartamentos extends UIScreen{
             }
         }));
         opcoes.put(4, new UIScreenOption("Editar", () -> {
-            editar();
+            try {
+                editar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenDepartamentos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(5, new UIScreenOption("Deletar", () -> {
-            deletar();
+            try {
+                deletar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenDepartamentos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
     }
     
     private static void cadastrar() throws IOException {
-        final String id = IO.readString("Insira o id do Departamento:");
         final String nome = IO.readString("Insira o nome do Departamento:");
-        DepartamentoAPI.criaDepartamento(id, nome);
+        DepartamentoAPI.criaDepartamento(nome);
     }
     
     private static void visualizar() throws IOException {
@@ -78,12 +85,15 @@ public class UIScreenDepartamentos extends UIScreen{
         }
     }
     
-    private static void editar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void editar() throws IOException {
+        final String nome = IO.readString("Insira o nome do Departamento:");
+        final String id = IO.readString("Insira o id do Departamento:");
+        DepartamentoAPI.editarDepartamento(id, nome);
     }
     
-    private static void deletar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void deletar() throws IOException {
+        final String id = IO.readString("Insira o id do Departamento:");
+        DepartamentoAPI.deletaDepartamento(id);
     }
     
     private static void mostrar(String json) {
