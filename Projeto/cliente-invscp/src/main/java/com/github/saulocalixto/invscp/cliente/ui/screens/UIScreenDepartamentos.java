@@ -5,10 +5,10 @@
  */
 package com.github.saulocalixto.invscp.cliente.ui.screens;
 
-import com.github.saulocalixto.invscp.cliente.ui.TerminalUI;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreen;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreenOption;
 import java.util.HashMap;
+import org.json.JSONObject;
 
 /**
  *
@@ -21,17 +21,46 @@ public class UIScreenDepartamentos extends UIScreen{
     {
         opcoes = new HashMap<>();
         opcoes.put(1, new UIScreenOption("Cadastrar", () -> {
-            System.out.println("Funcionalidade não implementada");
+            cadastrarDepartamento();
         }));
         opcoes.put(2, new UIScreenOption("Visualizar", () -> {
-            System.out.println("Funcionalidade não implementada");
+            visualizarDepartamento();
         }));
-        opcoes.put(3, new UIScreenOption("Editar", () -> {
-            System.out.println("Funcionalidade não implementada");
+        opcoes.put(3, new UIScreenOption("Visualizar Todos", () -> {
+            visualizarDepartamentos();
         }));
-        opcoes.put(4, new UIScreenOption("Deletar", () -> {
-            System.out.println("Funcionalidade não implementada");
+        opcoes.put(4, new UIScreenOption("Editar", () -> {
+            editarDepartamento();
         }));
+        opcoes.put(5, new UIScreenOption("Deletar", () -> {
+            deletarDepartamento();
+        }));
+    }
+    
+    private static void cadastrarDepartamento() {
+        System.out.println("Funcionalidade não implementada");
+    }
+    
+    private static void visualizarDepartamento() {
+        System.out.println("Funcionalidade não implementada");
+    }
+    
+    private static void visualizarDepartamentos() {
+        System.out.println("Funcionalidade não implementada");
+    }
+    
+    private static void editarDepartamento() {
+        System.out.println("Funcionalidade não implementada");
+    }
+    
+    private static void deletarDepartamento() {
+        System.out.println("Funcionalidade não implementada");
+    }
+    
+    private static void mostrarDepartamento(String json) {
+        JSONObject obj = new JSONObject(json);
+        System.out.println("\nid: " + obj.get("id"));
+        System.out.println("Nome: " + obj.get("nome"));
     }
     
     public UIScreenDepartamentos() {
