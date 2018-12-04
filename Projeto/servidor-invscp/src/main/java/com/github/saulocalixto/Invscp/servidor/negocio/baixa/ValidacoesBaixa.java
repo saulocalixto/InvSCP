@@ -18,6 +18,7 @@ public class ValidacoesBaixa extends ValidadorPadrao<Baixa> {
     private IRepositorioBemPatrimonial repositorioBem;
 
     public List<Inconsistencia> ValideInclusao () {
+        bemNaoEstaBaixado();
         comumCadastroEAtualizacao();
         return super.ValideInclusao();
     }
@@ -93,7 +94,6 @@ public class ValidacoesBaixa extends ValidadorPadrao<Baixa> {
         usuarioSemPermissaoParaBaixarBem();
         bemDeveSerInformado();
         bemDeveExistir();
-        bemNaoEstaBaixado();
         dataDeveSerInformado();
         motivoDeveSerInformado();
     }
