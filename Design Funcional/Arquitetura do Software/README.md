@@ -15,7 +15,7 @@ O cliente é todo feito em Java, não implementa interface gráfica e toda itera
 
 ## Servidor InvSCP
 
-![Servidor](./ModelagemServidor.png?raw=true)
+![Servidor](./servidor.png?raw=true)
 
 Este é o principal módulo do sistema, que, como podemos ver, é divido em multicamadas. Cada camada tem uma função bem específica?
 
