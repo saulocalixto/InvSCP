@@ -110,7 +110,9 @@ public abstract class InventoryAPI {
         if (responseCode < 200 || responseCode > 299) {
             throw new RuntimeException("HttpResponseCode: " + responseCode);
         }
-        else {
+        else if (conn.getContentLength() == 54) {
+            throw new RuntimeException("Resposta inválida do servidor. Content length: " + conn.getContentLength());
+        } else {
             Scanner sc = new Scanner(conn.getInputStream());
             while (sc.hasNext()) {
                 file.append(sc.nextLine());
