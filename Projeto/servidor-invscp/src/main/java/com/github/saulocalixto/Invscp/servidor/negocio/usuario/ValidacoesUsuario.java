@@ -103,7 +103,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("Departamento")
                 .validarSe(objetoValidado != null)
                 .ehValidoQuando(objetoValidado.getDepartamento() != null
-                        && objetoValidado.getDepartamento().getId() != null)
+                        && objetoValidado.getDepartamento() != null)
                 .comMensagem("Departamento deve ser informado")
                 .valide();
     }
@@ -112,7 +112,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
         this.conceito("Departamento")
                 .validarSe(objetoValidado != null && objetoValidado.getDepartamento() != null)
                 .ehValidoQuando(objetoValidado.getDepartamento() == null
-                        || repositorioDepartamento().departamentoExiste(objetoValidado.getDepartamento().getId()))
+                        || repositorioDepartamento().departamentoExiste(objetoValidado.getDepartamento()))
                 .comMensagem("Departamento não cadastrado.")
                 .valide();
     }
@@ -122,7 +122,7 @@ public class ValidacoesUsuario extends ValidadorPadrao<Usuario> {
                 .validarSe(objetoValidado != null && objetoValidado.getDepartamento() != null)
                 .ehValidoQuando(objetoValidado
                         .getGrupo() != EnumGrupoDeAcesso.ADMINISTRADOR_DEPARTAMENTO
-                        || (objetoValidado.getDepartamento() != null && !repositorioDepartamento().departamentoTemChefe(objetoValidado.getDepartamento().getId())))
+                        || (objetoValidado.getDepartamento() != null && !repositorioDepartamento().departamentoTemChefe(objetoValidado.getDepartamento())))
                 .comMensagem("Esse departamento já tem um usuário como chefe.")
                 .valide();
     }

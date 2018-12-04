@@ -80,7 +80,7 @@ public class UIScreenUsuarios extends UIScreen{
         JSONArray array = new JSONObject(UsuarioAPI.getUsuarios()).getJSONArray("data");
 
         for (int i = 0; i < array.length(); i++) {
-            mostrarUsuario(array.get(i).toString());
+            mostrarUsuario(array.getJSONObject(i).toString());
         }
     }
     
@@ -102,10 +102,8 @@ public class UIScreenUsuarios extends UIScreen{
         JSONObject obj = new JSONObject(json);
         System.out.println("\nNome: " + obj.get("nome"));
         System.out.println("Grupo: " + obj.get("grupo"));
-        
-        JSONObject depto = obj.getJSONObject("departamento");
-        System.out.println("Departamento: " + 
-                depto.getString("nomeDoDepartamento"));
+
+        System.out.println("Departamento: " + obj.get("departamento"));
     }
     
     public UIScreenUsuarios() {

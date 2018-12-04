@@ -175,24 +175,36 @@ public abstract class InventoryAPI {
                 JsonElement jsonTree = parser.parse(json);
                 if (jsonTree.isJsonObject()) {
                     JsonObject jsonObject = jsonTree.getAsJsonObject();
-                    JsonElement erro = jsonObject.get("id");
-                    return true;
+                    JsonElement erro = jsonObject.get("departamento");
+                    if (erro.isJsonNull()) {
+                        return false;
+                    }
                 }
-            } catch (NullPointerException npe2) {
+            } catch (NullPointerException e) {
                 try {
                     JsonParser parser = new JsonParser();
-
                     JsonElement jsonTree = parser.parse(json);
                     if (jsonTree.isJsonObject()) {
                         JsonObject jsonObject = jsonTree.getAsJsonObject();
-                        JsonElement erro = jsonObject.get("data");
+                        JsonElement erro = jsonObject.get("id");
                         return true;
                     }
-                } catch (NullPointerException npe3) {
-                    return false;
+                } catch (NullPointerException npe2) {
+                    try {
+                        JsonParser parser = new JsonParser();
+
+                        JsonElement jsonTree = parser.parse(json);
+                        if (jsonTree.isJsonObject()) {
+                            JsonObject jsonObject = jsonTree.getAsJsonObject();
+                            JsonElement erro = jsonObject.get("data");
+                            return true;
+                        }
+                    } catch (NullPointerException npe3) {
+                        return false;
+                    }
                 }
             }
         }
-        return false;
+        return true;
     }
 }

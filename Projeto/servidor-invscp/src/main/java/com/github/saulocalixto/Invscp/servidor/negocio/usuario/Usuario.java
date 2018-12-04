@@ -18,7 +18,7 @@ public class Usuario extends ModelPadrao {
 
     private String email;
 
-    private Departamento departamento;
+    private String departamento;
 
     private EnumGrupoDeAcesso grupo;
 
@@ -50,11 +50,11 @@ public class Usuario extends ModelPadrao {
         return grupo;
     }
 
-    public Departamento getDepartamento() {
+    public String getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(Departamento departamento) {
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
 

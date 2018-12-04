@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
     senha char(60) NOT NULL,
     nome char(255) NOT NULL,
     cpf varchar(11) NOT NULL UNIQUE,
-    idDepartamento varchar(40),
+    idDepartamento varchar(40) NOT NULL,
     FOREIGN KEY (idDepartamento)
 			REFERENCES Departamento(id)
 );

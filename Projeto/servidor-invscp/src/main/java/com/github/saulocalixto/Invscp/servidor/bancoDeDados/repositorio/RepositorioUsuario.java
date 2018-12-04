@@ -63,7 +63,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
             stmt.setString(4, objeto.getEmail());
             stmt.setString(5, objeto.getGrupo().name());
             stmt.setString(6, objeto.getCpf());
-            stmt.setString(7, objeto.getDepartamento() != null ? objeto.getDepartamento().getId() : null);
+            stmt.setString(7, objeto.getDepartamento());
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {
@@ -87,7 +87,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
                 UsuarioMap.senha,
                 objeto.getSenha(),
                 UsuarioMap.idDepartamento,
-                objeto.getDepartamento().getId(),
+                objeto.getDepartamento(),
                 UsuarioMap.id,
                 objeto.getId());
         try {
@@ -129,7 +129,7 @@ public class RepositorioUsuario extends RepositorioPadrao<Usuario> implements IR
         usuario.setGrupo(rs.getString(UsuarioMap.grupo));
         usuario.setId(rs.getString(UsuarioMap.id));
         departamento.setId(rs.getString(UsuarioMap.idDepartamento));
-        usuario.setDepartamento(departamento);
+        usuario.setDepartamento(departamento.getId());
     }
 
     private Usuario ConsulteUsuario(String id, String sql) {

@@ -24,8 +24,8 @@ public class ServicoUsuario extends ServicoPadrao<Usuario> {
 
     public Usuario Consultar(String id) {
         Usuario usuario = repositorio().Consultar(id);
-        if(usuario.getDepartamento() != null && usuario.getDepartamento().getId() != null) {
-            usuario.setDepartamento(servicoDepartamento().Consultar(usuario.getDepartamento().getId()));
+        if(usuario.getDepartamento() != null && usuario.getDepartamento() != null) {
+            usuario.setDepartamento(servicoDepartamento().Consultar(usuario.getDepartamento()).getId());
         }
 
         return usuario;
@@ -34,8 +34,8 @@ public class ServicoUsuario extends ServicoPadrao<Usuario> {
     public List<Usuario> ConsultarLista() {
         List<Usuario> lista = repositorio().ConsultarLista();
         lista.forEach(x -> {
-            if(x.getDepartamento() != null && x.getDepartamento().getId() != null) {
-                x.setDepartamento(servicoDepartamento().Consultar(x.getDepartamento().getId()));
+            if(x.getDepartamento() != null && x.getDepartamento() != null) {
+                x.setDepartamento(servicoDepartamento().Consultar(x.getDepartamento()).getId());
             }
         });
 
@@ -46,8 +46,8 @@ public class ServicoUsuario extends ServicoPadrao<Usuario> {
 
         Usuario usuario = ((IRepositorioUsuario)repositorio()).consultarPorEmail(email);
 
-        if(usuario.getDepartamento() != null && usuario.getDepartamento().getId() != null) {
-            usuario.setDepartamento(servicoDepartamento().Consultar(usuario.getDepartamento().getId()));
+        if(usuario.getDepartamento() != null && usuario.getDepartamento() != null) {
+            usuario.setDepartamento(servicoDepartamento().Consultar(usuario.getDepartamento()).getId());
         }
 
         return usuario;
