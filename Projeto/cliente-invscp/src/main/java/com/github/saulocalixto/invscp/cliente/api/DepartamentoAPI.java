@@ -13,7 +13,7 @@ public class DepartamentoAPI extends InventoryAPI {
 
     private static final String ID = "id";
     
-    private static final String NOME_DEPARTAMENTO = "nomeDoDepartamento";
+    private static final String NOME_DEPARTAMENTO = "nome";
 
     public static String getDepartamento(String id) throws IOException {
         return chamadaGet(ENDPOINT_PADRAO, PARAMETRO_DE_CONSULTA, id);

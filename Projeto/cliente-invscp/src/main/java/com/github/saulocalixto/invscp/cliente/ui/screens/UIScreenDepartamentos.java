@@ -27,7 +27,11 @@ public class UIScreenDepartamentos extends UIScreen{
     {
         opcoes = new HashMap<>();
         opcoes.put(1, new UIScreenOption("Cadastrar", () -> {
-            cadastrar();
+            try {
+                cadastrar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenDepartamentos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(2, new UIScreenOption("Visualizar", () -> {
             try {
@@ -51,8 +55,10 @@ public class UIScreenDepartamentos extends UIScreen{
         }));
     }
     
-    private static void cadastrar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void cadastrar() throws IOException {
+        final String id = IO.readString("Insira o id do Departamento:");
+        final String nome = IO.readString("Insira o nome do Departamento:");
+        DepartamentoAPI.criaDepartamento(id, nome);
     }
     
     private static void visualizar() throws IOException {
