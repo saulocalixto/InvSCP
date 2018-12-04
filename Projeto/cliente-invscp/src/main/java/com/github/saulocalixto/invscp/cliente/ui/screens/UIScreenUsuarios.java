@@ -28,7 +28,11 @@ public class UIScreenUsuarios extends UIScreen{
     {
         opcoes = new HashMap<>();
         opcoes.put(1, new UIScreenOption("Cadastrar", () -> {
-            System.out.println("Funcionalidade não implementada");
+            try {
+                cadastrarUsuario();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(2, new UIScreenOption("Visualizar", () -> {
             try {
@@ -45,15 +49,22 @@ public class UIScreenUsuarios extends UIScreen{
             }
         }));
         opcoes.put(4, new UIScreenOption("Editar", () -> {
-            System.out.println("Funcionalidade não implementada");
+            editarUsuario();
         }));
         opcoes.put(5, new UIScreenOption("Deletar", () -> {
             deletarUsuario();
         }));
     }
     
-    private static void cadastrarUsuario() {
+    private static void cadastrarUsuario() throws IOException {
+        final String email = IO.readString("Insira o email do Usuario:");
+        final String senha = IO.readString("Insira a senha do Usuario:");
+        final String nome = IO.readString("Insira o nome do Usuario:");
+        final String cpf = IO.readString("Insira o cpf do Usuario:");
+        final String idDepartamento = IO.readString("Insira o id do Departamento:");
+        final String grupo = IO.readString("Insira o grupo:");
         
+        UsuarioAPI.criaUsuario(email, senha, nome, cpf, idDepartamento, grupo);
     }
 
     private static void visualizarUsuario() throws IOException {
@@ -74,7 +85,7 @@ public class UIScreenUsuarios extends UIScreen{
     }
     
     private static void editarUsuario() {
-        
+        System.out.println("Funcionalidade não implementada");
     }
     
     private static void deletarUsuario() {

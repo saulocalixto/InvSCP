@@ -13,6 +13,18 @@ public class UsuarioAPI extends InventoryAPI {
     private static final String ENDPOINT_ATUALIZE = ENDPOINT_PADRAO + "/atualize";
 
     private static final String ID = "id";
+    
+    private static final String EMAIL = "email";
+    
+    private static final String SENHA = "senha";
+    
+    private static final String NOME = "nome";
+    
+    private static final String CPF = "cpf";
+    
+    private static final String ID_DEPARTAMENTO = "idDepartamento";
+    
+    private static final String GRUPO = "grupo";
 
     public static String getUsuario(String email) throws IOException {
         return chamadaGet(ENDPOINT_PADRAO, PARAMETRO_DE_CONSULTA, email);
@@ -26,4 +38,15 @@ public class UsuarioAPI extends InventoryAPI {
         return chamadaGet(ENDPOINT_CONSULTE_TODOS);
     }
     
+    public static String criaUsuario(String email, String senha, String nome, 
+            String cpf, String idDepartamento, String grupo) {
+        return chamadaPut(ENDPOINT_PADRAO, EMAIL, email, SENHA, senha,
+            NOME, nome, CPF, cpf, ID_DEPARTAMENTO, idDepartamento);
+    }
+    
+    public static String editarUsuario(String email, String senha, String nome, 
+            String cpf, String idDepartamento) {
+        return chamadaPut(ENDPOINT_ATUALIZE, EMAIL, email, SENHA, senha,
+            NOME, nome, CPF, cpf, ID_DEPARTAMENTO, idDepartamento);
+    }
 }
