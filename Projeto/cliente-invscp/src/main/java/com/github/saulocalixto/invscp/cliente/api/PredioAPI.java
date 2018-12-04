@@ -34,8 +34,8 @@ public class PredioAPI extends InventoryAPI {
         return chamadaPut(ENDPOINT_PADRAO, ID, id, NOME, nome);
     }
     
-    public  static String deletaPredio(String id, String nome) throws IOException {
-        return chamadaDelete(ENDPOINT_PADRAO, PARAMETRO_DE_DELECAO, id, nome);
+    public  static String deletaPredio(String id) throws IOException {
+        return chamadaDelete(ENDPOINT_PADRAO, PARAMETRO_DE_DELECAO, id);
     }
     
     public static String editarPredio(String id, String nome) {
