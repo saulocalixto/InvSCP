@@ -23,13 +23,13 @@ import java.util.Scanner;
  * @author Lucas Sampaio Dias
  */
 public abstract class InventoryAPI {
-    private static final String BASE_URL = "http://localhost:8080";
+    static final String BASE_URL = "http://localhost:8080";
 
-    private static final String CONSULTA = "GET";
+    static final String CONSULTA = "GET";
 
-    private static final String ATUALIZACAO = "PUT";
+    static final String ATUALIZACAO = "PUT";
 
-    private static final String EXCLUSAO = "DELETE";
+    static final String EXCLUSAO = "DELETE";
 
     private static final String ENDPOINT_PADRAO = null;
 
@@ -41,7 +41,7 @@ public abstract class InventoryAPI {
 
     static final String PARAMETRO_DE_DELECAO = "id";
 
-    private static final String JSON_ERRO = "{\"erro\":[{\"mensagem\":\"Ocorreu um erro no banco de dados." +
+    public static final String JSON_ERRO = "{\"erro\":[{\"mensagem\":\"Ocorreu um erro no banco de dados." +
             " Por favor revise o que foi enviado ou reinicie o servidor.\",\"conceito\":\"Banco de dados\"}]}";
 
     public static String getAuth() {
@@ -91,7 +91,7 @@ public abstract class InventoryAPI {
         return new URL(BASE_URL + builder.toString());
     }
 
-    private static String concatenaParametrosAdicionais(int numeroDeParametros) {
+    public static String concatenaParametrosAdicionais(int numeroDeParametros) {
         return (numeroDeParametros == 0) ? ""
                 : (numeroDeParametros == 1) ? "?"
                 : (numeroDeParametros % 2 == 0) ? "="
@@ -138,7 +138,7 @@ public abstract class InventoryAPI {
         } catch (Exception ignored) {}
     }
 
-    private static String validaInconsistencia(String json) {
+    public static String validaInconsistencia(String json) {
         try {
             JsonParser parser = new JsonParser();
             JsonElement jsonTree = parser.parse(json);

@@ -69,7 +69,7 @@ public class PredioAPI extends InventoryAPI {
         StringBuilder file = new StringBuilder();
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod(metodoRequisicao);
-        conn.setRequestProperty("Autorizacao", auth);
+        conn.setRequestProperty("Autorizacao", getAuth());
         conn.setRequestProperty("content-type", "application/json");
         prepareBody(conn, body);
         conn.connect();

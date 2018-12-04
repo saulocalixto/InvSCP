@@ -47,14 +47,6 @@ public class UIScreenMenuPrincipal extends UIScreen{
                         Level.SEVERE, null, ex);
             }
         }));
-        opcoes.put(4, new UIScreenOption("Logins", () -> {
-            try {
-                TerminalUI.mostrar(new UIScreenLogins());
-            } catch (IOException ex) {
-                Logger.getLogger(UIScreenMenuPrincipal.class.getName()).log(
-                        Level.SEVERE, null, ex);
-            }
-        }));
     }
     
     public UIScreenMenuPrincipal() {
