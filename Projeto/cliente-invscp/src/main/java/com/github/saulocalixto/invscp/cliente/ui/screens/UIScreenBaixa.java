@@ -44,10 +44,18 @@ public class UIScreenBaixa extends UIScreen{
             }
         }));
         opcoes.put(4, new UIScreenOption("Editar", () -> {
-            editar();
+            try {
+                editar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenBaixa.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(5, new UIScreenOption("Deletar", () -> {
-            deletar();
+            try {
+                deletar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenBaixa.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
     }
     
@@ -72,12 +80,18 @@ public class UIScreenBaixa extends UIScreen{
         }
     }
     
-    private static void editar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void editar() throws IOException {
+        final String id = IO.readString("Insira o id da Baixa:");
+        final String idBem = IO.readString("Insira o id do Bem Patrimonial:");
+        final String data = IO.readString("Insira a data da Baixa:");
+        final String observacao = IO.readString("Insira a observação da Baixa:");
+        
+        BaixaAPI.editarBaixa(id, idBem, data, observacao);
     }
     
-    private static void deletar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void deletar() throws IOException {
+        final String id = IO.readString("Insira o id da Baixa:");
+        BaixaAPI.deletarBaixa(id);
     }
     
     private static void mostrar(String json) {
