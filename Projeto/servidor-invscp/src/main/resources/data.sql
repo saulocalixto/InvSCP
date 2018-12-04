@@ -44,6 +44,10 @@ TRUNCATE TABLE Baixa;
 INSERT INTO Baixa (id, idBem, dataBaixa, observacao, motivo) VALUES 
 	('baixa001','bem001','2018-08-01','Nenhuma',3),
 	('baixa002','bem003','2018-12-03','Foi descartado',1);
-	
+
+TRUNCATE TABLE OrdemDeServico;
+INSERT INTO OrdemDeServico (id, identificadorDaOS, bem, motivo, observacao, dataAbertura, dataEncerramento, nomeDaPrestadora, situacao) VALUES
+	('OS001', 'Ordem X', 'bem001', 'Motivo', "Nenhuma", '20180202', '20180203', 'Prestadora', 'Encerrada');
+
 -- A seguinte declaração deve estar sempre ao final do arquivo.
 SET FOREIGN_KEY_CHECKS = 1;
