@@ -97,7 +97,7 @@ public class UIScreenBaixa extends UIScreen{
     private static void mostrar(String json) {
         JSONObject obj = new JSONObject(json);
         System.out.println("\nid: " + obj.get("id"));
-        System.out.println("id do Bem: " + obj.get("idBem"));
+        System.out.println("id do Bem Patrimonial: " + obj.get("idBem"));
         System.out.println("Data: " + obj.get("data"));
         System.out.println("Observacao: " + obj.get("observacao"));
     }

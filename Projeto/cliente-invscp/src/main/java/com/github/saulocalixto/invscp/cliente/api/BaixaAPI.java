@@ -36,12 +36,12 @@ public class BaixaAPI extends InventoryAPI {
     public static String criaBaixa(String id, String idBem, String data, 
             String observacao) {
         return chamadaPut(ENDPOINT_PADRAO, ID, id, ID_BEM, idBem,
-            OBSERVACAO, observacao, DATA, data);
+            OBSERVACAO, observacao, DATA, data, "motivo", "VENDIDO");
     }
     
     public static String editarBaixa(String id, String idBem, String data, 
             String observacao) {
         return chamadaPut(ENDPOINT_ATUALIZE, ID, id, ID_BEM, idBem,
-            OBSERVACAO, observacao, DATA, data);
+            OBSERVACAO, observacao, DATA, data, "motivo", "VENDIDO");
     }
 }
