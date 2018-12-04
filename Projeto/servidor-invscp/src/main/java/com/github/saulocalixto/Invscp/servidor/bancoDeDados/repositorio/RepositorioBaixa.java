@@ -131,7 +131,7 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
     }
 
     private String converteData(Date data) {
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String dataConvertida = df.format(data);
         return dataConvertida;
     }
@@ -139,7 +139,7 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
     private Date converteData(String data) {
         try {
             String dataString = data;
-            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date date = formatter.parse(dataString);
             return date;
         } catch (ParseException e) {
