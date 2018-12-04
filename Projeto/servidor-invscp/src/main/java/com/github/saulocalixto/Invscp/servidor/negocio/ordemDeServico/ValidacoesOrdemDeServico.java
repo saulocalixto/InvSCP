@@ -154,7 +154,7 @@ public class ValidacoesOrdemDeServico extends ValidadorPadrao<OrdemDeServico> {
     private boolean verificaBemExiste (OrdemDeServico objetoValidado) {
         String idBem = objetoValidado.getBem();
         BemPatrimonial bemPatrimonial = repositorioBemPatrimonial().Consultar(idBem);
-        return (bemPatrimonial.getId() == idBem);
+        return (bemPatrimonial.getId().equals(idBem));
     }
 
 

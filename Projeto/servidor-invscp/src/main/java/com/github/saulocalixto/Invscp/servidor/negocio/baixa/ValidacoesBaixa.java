@@ -6,6 +6,7 @@ import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfac
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.interfaces.IRepositorioBemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumGrupoDeAcesso;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumStatusBemPatrimonial;
+import com.github.saulocalixto.Invscp.servidor.negocio.bemPatrimonial.BemPatrimonial;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.Inconsistencia;
 import com.github.saulocalixto.Invscp.servidor.negocio.validacao.ValidadorPadrao;
 
@@ -50,8 +51,23 @@ public class ValidacoesBaixa extends ValidadorPadrao<Baixa> {
     }
 
     private void comumCadastroEAtualizacao() {
+        bemDeveExistir();
         bemNaoEstaBaixado();
         usuarioSemPermissaoParaBaixarBem();
+    }
+
+    public void bemDeveExistir() {
+        this.conceito("Bem Patrimonial")
+                .validarSe(objetoValidado != null && objetoValidado.getIdBem() != null && !objetoValidado.getIdBem().isEmpty())
+                .ehValidoQuando(verificaBemExiste(objetoValidado))
+                .comMensagem("O Bem Patrimonial refenciado não existe")
+                .valide();
+    }
+
+    private boolean verificaBemExiste (Baixa objetoValidado) {
+        String idBem = objetoValidado.getIdBem();
+        BemPatrimonial bemPatrimonial = repositorioBem().Consultar(idBem);
+        return (bemPatrimonial.getId().equals(idBem));
     }
 
     private IRepositorioBaixa repositorio() {
