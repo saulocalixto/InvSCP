@@ -11,7 +11,6 @@ import com.github.saulocalixto.invscp.cliente.ui.IO;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -32,7 +31,7 @@ public class Usuario {
     public boolean loginTerminal() throws IOException {
         String logado = null;
 
-        while (logado == null) {
+        while (!LoginAPI.isJsonValid(logado)) {
             email = IO.readNomeUsuario("E-mail: ");
             String senha = IO.readSenha("Senha: ");
             logado = checarLogin(email, senha);
@@ -56,11 +55,7 @@ public class Usuario {
     }
     
     private String checarLogin(String email, String senha) {
-        try {
-            return LoginAPI.login(email, senha);
-        } catch (Exception e) {
-            return null;
-        }
+        return LoginAPI.login(email, senha);
     }
     
     public String getNome() {

@@ -143,16 +143,13 @@ public abstract class InventoryAPI {
             if(jsonTree.isJsonObject()){
                 JsonObject jsonObject = jsonTree.getAsJsonObject();
 
-                JsonElement erro = jsonObject.get("erro");
+                JsonElement erro = jsonObject.get("erro").getAsJsonArray().get(0);
 
                 if(erro.isJsonObject()){
                     JsonObject mensagem = erro.getAsJsonObject();
 
                     JsonElement valor = mensagem.get("mensagem");
-
-                    if(valor.isJsonObject()){
-                        System.out.println(valor.getAsString());
-                    }
+                    System.out.println(valor.getAsString());
                 }
             }
         } catch (Exception ignored) {
@@ -167,14 +164,33 @@ public abstract class InventoryAPI {
             JsonElement jsonTree = parser.parse(json);
             if(jsonTree.isJsonObject()){
                 JsonObject jsonObject = jsonTree.getAsJsonObject();
-                JsonElement erro = jsonObject.get("erro");
-                if(erro.isJsonObject()){
+                JsonElement erro = jsonObject.get("erro").getAsJsonArray().get(0);
+                return false;
+            }
+        } catch (NullPointerException npe) {
+            try {
+                JsonParser parser = new JsonParser();
+                JsonElement jsonTree = parser.parse(json);
+                if (jsonTree.isJsonObject()) {
+                    JsonObject jsonObject = jsonTree.getAsJsonObject();
+                    JsonElement erro = jsonObject.get("id");
+                    return true;
+                }
+            } catch (NullPointerException npe2) {
+                try {
+                    JsonParser parser = new JsonParser();
+
+                    JsonElement jsonTree = parser.parse(json);
+                    if (jsonTree.isJsonObject()) {
+                        JsonObject jsonObject = jsonTree.getAsJsonObject();
+                        JsonElement erro = jsonObject.get("data");
+                        return true;
+                    }
+                } catch (NullPointerException npe3) {
                     return false;
                 }
             }
-        } catch (Exception ignored) {
-        } finally {
-            return true;
         }
+        return false;
     }
 }

@@ -10,7 +10,7 @@ public class LoginAPI extends InventoryAPI {
 
     private static final String SENHA = "senha";
 
-    public static String login(String email, String senha) throws IOException {
+    public static String login(String email, String senha) {
         return chamadaGet(ENDPOINT_PADRAO, EMAIL, email, SENHA, senha);
     }
 }

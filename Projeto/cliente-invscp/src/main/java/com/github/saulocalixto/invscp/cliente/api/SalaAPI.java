@@ -27,12 +27,8 @@ public class SalaAPI extends InventoryAPI {
     }
 
     public static String criaSala(String numeroSala, String idDepartamento, String idPredio) {
-        try {
-            return chamadaPut(ENDPOINT_PADRAO, NUMERO_SALA, numeroSala,
+        return chamadaPut(ENDPOINT_PADRAO, NUMERO_SALA, numeroSala,
                     ID_DEPARTAMENTO, idDepartamento, ID_PREDIO, idPredio);
-        } catch (IOException e) {
-            return "{}";
-        }
     }
     
     public  static String deletaSala(String numeroSala) throws IOException {
@@ -40,11 +36,7 @@ public class SalaAPI extends InventoryAPI {
     }
     
     public static String editarSala(String id, String numeroSala, String idDepartamento, String idPredio) {
-        try {
-            return chamadaPut(ENDPOINT_ATUALIZE, ID, id, NUMERO_SALA, numeroSala,
+        return chamadaPut(ENDPOINT_ATUALIZE, ID, id, NUMERO_SALA, numeroSala,
                     ID_DEPARTAMENTO, idDepartamento, ID_PREDIO, idPredio);
-        } catch (IOException e) {
-            return "{}";
-        }
     }
 }
