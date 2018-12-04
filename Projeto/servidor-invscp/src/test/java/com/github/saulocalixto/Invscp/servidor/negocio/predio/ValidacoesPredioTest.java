@@ -47,6 +47,7 @@ public class ValidacoesPredioTest {
                 "obrigatório");
     }
 
+    /*
     @Test
     public void enderecoDoPredioInformado() {
         enderecoTeste.setRua("Rua Teste");
@@ -60,5 +61,6 @@ public class ValidacoesPredioTest {
         List<Inconsistencia> listaDeInconsistencias = validacao.retorneInconsistencias();
         assertEquals(listaDeInconsistencias.size(), 0);
     }
+    */
 
 }
