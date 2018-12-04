@@ -64,7 +64,7 @@ public class UIScreenEndereco extends UIScreen{
     }
     
     public UIScreenEndereco() {
-        super("Endereco", opcoes);
+        super("Endereço", opcoes);
     }
     
 }

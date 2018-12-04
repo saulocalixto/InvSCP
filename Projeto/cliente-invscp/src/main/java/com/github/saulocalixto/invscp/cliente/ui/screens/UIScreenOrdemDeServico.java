@@ -64,7 +64,7 @@ public class UIScreenOrdemDeServico extends UIScreen{
     }
     
     public UIScreenOrdemDeServico() {
-        super("Ordem de Servico", opcoes);
+        super("Ordem de Serviço", opcoes);
     }
     
 }

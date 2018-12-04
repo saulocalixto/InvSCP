@@ -23,7 +23,15 @@ public class UIScreenLocais extends UIScreen{
     static
     {
         opcoes = new HashMap<>();
-        opcoes.put(1, new UIScreenOption("Departamentos", () -> {
+        opcoes.put(1, new UIScreenOption("Endereços", () -> {
+            try {
+                TerminalUI.mostrar(new UIScreenEndereco());
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenMenuPrincipal.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            }
+        }));
+        opcoes.put(2, new UIScreenOption("Departamentos", () -> {
             try {
                 TerminalUI.mostrar(new UIScreenDepartamentos());
             } catch (IOException ex) {
@@ -31,7 +39,7 @@ public class UIScreenLocais extends UIScreen{
                         Level.SEVERE, null, ex);
             }
         }));
-        opcoes.put(2, new UIScreenOption("Prédios", () -> {
+        opcoes.put(3, new UIScreenOption("Prédios", () -> {
             try {
                 TerminalUI.mostrar(new UIScreenPredios());
             } catch (IOException ex) {
@@ -39,15 +47,7 @@ public class UIScreenLocais extends UIScreen{
                         Level.SEVERE, null, ex);
             }
         }));
-//        opcoes.put(3, new UIScreenOption("Filiais", () -> {
-//            try {
-//                TerminalUI.mostrar(new UIScreenFiliais());
-//            } catch (IOException ex) {
-//                Logger.getLogger(UIScreenMenuPrincipal.class.getName()).log(
-//                        Level.SEVERE, null, ex);
-//            }
-//        }));
-        opcoes.put(3, new UIScreenOption("Salas", () -> {
+        opcoes.put(4, new UIScreenOption("Salas", () -> {
             try {
                 TerminalUI.mostrar(new UIScreenSalas());
             } catch (IOException ex) {
