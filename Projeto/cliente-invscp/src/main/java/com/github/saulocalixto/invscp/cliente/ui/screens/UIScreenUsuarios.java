@@ -5,9 +5,7 @@
  */
 package com.github.saulocalixto.invscp.cliente.ui.screens;
 
-import com.github.saulocalixto.invscp.cliente.api.InventoryAPI;
 import com.github.saulocalixto.invscp.cliente.api.UsuarioAPI;
-import com.github.saulocalixto.invscp.cliente.core.Usuario;
 import com.github.saulocalixto.invscp.cliente.ui.IO;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreen;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreenOption;
@@ -16,6 +14,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -38,10 +37,17 @@ public class UIScreenUsuarios extends UIScreen{
                 Logger.getLogger(UIScreenUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
         }));
-        opcoes.put(3, new UIScreenOption("Editar", () -> {
+        opcoes.put(3, new UIScreenOption("Visualizar Todos", () -> {
+            try {
+                visualizarUsuarios();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }));
+        opcoes.put(4, new UIScreenOption("Editar", () -> {
             System.out.println("Funcionalidade não implementada");
         }));
-        opcoes.put(4, new UIScreenOption("Deletar", () -> {
+        opcoes.put(5, new UIScreenOption("Deletar", () -> {
             deletarUsuario();
         }));
     }
@@ -54,13 +60,17 @@ public class UIScreenUsuarios extends UIScreen{
         final String email = IO.readString("Insira o e-mail do usuario:");
         final String json = UsuarioAPI.getUsuario(email);
 
-        JSONObject obj = new JSONObject(json);
-        System.out.println("\nNome: " + obj.get("nome"));
-        System.out.println("Grupo: " + obj.get("grupo"));
-        
-        JSONObject depto = obj.getJSONObject("departamento");
-        System.out.println("Departamento: " + 
-                depto.getString("nomeDoDepartamento"));
+        if (UsuarioAPI.isJsonValid(json)) {
+            mostrarUsuario(json);
+        }
+    }
+    
+    private static void visualizarUsuarios() throws IOException {
+        JSONArray array = new JSONObject(UsuarioAPI.getUsuarios()).getJSONArray("data");
+
+        for (int i = 0; i < array.length(); i++) {
+            mostrarUsuario(array.get(i).toString());
+        }
     }
     
     private static void editarUsuario() {
@@ -75,6 +85,16 @@ public class UIScreenUsuarios extends UIScreen{
         } catch (Exception e) {
             System.out.println("Não foi possível deletar o usuário.");
         }
+    }
+    
+    private static void mostrarUsuario(final String json) throws JSONException {
+        JSONObject obj = new JSONObject(json);
+        System.out.println("\nNome: " + obj.get("nome"));
+        System.out.println("Grupo: " + obj.get("grupo"));
+        
+        JSONObject depto = obj.getJSONObject("departamento");
+        System.out.println("Departamento: " + 
+                depto.getString("nomeDoDepartamento"));
     }
     
     public UIScreenUsuarios() {

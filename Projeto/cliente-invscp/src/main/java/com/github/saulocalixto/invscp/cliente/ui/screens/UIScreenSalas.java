@@ -5,11 +5,8 @@
  */
 package com.github.saulocalixto.invscp.cliente.ui.screens;
 
-import com.github.saulocalixto.invscp.cliente.api.InventoryAPI;
 import com.github.saulocalixto.invscp.cliente.api.SalaAPI;
-import com.github.saulocalixto.invscp.cliente.api.UsuarioAPI;
 import com.github.saulocalixto.invscp.cliente.ui.IO;
-import com.github.saulocalixto.invscp.cliente.ui.TerminalUI;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreen;
 import com.github.saulocalixto.invscp.cliente.ui.UIScreenOption;
 import java.io.IOException;
@@ -70,7 +67,7 @@ public class UIScreenSalas extends UIScreen{
         super("Salas", opcoes);
     }
     
-    public static void deletarSala() throws IOException {
+    private static void deletarSala() throws IOException {
         final String id = IO.readString("Insira o id da Sala:");
         SalaAPI.deletaSala(id);
     }
@@ -84,7 +81,7 @@ public class UIScreenSalas extends UIScreen{
         SalaAPI.editarSala(id, numSala, idDepartamento, idPredio);
     }
     
-    public static void criarSala() throws IOException {
+    private static void criarSala() throws IOException {
         final String numSala = IO.readString("Insira o número da Sala:");
         final String idDepartamento = IO.readString("Insira o id do Departamento:");
         final String idPredio = IO.readString("Insira o id do Prédio:");
@@ -92,7 +89,7 @@ public class UIScreenSalas extends UIScreen{
         SalaAPI.criaSala(numSala, idDepartamento, idPredio);
     }
     
-    public static void visualizarSala() throws IOException {
+    private static void visualizarSala() throws IOException {
         final String id = IO.readString("Insira o id da Sala:");
         final String json = SalaAPI.getSala(id);
         if (SalaAPI.isJsonValid(json)) {
@@ -100,7 +97,7 @@ public class UIScreenSalas extends UIScreen{
         }
     }
     
-    public static void visualizarSalas() throws IOException {
+    private static void visualizarSalas() throws IOException {
         JSONArray salas = new JSONObject(SalaAPI.getSalas()).getJSONArray("data");
 
         for (int i = 0; i < salas.length(); i++) {
