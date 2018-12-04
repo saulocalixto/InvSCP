@@ -40,6 +40,10 @@ INSERT INTO BemPatrimonial (id,	localAtual,	numeroDeTombamento,	denominacao, dat
 	('bem002', 'sala002', '111', 'Cadeira', '20180202', 'especificacao', 'garantia', 'Onion', 123.00, 'Coisado', '34234253452', 'Furniture', 'OS003'),
 	('bem003', 'sala003', '999', 'Livro', '20180202', 'especificacao', 'garantia', 'Penguin', 32.32, 'Coisado', '34234253452', 'Assets', 'OS005');
 
+TRUNCATE TABLE Baixa;	
+INSERT INTO Baixa (id, idBem, dataBaixa, observacao, motivo) VALUES 
+	('baixa001','bem001','2018-08-01','Nenhuma',3),
+	('baixa002','bem003','2018-12-03','Foi descartado',1);
 	
 -- A seguinte declaração deve estar sempre ao final do arquivo.
 SET FOREIGN_KEY_CHECKS = 1;

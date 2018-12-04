@@ -20,7 +20,7 @@ public class BemPatrimonial extends ModelPadrao {
 
     private String marca;
 
-    private double valorDeCompra;
+    private String valorDeCompra;
 
     private String notaFiscal;
 
@@ -95,11 +95,11 @@ public class BemPatrimonial extends ModelPadrao {
     }
 
     public double getValorDeCompra() {
-        return valorDeCompra;
+        return Double.parseDouble(valorDeCompra);
     }
 
     public void setValorDeCompra(double valorDeCompra) {
-        this.valorDeCompra = valorDeCompra;
+        this.valorDeCompra = String.valueOf(valorDeCompra);
     }
 
     public EnumStatusBemPatrimonial getStatus() {

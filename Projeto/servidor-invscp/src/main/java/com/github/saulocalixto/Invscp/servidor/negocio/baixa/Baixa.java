@@ -3,13 +3,18 @@ package com.github.saulocalixto.Invscp.servidor.negocio.baixa;
 import com.github.saulocalixto.Invscp.servidor.enumeradores.EnumMotivoBaixa;
 import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 
+import javax.swing.text.DateFormatter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Baixa extends ModelPadrao {
 
     private String idBem;
 
-    private Date data;
+    private String data;
 
     private String observacao;
 
@@ -24,11 +29,19 @@ public class Baixa extends ModelPadrao {
     }
 
     public Date getData() {
-        return data;
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date = null;
+        try {
+            date = format.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
     public void setData(Date data) {
-        this.data = data;
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        this.data = format.format(data);
     }
 
     public String getObservacao() {
