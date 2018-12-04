@@ -49,7 +49,11 @@ public class UIScreenUsuarios extends UIScreen{
             }
         }));
         opcoes.put(4, new UIScreenOption("Editar", () -> {
-            editarUsuario();
+            try {
+                editarUsuario();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
         opcoes.put(5, new UIScreenOption("Deletar", () -> {
             deletarUsuario();
@@ -84,8 +88,15 @@ public class UIScreenUsuarios extends UIScreen{
         }
     }
     
-    private static void editarUsuario() {
-        System.out.println("Funcionalidade não implementada");
+    private static void editarUsuario() throws IOException {
+        final String email = IO.readString("Insira o email do Usuario:");
+        final String senha = IO.readString("Insira a senha do Usuario:");
+        final String nome = IO.readString("Insira o nome do Usuario:");
+        final String cpf = IO.readString("Insira o cpf do Usuario:");
+        final String idDepartamento = IO.readString("Insira o id do Departamento:");
+        final String grupo = IO.readString("Insira o grupo:");
+        
+        UsuarioAPI.editarUsuario(email, senha, nome, cpf, idDepartamento, grupo);
     }
     
     private static void deletarUsuario() {
@@ -101,8 +112,8 @@ public class UIScreenUsuarios extends UIScreen{
     private static void mostrarUsuario(final String json) throws JSONException {
         JSONObject obj = new JSONObject(json);
         System.out.println("\nNome: " + obj.get("nome"));
+        System.out.println("E-mail: " + obj.get("email"));
         System.out.println("Grupo: " + obj.get("grupo"));
-
         System.out.println("Departamento: " + obj.get("departamento"));
     }
     

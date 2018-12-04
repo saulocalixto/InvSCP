@@ -45,8 +45,8 @@ public class UsuarioAPI extends InventoryAPI {
     }
     
     public static String editarUsuario(String email, String senha, String nome, 
-            String cpf, String idDepartamento) {
+            String cpf, String idDepartamento, String grupo) {
         return chamadaPut(ENDPOINT_ATUALIZE, EMAIL, email, SENHA, senha,
-            NOME, nome, CPF, cpf, ID_DEPARTAMENTO, idDepartamento);
+            NOME, nome, CPF, cpf, GRUPO, grupo, ID_DEPARTAMENTO, idDepartamento);
     }
 }
