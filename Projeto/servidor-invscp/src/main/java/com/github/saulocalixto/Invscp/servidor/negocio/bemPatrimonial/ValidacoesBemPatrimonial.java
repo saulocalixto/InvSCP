@@ -50,10 +50,84 @@ public class ValidacoesBemPatrimonial extends ValidadorPadrao<BemPatrimonial> {
                 .valide();
     }
 
-    private void comumCadastroEAtualizacao() {
-        salaDeveExistir();
-
+    public void nTombamentoDeveSerInformado() {
+        this.conceito("Numero de Tombamento")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getNumeroDeTombamento() != null &&
+                        !objetoValidado.getNumeroDeTombamento().isEmpty())
+                .comMensagem("Numero de Tombamento deve ser informado")
+                .valide();
     }
+
+    public void denominacaoDeveSerInformado() {
+        this.conceito("Denominação")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getDenominacao() != null && !objetoValidado.getDenominacao().isEmpty())
+                .comMensagem("Denominação deve ser informada")
+                .valide();
+    }
+
+    public void dataDeAquisicaoDeveSerInformado() {
+        this.conceito("Data De Aquisiçao")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getDataDeAquisicao() != null &&
+                        !objetoValidado.getDataDeAquisicao().isEmpty())
+                .comMensagem("Data De Aquisiçao deve ser informada")
+                .valide();
+    }
+
+    public void especificacaoDeveSerInformado() {
+        this.conceito("Especificação")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getEspecificacao() != null &&
+                        !objetoValidado.getEspecificacao().isEmpty())
+                .comMensagem("Especificação deve ser informada")
+                .valide();
+    }
+
+    public void garantiaDeveSerInformado() {
+        this.conceito("Garantia")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getGarantia() != null &&
+                        !objetoValidado.getGarantia().isEmpty())
+                .comMensagem("Garantia deve ser informada")
+                .valide();
+    }
+
+    public void marcaDeveSerInformado() {
+        this.conceito("Marca")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getMarca() != null &&
+                        !objetoValidado.getMarca().isEmpty())
+                .comMensagem("Marca deve ser informada")
+                .valide();
+    }
+
+    public void notaFiscalDeveSerInformado() {
+        this.conceito("Nota Fiscal")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getNotaFiscal() != null &&
+                        !objetoValidado.getNotaFiscal().isEmpty())
+                .comMensagem("Nota Fiscal deve ser informada")
+                .valide();
+    }
+
+    public void statusDeveSerInformado() {
+        this.conceito("Status")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getStatus() != null)
+                .comMensagem("Status deve ser informado")
+                .valide();
+    }
+
+    public void grupoDeMaterialDeveSerInformado() {
+        this.conceito("Grupo De Material")
+                .validarSe(objetoValidado != null)
+                .ehValidoQuando(objetoValidado.getGrupoDeMaterial() != null)
+                .comMensagem("Grupo De Material deve ser informado")
+                .valide();
+    }
+
 
     public void salaDeveExistir() {
         this.conceito("Sala")
@@ -68,6 +142,19 @@ public class ValidacoesBemPatrimonial extends ValidadorPadrao<BemPatrimonial> {
         String idSala = objetoValidado.getLocalAtual();
         Sala sala = repositorioSala().Consultar(idSala);
         return (sala.getId().equals(idSala));
+    }
+
+    private void comumCadastroEAtualizacao() {
+        nTombamentoDeveSerInformado();
+        denominacaoDeveSerInformado();
+        dataDeAquisicaoDeveSerInformado();
+        especificacaoDeveSerInformado();
+        garantiaDeveSerInformado();
+        marcaDeveSerInformado();
+        notaFiscalDeveSerInformado();
+        statusDeveSerInformado();
+        grupoDeMaterialDeveSerInformado();
+        salaDeveExistir();
     }
 
     private IRepositorioBemPatrimonial repositorio() {
