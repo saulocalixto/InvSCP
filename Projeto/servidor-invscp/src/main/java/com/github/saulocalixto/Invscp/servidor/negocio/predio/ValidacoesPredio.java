@@ -39,11 +39,15 @@ public class ValidacoesPredio extends ValidadorPadrao<Predio> {
     }
 
     public void nomeObrigatorio() {
-        this.conceito("Nome")
-                .validarSe(objetoValidado != null)
-                .ehValidoQuando(objetoValidado.getNome() != null && !objetoValidado.getNome().isEmpty())
-                .comMensagem("Nome do prédio é obrigatório")
-                .valide();
+        try {
+            this.conceito("Nome")
+                    .validarSe(objetoValidado != null)
+                    .ehValidoQuando(objetoValidado.getNome() != null && !objetoValidado.getNome().isEmpty())
+                    .comMensagem("Nome do prédio é obrigatório")
+                    .valide();
+        } catch (NullPointerException e) {
+
+        }
     }
 
     public void usuarioTemPermissaoParaAlterarPredio() {

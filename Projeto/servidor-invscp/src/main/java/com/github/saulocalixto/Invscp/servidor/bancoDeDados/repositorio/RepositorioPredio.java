@@ -76,16 +76,16 @@ public class RepositorioPredio extends RepositorioPadrao<Predio> implements IRep
 
     public void Atualizar(Predio objeto) {
         String sql = String
-                .format("UPDATE %s SET %s = ?, %s = ? = '%s' WHERE %s = '%s'",
+                .format("UPDATE %s SET %s = ?, %s = ? WHERE %s = '?'",
                         PredioMap.nomeTabela,
                         PredioMap.nome,
                         PredioMap.endereco,
-                        PredioMap.id,
-                        objeto.getId());
+                        PredioMap.id);
         try {
             PreparedStatement stmt = RetorneConexaoBd().prepareStatement(sql);
             stmt.setObject(1, objeto.getNome(), Types.VARCHAR);
-            stmt.setObject(2, objeto.getId(), Types.VARCHAR);
+            stmt.setObject(2, objeto.getEndereco().getId());
+            stmt.setObject(3, objeto.getId(), Types.VARCHAR);
             stmt.execute();
             stmt.close();
         } catch (SQLException u) {

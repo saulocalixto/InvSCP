@@ -31,6 +31,6 @@ public class ModelPadrao {
             return false;
         if (obj == this)
             return true;
-        return this.getId() == ((ModelPadrao) obj).getId();
+        return this.getId().equals(((ModelPadrao) obj).getId());
     }
 }

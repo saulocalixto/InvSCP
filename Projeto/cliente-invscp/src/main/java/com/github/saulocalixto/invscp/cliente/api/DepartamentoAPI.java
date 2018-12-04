@@ -20,7 +20,7 @@ public class DepartamentoAPI extends InventoryAPI {
 
     private static final String ID = "id";
     
-    private static final String NOME_DEPARTAMENTO = "nome";
+    private static final String NOME_DEPARTAMENTO = "nomeDoDepartamento";
 
     public static String getDepartamento(String id) throws IOException {
         return chamadaGet(ENDPOINT_PADRAO, PARAMETRO_DE_CONSULTA, id);
@@ -39,9 +39,9 @@ public class DepartamentoAPI extends InventoryAPI {
     }
     
     public static String editarDepartamento(String id, String nome) {
-        return chamadaPut(ENDPOINT_ATUALIZE, ID, id, NOME_DEPARTAMENTO, nome);
+        return DepartamentoAPI.chamadaPut(ENDPOINT_ATUALIZE, ID, id, NOME_DEPARTAMENTO, nome);
     }
-    
+
     static String chamadaPut(String... urlParameters) {
         try {
             String endpoint = urlParameters[0];

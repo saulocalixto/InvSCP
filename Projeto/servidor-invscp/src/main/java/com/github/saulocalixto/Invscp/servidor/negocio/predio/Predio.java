@@ -1,5 +1,6 @@
 package com.github.saulocalixto.Invscp.servidor.negocio.predio;
 
+import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioEndereco;
 import com.github.saulocalixto.Invscp.servidor.bancoDeDados.repositorio.RepositorioSala;
 import com.github.saulocalixto.Invscp.servidor.negocio.ModelPadrao;
 import com.github.saulocalixto.Invscp.servidor.negocio.endereco.Endereco;
@@ -15,7 +16,7 @@ public class Predio extends ModelPadrao {
 
     private String nome;
 
-    private Endereco endereco;
+    private String endereco;
 
     private List<String> listaDeSalas;
 
@@ -28,20 +29,21 @@ public class Predio extends ModelPadrao {
     }
 
     public Endereco getEndereco() {
-        return endereco;
+        RepositorioEndereco repo = new RepositorioEndereco();
+        return repo.Consultar(endereco);
     }
 
     public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+        this.endereco = endereco.getId();
     }
 
     public List<Sala> getListaDeSalas() {
         RepositorioSala repo = new RepositorioSala();
-        List<Sala> listaDeSalas = new ArrayList<Sala>();
+        List<Sala> listinhas = new ArrayList<Sala>();
         for (String s : this.listaDeSalas) {
-            listaDeSalas.add(repo.Consultar(s));
+            listinhas.add(repo.Consultar(s));
         }
-        return listaDeSalas;
+        return listinhas;
     }
 
     public void setListaDeSalas(List<Sala> listaDeSalas) {

@@ -19,7 +19,9 @@ public class PredioAPI extends InventoryAPI {
     private static final String ENDPOINT_ATUALIZE = ENDPOINT_PADRAO + "/atualize";
 
     private static final String ID = "id";
-    
+
+    private static final String ENDERECO = "74552-222";
+
     private static final String NOME = "nome";
 
     public static String getPredio(String id) throws IOException {
@@ -31,7 +33,7 @@ public class PredioAPI extends InventoryAPI {
     }
 
     public static String criaPredio(String id, String nome) {
-        return chamadaPut(ENDPOINT_PADRAO, ID, id, NOME, nome);
+        return chamadaPut(ENDPOINT_PADRAO, NOME, nome, "endereco", ENDERECO);
     }
     
     public  static String deletaPredio(String id) throws IOException {
@@ -39,7 +41,7 @@ public class PredioAPI extends InventoryAPI {
     }
     
     public static String editarPredio(String id, String nome) {
-        return chamadaPut(ENDPOINT_ATUALIZE, ID, id, NOME, nome);
+        return chamadaPut(ENDPOINT_ATUALIZE, ID, id, NOME, nome, "endereco", ENDERECO);
     }
     
     static String chamadaPut(String... urlParameters) {

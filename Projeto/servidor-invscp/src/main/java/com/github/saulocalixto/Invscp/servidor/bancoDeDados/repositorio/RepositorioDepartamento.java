@@ -74,9 +74,10 @@ public class RepositorioDepartamento extends RepositorioPadrao<Departamento> imp
     }
 
     public void Atualizar(Departamento objeto) {
-        String sql = String.format("UPDATE %s SET %s = %s WHERE %s = %s",
+        String sql = String.format("UPDATE %s SET %s = '%s' WHERE %s = '%s'",
                 DepartamentoMap.nomeTabela,
                 DepartamentoMap.nomeDoDepartamento,
+                objeto.getNomeDoDepartamento(),
                 DepartamentoMap.id,
                 objeto.getId());
         try {

@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepositorioBaixa {
@@ -79,11 +80,11 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
                 BaixaMap.idBem,
                 objeto.getIdBem(),
                 BaixaMap.data,
-                objeto.getData().toString(),
+                converteData(objeto.getData()),
                 BaixaMap.observacao,
                 objeto.getObservacao(),
                 BaixaMap.motivo,
-                objeto.getMotivo().name(),
+                objeto.getMotivo().ordinal(),
                 BaixaMap.id,
                 objeto.getId());
         try {
@@ -131,16 +132,16 @@ public class RepositorioBaixa extends RepositorioPadrao<Baixa> implements IRepos
     }
 
     private String converteData(Date data) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String dataConvertida = df.format(data);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        String dataConvertida = format.format(data);
         return dataConvertida;
     }
 
     private Date converteData(String data) {
         try {
             String dataString = data;
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = formatter.parse(dataString);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            Date date = format.parse(dataString);
             return date;
         } catch (ParseException e) {
             return new Date();
