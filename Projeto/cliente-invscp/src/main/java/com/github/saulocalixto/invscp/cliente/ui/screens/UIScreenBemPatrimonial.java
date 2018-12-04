@@ -47,7 +47,11 @@ public class UIScreenBemPatrimonial extends UIScreen{
             editar();
         }));
         opcoes.put(5, new UIScreenOption("Deletar", () -> {
-            deletar();
+            try {
+                deletar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenBemPatrimonial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
     }
     
@@ -56,7 +60,7 @@ public class UIScreenBemPatrimonial extends UIScreen{
     }
     
     private static void visualizar() throws IOException {
-        final String id = IO.readString("Insira o id do Departamento:");
+        final String id = IO.readString("Insira o id do Bem Patrimonial:");
         final String json = BemPatrimonialAPI.getBemParimonial(id);
 
         if (BemPatrimonialAPI.isJsonValid(json)) {
@@ -76,8 +80,9 @@ public class UIScreenBemPatrimonial extends UIScreen{
         System.out.println("Funcionalidade não implementada");
     }
     
-    private static void deletar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void deletar() throws IOException {
+        final String id = IO.readString("Insira o id do Bem Patrimonial:");
+        BemPatrimonialAPI.deletarBemParimonial(id);
     }
     
     private static void mostrar(String json) {

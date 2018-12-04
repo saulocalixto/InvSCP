@@ -47,7 +47,11 @@ public class UIScreenOrdemDeServico extends UIScreen{
             editar();
         }));
         opcoes.put(5, new UIScreenOption("Deletar", () -> {
-            deletar();
+            try {
+                deletar();
+            } catch (IOException ex) {
+                Logger.getLogger(UIScreenOrdemDeServico.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
     }
     
@@ -76,8 +80,9 @@ public class UIScreenOrdemDeServico extends UIScreen{
         System.out.println("Funcionalidade não implementada");
     }
     
-    private static void deletar() {
-        System.out.println("Funcionalidade não implementada");
+    private static void deletar() throws IOException {
+        final String id = IO.readString("Insira o id da OS:");
+        OrdemDeServicoAPI.deletarOrdemDeServico(id);
     }
     
     private static void mostrar(String json) {
