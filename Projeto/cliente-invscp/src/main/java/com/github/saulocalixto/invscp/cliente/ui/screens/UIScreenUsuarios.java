@@ -89,6 +89,7 @@ public class UIScreenUsuarios extends UIScreen{
     }
     
     private static void editarUsuario() throws IOException {
+        final String id = IO.readString("Insira o id do Usuario:");
         final String email = IO.readString("Insira o email do Usuario:");
         final String senha = IO.readString("Insira a senha do Usuario:");
         final String nome = IO.readString("Insira o nome do Usuario:");
@@ -96,7 +97,7 @@ public class UIScreenUsuarios extends UIScreen{
         final String idDepartamento = IO.readString("Insira o id do Departamento:");
         final String grupo = IO.readString("Insira o grupo:");
         
-        UsuarioAPI.editarUsuario(email, senha, nome, cpf, idDepartamento, grupo);
+        UsuarioAPI.editarUsuario(id, email, senha, nome, cpf, idDepartamento, grupo);
     }
     
     private static void deletarUsuario() {
@@ -112,6 +113,7 @@ public class UIScreenUsuarios extends UIScreen{
     private static void mostrarUsuario(final String json) throws JSONException {
         JSONObject obj = new JSONObject(json);
         System.out.println("\nNome: " + obj.get("nome"));
+        System.out.println("id: " + obj.get("id"));
         System.out.println("E-mail: " + obj.get("email"));
         System.out.println("Grupo: " + obj.get("grupo"));
         System.out.println("Departamento: " + obj.get("departamento"));
